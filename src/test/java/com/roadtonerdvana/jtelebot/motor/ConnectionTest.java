@@ -64,12 +64,7 @@ public class ConnectionTest {
 		ComplexTelegramResponse <Update>telegramResponse = mapper.readValue(result.toString(), mapper.getTypeFactory().constructParametricType(ComplexTelegramResponse.class, Update.class));
 
 		System.out.println(telegramResponse);
-		if(telegramResponse.getResult()==null||telegramResponse.getResult().length==0){
-			System.out.println("updates are null or empty :(");
-		}
-		for(Update update : telegramResponse.getResult()){
-			System.out.println(update);
-		}
+		
 	}
 	
 	@Test

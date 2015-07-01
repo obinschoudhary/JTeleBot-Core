@@ -1,6 +1,8 @@
 package com.roadtonerdvana.jtelebot.response.json;
 
+import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.annotate.JsonProperty;
+import org.codehaus.jackson.map.ObjectMapper;
 
 /**
  * 
@@ -159,8 +161,25 @@ public class Message extends Result {
 		return chat;
 	}
 
-	public void setChat(final Chat chat) {
-		this.chat = chat;
+	public void setChat(final JsonNode chat) {
+		/**
+		 * NOT SURE IF UGLY HACK 
+		 * 
+		 * http://meatified.com/wp-content/uploads/2013/10/futurama-fry-not-sure-if.jpg
+		 * 
+		 * OF GENIOUS 
+		 */
+		if(chat!=null){
+			final ObjectMapper mapper = new ObjectMapper();
+			if(chat.asText()!=null&&chat.asText().contains("title")){//must be groupchat
+				this.chat = mapper.convertValue(chat, GroupChat.class);
+				return;
+			}
+			if(chat.asText()!=null&&chat.asText().contains("username")){//must be user
+				this.chat = mapper.convertValue(chat, User.class);
+				return;
+			}
+		}
 	}
 
 	public User getForwardFromUser() {
