@@ -1,5 +1,7 @@
 package com.roadtonerdvana.jtelebot.response.json;
 
+import java.util.List;
+
 import org.codehaus.jackson.annotate.JsonProperty;
 
 public class TelegramResponse <T extends Result>{
@@ -16,17 +18,17 @@ public class TelegramResponse <T extends Result>{
 	 * but its contents are subject to change in the future
 	 */
 	@JsonProperty("ok")
-	private boolean successful;
+	private Boolean successful;
 	@JsonProperty("description")
 	private String description;
 	@JsonProperty("error_code")
 	private Integer errorCode;
 	@JsonProperty("result")
 	private T result;
-	public boolean isSuccessful() {
+	public Boolean isSuccessful() {
 		return successful;
 	}
-	public void setSuccessful(boolean successful) {
+	public void setSuccessful(Boolean successful) {
 		this.successful = successful;
 	}
 	public String getDescription() {

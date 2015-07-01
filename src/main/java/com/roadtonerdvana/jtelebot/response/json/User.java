@@ -7,15 +7,9 @@ import org.codehaus.jackson.annotate.JsonProperty;
  * This object represents a Telegram user or bot.
  *
  */
-public class User extends Result{
-	
+public class User extends Chat{
 
 	
-	/**
-	 * Integer	Unique identifier for this user or bot
-	 */
-	@JsonProperty("id")
-	private int id;
 	/**
 	 * String	User‘s or bot’s first name
 	 */
@@ -32,12 +26,7 @@ public class User extends Result{
 	@JsonProperty("username")
 	private String username;
 	
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
+
 	public String getFirstName() {
 		return firstName;
 	}
@@ -58,9 +47,10 @@ public class User extends Result{
 	}
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", firstName=" + firstName + ", lastName="
-				+ lastName + ", username=" + username + "]";
+		return "User [id=" +this.getId()+ " firstName=" + firstName + ", lastName=" + lastName
+				+ ", username=" + username + "]";
 	}
+
 	
 	
 	
