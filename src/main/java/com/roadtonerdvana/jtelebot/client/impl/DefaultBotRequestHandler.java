@@ -42,9 +42,8 @@ public class DefaultBotRequestHandler implements BotRequestHandler {
 	public String sendRequest(final RequestType requestType,
 			final List<BasicNameValuePair> parameters) {
 		TelegramResponse<?> telegramResponse = null;
-
-		telegramResponse = parseJsonResponse(
-					callHttpService(requestType.name(), parameters),
+		String json = callHttpService(requestType.getMethodName(), parameters);
+		telegramResponse = parseJsonResponse(json,
 					TelegramResponse.class, requestType.getResultClass());
 
 		/**

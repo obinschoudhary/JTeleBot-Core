@@ -14,7 +14,7 @@ import com.roadtonerdvana.jtelebot.client.impl.DefaultBotRequestHandler;
 public class RequestHandlerTest {
 
 	// PUT YOUR TEST TOKEN HERE...
-	private static final String TEST_TOKEN = "put token token token here";
+	private static final String TEST_TOKEN = "put token herererererere";
 	
 	private BotRequestHandler handler;
 	
@@ -38,6 +38,16 @@ public class RequestHandlerTest {
 		parameters.add(new BasicNameValuePair("timeout", "0"));
 		
 		final String jsonResponse = handler.sendRequest(RequestType.GET_UPDATES, parameters);
+	}
+	
+	@Test
+	public void testSendChatAction() {
+		System.out.println("********[ testSendChatAction ]********");
+		List<BasicNameValuePair> parameters = new ArrayList<BasicNameValuePair>();
+		parameters.add(new BasicNameValuePair("chat_id", "-7155093"));
+		parameters.add(new BasicNameValuePair("action", "upload_document"));
+		
+		final String jsonResponse = handler.sendRequest(RequestType.SEND_CHAT_ACTION, parameters);
 	}
 
 }
