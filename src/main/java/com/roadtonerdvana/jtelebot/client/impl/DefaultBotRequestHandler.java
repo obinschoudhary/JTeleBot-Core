@@ -17,9 +17,7 @@ import org.codehaus.jackson.map.ObjectMapper;
 import com.roadtonerdvana.jtelebot.client.BotRequestHandler;
 import com.roadtonerdvana.jtelebot.client.HttpClientFactory;
 import com.roadtonerdvana.jtelebot.client.RequestType;
-import com.roadtonerdvana.jtelebot.response.BasicTelegramResponse;
-import com.roadtonerdvana.jtelebot.response.ComplexTelegramResponse;
-import com.roadtonerdvana.jtelebot.response.TelegramResponse;
+import com.roadtonerdvana.jtelebot.response.json.TelegramResponse;
 import com.roadtonerdvana.jtelebot.response.json.Update;
 import com.roadtonerdvana.jtelebot.response.json.User;
 
@@ -49,13 +47,13 @@ public class DefaultBotRequestHandler implements BotRequestHandler {
 		case getMe:
 			telegramResponse = parseJsonResponse(
 					callHttpService(requestType.name(), parameters),
-					BasicTelegramResponse.class, User.class);
+					TelegramResponse.class, User.class);
 			break;
 
 		case getUpdates:
 			telegramResponse = parseJsonResponse(
 					callHttpService(requestType.name(), parameters),
-					ComplexTelegramResponse.class, Update.class);
+					TelegramResponse.class, Update.class);
 			break;
 
 		// TODO put the remaining methods here
@@ -108,14 +106,14 @@ public class DefaultBotRequestHandler implements BotRequestHandler {
 			ObjectMapper mapper = new ObjectMapper();
 			TelegramResponse<?> telegramResponse = null;
 
-			if (responseClass == BasicTelegramResponse.class) {
-				telegramResponse = (BasicTelegramResponse<?>) mapper.readValue(
+			if (responseClass == TelegramResponse.class) {
+				telegramResponse = (TelegramResponse<?>) mapper.readValue(
 						jsonResponse,
 						mapper.getTypeFactory().constructParametricType(
 								responseClass, resultTypeClass));
 
-			} else if (responseClass == ComplexTelegramResponse.class) {
-				telegramResponse = (ComplexTelegramResponse<?>) mapper
+			} else if (responseClass == TelegramResponse.class) {
+				telegramResponse = (TelegramResponse<?>) mapper
 						.readValue(
 								jsonResponse,
 								mapper.getTypeFactory()

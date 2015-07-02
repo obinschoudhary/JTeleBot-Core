@@ -1,20 +1,20 @@
-package com.roadtonerdvana.jtelebot.response;
+package com.roadtonerdvana.jtelebot.response.json;
+
+import java.util.List;
 
 import org.codehaus.jackson.annotate.JsonProperty;
 
-import com.roadtonerdvana.jtelebot.response.json.Result;
-
-public abstract class TelegramResponse<T extends Result> {
+public class TelegramResponse<T extends Result> {
 
 	/**
 	 * The response contains a JSON object, which always has a Boolean field
-	 * ‘ok’ and may have an optional String field ‘description’ with a
-	 * human-readable description of the result. If ‘ok’ equals true, the
+	 * ok and may have an optional String field description with a
+	 * human-readable description of the result. If ok equals true, the
 	 * request was successful and the result of the query can be found in the
-	 * ‘result’ field.
+	 * result field.
 	 * 
-	 * In case of an unsuccessful request, ‘ok’ equals false and the error is
-	 * explained in the ‘description’. An Integer ‘error_code’ field is also
+	 * In case of an unsuccessful request, ok equals false and the error is
+	 * explained in the description. An Integer error_code field is also
 	 * returned, but its contents are subject to change in the future
 	 */
 	@JsonProperty("ok")
@@ -25,6 +25,9 @@ public abstract class TelegramResponse<T extends Result> {
 
 	@JsonProperty("error_code")
 	private Integer errorCode;
+	
+	@JsonProperty("result")
+	private List<T> result;
 
 	public Boolean isSuccessful() {
 		return successful;
@@ -51,9 +54,26 @@ public abstract class TelegramResponse<T extends Result> {
 	}
 
 
+	public List<T> getResult() {
+		return result;
+	}
+
+	public void setResult(List<T> result) {
+		this.result = result;
+	}
+
+	public Boolean getSuccessful() {
+		return successful;
+	}
+
 	@Override
 	public String toString() {
 		return "TelegramResponse [successful=" + successful + ", description="
-				+ description + ", errorCode=" + errorCode + "]";
+				+ description + ", errorCode=" + errorCode + ", result="
+				+ result + "]";
 	}
+
+
+
+	
 }

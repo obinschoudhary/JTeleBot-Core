@@ -14,7 +14,7 @@ import com.roadtonerdvana.jtelebot.client.impl.DefaultBotRequestHandler;
 public class RequestHandlerTest {
 
 	// PUT YOUR TEST TOKEN HERE...
-	private static final String TEST_TOKEN = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";
+	private static final String TEST_TOKEN = "put token here";
 	
 	private BotRequestHandler handler;
 	
