@@ -4,6 +4,8 @@ import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.map.ObjectMapper;
 
+import com.roadtonerdvana.jtelebot.mapper.json.MapperHandler;
+
 /**
  * 
  * This object represents a message.
@@ -170,13 +172,12 @@ public class Message extends Result {
 		 * OF GENIOUS 
 		 */
 		if(chat!=null){
-			final ObjectMapper mapper = new ObjectMapper();
 			if(chat.asText()!=null&&chat.asText().contains("title")){//must be groupchat
-				this.chat = mapper.convertValue(chat, GroupChat.class);
+				this.chat = MapperHandler.INSTANCE.getObjectMapper().convertValue(chat, GroupChat.class);
 				return;
 			}
 			if(chat.asText()!=null&&chat.asText().contains("username")){//must be user
-				this.chat = mapper.convertValue(chat, User.class);
+				this.chat = MapperHandler.INSTANCE.getObjectMapper().convertValue(chat, User.class);
 				return;
 			}
 		}

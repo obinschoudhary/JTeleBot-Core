@@ -14,10 +14,9 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.message.BasicNameValuePair;
-import org.codehaus.jackson.map.DeserializationConfig;
-import org.codehaus.jackson.map.ObjectMapper;
 import org.junit.Test;
 
+import com.roadtonerdvana.jtelebot.mapper.json.MapperHandler;
 import com.roadtonerdvana.jtelebot.response.json.Message;
 import com.roadtonerdvana.jtelebot.response.json.ReplyKeyboardMarkup;
 import com.roadtonerdvana.jtelebot.response.json.TelegramResponse;
@@ -26,7 +25,7 @@ import com.roadtonerdvana.jtelebot.response.json.User;
 
 public class ConnectionTest {
 
-	public 	String token = "put token here";
+	public 	String token = "botPUT_TOKEN_HERE";
 
 	
 	@Test
@@ -37,8 +36,7 @@ public class ConnectionTest {
 		HttpClient client = HttpClientBuilder.create().build();
 		HttpPost request = new HttpPost(url);
 
-		ObjectMapper mapper = new ObjectMapper();
-		mapper.enable(DeserializationConfig.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
+
 
 		List<BasicNameValuePair> nvps = new ArrayList<BasicNameValuePair>();
 		nvps.add(new BasicNameValuePair("chat_id", "-7155093"));
@@ -49,7 +47,7 @@ public class ConnectionTest {
 		keyboard.setOneTimeKeyboard(true);
 		keyboard.setResizeKeyboard(false);
 		keyboard.setSelective(false);
-		nvps.add(new BasicNameValuePair("reply_markup", mapper.writeValueAsString(keyboard)));
+		nvps.add(new BasicNameValuePair("reply_markup", MapperHandler.INSTANCE.getObjectMapper().writeValueAsString(keyboard)));
 		UrlEncodedFormEntity uefe = new UrlEncodedFormEntity(nvps, Consts.UTF_8);
 		request.setEntity(uefe);
 
@@ -64,9 +62,9 @@ public class ConnectionTest {
 		while ((line = rd.readLine()) != null) {
 			result.append(line);
 		}
-		TelegramResponse<Message> telegramResponse = mapper.readValue(
+		TelegramResponse<Message> telegramResponse = MapperHandler.INSTANCE.getObjectMapper().readValue(
 				result.toString(),
-				mapper.getTypeFactory().constructParametricType(
+				MapperHandler.INSTANCE.getObjectMapper().getTypeFactory().constructParametricType(
 						TelegramResponse.class, Message.class));
 
 		System.out.println(telegramResponse);
@@ -100,11 +98,10 @@ public class ConnectionTest {
 		while ((line = rd.readLine()) != null) {
 			result.append(line);
 		}
-		ObjectMapper mapper = new ObjectMapper();
-		mapper.enable(DeserializationConfig.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
-		TelegramResponse<Update> telegramResponse = mapper.readValue(
+		
+		TelegramResponse<Update> telegramResponse = MapperHandler.INSTANCE.getObjectMapper().readValue(
 				result.toString(),
-				mapper.getTypeFactory().constructParametricType(
+				MapperHandler.INSTANCE.getObjectMapper().getTypeFactory().constructParametricType(
 						TelegramResponse.class, Update.class));
 
 		System.out.println(telegramResponse);
@@ -130,11 +127,9 @@ public class ConnectionTest {
 		while ((line = rd.readLine()) != null) {
 			result.append(line);
 		}
-		ObjectMapper mapper = new ObjectMapper();
-		mapper.enable(DeserializationConfig.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
-		TelegramResponse<User> telegramResponse = mapper.readValue(
+		TelegramResponse<User> telegramResponse = MapperHandler.INSTANCE.getObjectMapper().readValue(
 				result.toString(),
-				mapper.getTypeFactory().constructParametricType(
+				MapperHandler.INSTANCE.getObjectMapper().getTypeFactory().constructParametricType(
 						TelegramResponse.class, User.class));
 
 		System.out.println(telegramResponse);
