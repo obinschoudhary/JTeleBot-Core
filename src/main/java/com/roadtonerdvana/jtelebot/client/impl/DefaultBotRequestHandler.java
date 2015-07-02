@@ -43,8 +43,7 @@ public class DefaultBotRequestHandler implements BotRequestHandler {
 		TelegramResponse<?> telegramResponse = null;
 		final String response = callHttpService(requestType.getMethodName(), parameters);
 
-		telegramResponse = parseJsonResponse(response,
-					TelegramResponse.class, requestType.getResultClass());
+		telegramResponse = parseJsonResponse(response, requestType.getResultClass());
 
 		return telegramResponse;
 	
@@ -61,9 +60,6 @@ public class DefaultBotRequestHandler implements BotRequestHandler {
 		try {
 			final HttpResponse response = httpClient.execute(request);
 
-			if(response.getStatusLine().getStatusCode()!=200){
-				
-			}
 			
 			
 			BufferedReader reader = new BufferedReader(new InputStreamReader(
@@ -73,6 +69,14 @@ public class DefaultBotRequestHandler implements BotRequestHandler {
 			String line = "";
 			while ((line = reader.readLine()) != null) {
 				result.append(line);
+			}
+			
+
+			if(response.getStatusLine().getStatusCode()!=200){
+				/**
+				 * TODO:
+				 * should we throw an exception?
+				 */
 			}
 
 			return result.toString();
@@ -86,15 +90,14 @@ public class DefaultBotRequestHandler implements BotRequestHandler {
 	}
 
 	// TODO This method should be implemented in a ResponseParser class
-	private TelegramResponse<?> parseJsonResponse(final String jsonResponse,
-			final Class<?> responseClass, final Class<?> resultTypeClass) {
+	private TelegramResponse<?> parseJsonResponse(final String jsonResponse, final Class<?> resultTypeClass) {
 		try {
 
 
 			final TelegramResponse<?> telegramResponse = (TelegramResponse<?>) MapperHandler.INSTANCE.getObjectMapper().readValue(
 						jsonResponse,
 						MapperHandler.INSTANCE.getObjectMapper().getTypeFactory().constructParametricType(
-								responseClass, resultTypeClass));
+								TelegramResponse.class, resultTypeClass));
 
 
 
