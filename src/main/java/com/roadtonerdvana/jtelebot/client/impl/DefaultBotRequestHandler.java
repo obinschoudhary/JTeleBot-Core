@@ -43,23 +43,14 @@ public class DefaultBotRequestHandler implements BotRequestHandler {
 			final List<BasicNameValuePair> parameters) {
 		TelegramResponse<?> telegramResponse = null;
 
-		switch (requestType) {
-		case getMe:
-			telegramResponse = parseJsonResponse(
+		telegramResponse = parseJsonResponse(
 					callHttpService(requestType.name(), parameters),
-					TelegramResponse.class, User.class);
-			break;
+					TelegramResponse.class, requestType.getResultClass());
 
-		case getUpdates:
-			telegramResponse = parseJsonResponse(
-					callHttpService(requestType.name(), parameters),
-					TelegramResponse.class, Update.class);
-			break;
+		/**
+		 * the switch is gone, aint that pretty?
+		 */
 
-		// TODO put the remaining methods here
-
-		default:
-		}
 
 		if (telegramResponse != null) {
 			return telegramResponse.toString();
