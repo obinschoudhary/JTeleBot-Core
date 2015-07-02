@@ -10,11 +10,12 @@ import org.junit.Test;
 import com.roadtonerdvana.jtelebot.client.BotRequestHandler;
 import com.roadtonerdvana.jtelebot.client.RequestType;
 import com.roadtonerdvana.jtelebot.client.impl.DefaultBotRequestHandler;
+import com.roadtonerdvana.jtelebot.response.json.TelegramResponse;
 
 public class RequestHandlerTest {
 
 	// PUT YOUR TEST TOKEN HERE...
-	private static final String TEST_TOKEN = "put token herererererere";
+	private static final String TEST_TOKEN = "";
 	
 	private BotRequestHandler handler;
 	
@@ -26,7 +27,8 @@ public class RequestHandlerTest {
 	@Test
 	public void testGetMeService() {
 		System.out.println("********[ testGetMeService ]********");
-		final String jsonResponse = handler.sendRequest(RequestType.GET_ME, new ArrayList<BasicNameValuePair>());
+		final TelegramResponse<?> jsonResponse = handler.sendRequest(RequestType.GET_ME, new ArrayList<BasicNameValuePair>());
+		System.out.println(jsonResponse);
 	}
 	
 	@Test
@@ -37,7 +39,9 @@ public class RequestHandlerTest {
 		parameters.add(new BasicNameValuePair("limit", "100"));
 		parameters.add(new BasicNameValuePair("timeout", "0"));
 		
-		final String jsonResponse = handler.sendRequest(RequestType.GET_UPDATES, parameters);
+		final TelegramResponse<?> jsonResponse = handler.sendRequest(RequestType.GET_UPDATES, parameters);
+		System.out.println(jsonResponse);
+
 	}
 	
 	@Test
@@ -47,7 +51,10 @@ public class RequestHandlerTest {
 		parameters.add(new BasicNameValuePair("chat_id", "-7155093"));
 		parameters.add(new BasicNameValuePair("action", "upload_document"));
 		
-		final String jsonResponse = handler.sendRequest(RequestType.SEND_CHAT_ACTION, parameters);
-	}
+		final TelegramResponse<?> jsonResponse = handler.sendRequest(RequestType.SEND_CHAT_ACTION, parameters);
+		System.out.println(jsonResponse);
+		System.out.println(jsonResponse.getResult().get(0).getClass());
 
+	}
+	
 }

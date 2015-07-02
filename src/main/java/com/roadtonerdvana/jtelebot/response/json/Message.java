@@ -10,7 +10,7 @@ import com.roadtonerdvana.jtelebot.mapper.json.MapperHandler;
  * This object represents a message.
  *
  */
-public class Message extends Result {
+public class Message{
 	/**
 	 * Unique message identifier
 	 */

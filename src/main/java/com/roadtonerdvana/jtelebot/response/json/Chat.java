@@ -2,7 +2,7 @@ package com.roadtonerdvana.jtelebot.response.json;
 
 import org.codehaus.jackson.annotate.JsonProperty;
 
-public class Chat extends Result{
+public class Chat{
 
 	/**
 	 * Unique identifier for this group chat

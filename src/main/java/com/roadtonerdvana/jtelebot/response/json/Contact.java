@@ -2,7 +2,7 @@ package com.roadtonerdvana.jtelebot.response.json;
 
 import org.codehaus.jackson.annotate.JsonProperty;
 
-public class Contact extends Result {
+public class Contact {
 
 	/**
 	 * Contact's phone number

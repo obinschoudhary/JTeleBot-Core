@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.codehaus.jackson.annotate.JsonProperty;
 
-public class TelegramResponse<T extends Result> {
+public class TelegramResponse<T> {
 
 	/**
 	 * The response contains a JSON object, which always has a Boolean field

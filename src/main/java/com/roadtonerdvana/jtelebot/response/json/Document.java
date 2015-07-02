@@ -8,7 +8,7 @@ import org.codehaus.jackson.annotate.JsonProperty;
 
  *
  */
-public class Document extends Result{
+public class Document{
 	/**
 	 * Unique file identifier
 	 */

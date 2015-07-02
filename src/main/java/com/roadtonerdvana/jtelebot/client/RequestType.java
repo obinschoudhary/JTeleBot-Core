@@ -1,7 +1,6 @@
 package com.roadtonerdvana.jtelebot.client;
 
 import com.roadtonerdvana.jtelebot.response.json.Message;
-import com.roadtonerdvana.jtelebot.response.json.Result;
 import com.roadtonerdvana.jtelebot.response.json.Update;
 import com.roadtonerdvana.jtelebot.response.json.User;
 import com.roadtonerdvana.jtelebot.response.json.UserProfilePhotos;
@@ -30,6 +29,7 @@ public enum RequestType {
 	private RequestType(final String methodName){
 		this(methodName,Message.class);
 	}
+	
 
 	private RequestType(final String methodName, final Class<?> clazz){
 		this.resultClass = clazz;
@@ -43,6 +43,11 @@ public enum RequestType {
 	public String getMethodName() {
 		return methodName;
 	}
+
+
+
+
+
 	
 	
 	

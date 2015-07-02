@@ -2,7 +2,7 @@ package com.roadtonerdvana.jtelebot.response.json;
 
 import org.codehaus.jackson.annotate.JsonProperty;
 
-public class ReplyKeyboardHide extends Result {
+public class ReplyKeyboardHide{
 
 	/**
 	 * Requests clients to hide the custom keyboard

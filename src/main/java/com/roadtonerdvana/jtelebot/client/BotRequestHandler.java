@@ -4,8 +4,10 @@ import java.util.List;
 
 import org.apache.http.message.BasicNameValuePair;
 
+import com.roadtonerdvana.jtelebot.response.json.TelegramResponse;
+
 public interface BotRequestHandler {
 
-	public String sendRequest(RequestType requestType, List<BasicNameValuePair> parameters);
+	public TelegramResponse<?> sendRequest(RequestType requestType, List<BasicNameValuePair> parameters);
 
 }

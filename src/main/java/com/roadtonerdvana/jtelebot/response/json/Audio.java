@@ -8,7 +8,7 @@ import org.codehaus.jackson.annotate.JsonProperty;
 
  *
  */
-public class Audio extends Result {
+public class Audio{
 	/**
 	 * Unique identifier for this file
 	 */

@@ -2,11 +2,11 @@ package com.roadtonerdvana.jtelebot.response.json;
 
 import org.codehaus.jackson.annotate.JsonProperty;
 
-public class ForceReply extends Result {
+public class ForceReply{
 
 	/**
-	 * Shows reply interface to the user, as if they manually selected the bot‘s
-	 * message and tapped ’Reply'
+	 * Shows reply interface to the user, as if they manually selected the bot���s
+	 * message and tapped ���Reply'
 	 * */
 	@JsonProperty("force_reply")
 	private Boolean forceReply;

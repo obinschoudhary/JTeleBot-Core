@@ -18,8 +18,7 @@ import com.roadtonerdvana.jtelebot.client.HttpClientFactory;
 import com.roadtonerdvana.jtelebot.client.RequestType;
 import com.roadtonerdvana.jtelebot.mapper.json.MapperHandler;
 import com.roadtonerdvana.jtelebot.response.json.TelegramResponse;
-import com.roadtonerdvana.jtelebot.response.json.Update;
-import com.roadtonerdvana.jtelebot.response.json.User;
+
 
 public class DefaultBotRequestHandler implements BotRequestHandler {
 
@@ -39,30 +38,22 @@ public class DefaultBotRequestHandler implements BotRequestHandler {
 	}
 
 	@Override
-	public String sendRequest(final RequestType requestType,
+	public TelegramResponse<?> sendRequest(final RequestType requestType,
 			final List<BasicNameValuePair> parameters) {
 		TelegramResponse<?> telegramResponse = null;
-		String json = callHttpService(requestType.getMethodName(), parameters);
-		telegramResponse = parseJsonResponse(json,
+		final String response = callHttpService(requestType.getMethodName(), parameters);
+
+		telegramResponse = parseJsonResponse(response,
 					TelegramResponse.class, requestType.getResultClass());
 
-		/**
-		 * the switch is gone, aint that pretty?
-		 */
-
-
-		if (telegramResponse != null) {
-			return telegramResponse.toString();
-		}
-		
-		return null;
+		return telegramResponse;
+	
 	}
 
 	private String callHttpService(final String methodName,
 			final List<BasicNameValuePair> parameters) {
 		final String url = MessageFormat
 				.format(URL_TEMPLATE, token, methodName);
-		// System.out.println("About to send: " + url);
 
 		final HttpPost request = new HttpPost(url);
 		request.setEntity(new UrlEncodedFormEntity(parameters, Consts.UTF_8));
@@ -70,6 +61,11 @@ public class DefaultBotRequestHandler implements BotRequestHandler {
 		try {
 			final HttpResponse response = httpClient.execute(request);
 
+			if(response.getStatusLine().getStatusCode()!=200){
+				
+			}
+			
+			
 			BufferedReader reader = new BufferedReader(new InputStreamReader(
 					response.getEntity().getContent()));
 
@@ -91,20 +87,17 @@ public class DefaultBotRequestHandler implements BotRequestHandler {
 
 	// TODO This method should be implemented in a ResponseParser class
 	private TelegramResponse<?> parseJsonResponse(final String jsonResponse,
-			final Class responseClass, final Class resultTypeClass) {
+			final Class<?> responseClass, final Class<?> resultTypeClass) {
 		try {
 
-			TelegramResponse<?> telegramResponse = null;
 
-			telegramResponse = (TelegramResponse<?>) MapperHandler.INSTANCE.getObjectMapper().readValue(
+			final TelegramResponse<?> telegramResponse = (TelegramResponse<?>) MapperHandler.INSTANCE.getObjectMapper().readValue(
 						jsonResponse,
 						MapperHandler.INSTANCE.getObjectMapper().getTypeFactory().constructParametricType(
 								responseClass, resultTypeClass));
 
 
 
-			
-			System.out.println("TelegramResponse: \n" + telegramResponse);
 			return telegramResponse;
 
 		} catch (IOException e) {

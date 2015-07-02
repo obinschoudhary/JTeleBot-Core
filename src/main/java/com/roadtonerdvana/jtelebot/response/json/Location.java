@@ -2,7 +2,7 @@ package com.roadtonerdvana.jtelebot.response.json;
 
 import org.codehaus.jackson.annotate.JsonProperty;
 
-public class Location extends Result {
+public class Location{
 
 	/**
 	 * Longitude as defined by sender

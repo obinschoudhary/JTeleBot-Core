@@ -2,7 +2,7 @@ package com.roadtonerdvana.jtelebot.response.json;
 
 import org.codehaus.jackson.annotate.JsonProperty;
 
-public class ReplyKeyboardMarkup extends Result {
+public class ReplyKeyboardMarkup{
 
 	/**
 	 * Array of button rows, each represented by an Array of Strings
@@ -32,9 +32,9 @@ public class ReplyKeyboardMarkup extends Result {
 	 * Message object; 2) if the bot's message is a reply (has
 	 * reply_to_message_id), sender of the original message.
 	 * 
-	 * Example: A user requests to change the bot‘s language, bot replies to the
+	 * Example: A user requests to change the bot���s language, bot replies to the
 	 * request with a keyboard to select the new language. Other users in the
-	 * group don’t see the keyboard.
+	 * group don���t see the keyboard.
 	 * */
 	@JsonProperty("selective")
 	private Boolean selective;

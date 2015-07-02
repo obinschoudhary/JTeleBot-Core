@@ -7,7 +7,7 @@ import org.codehaus.jackson.annotate.JsonProperty;
  * This object represents an incoming update.
  *
  */
-public class Update extends Result{
+public class Update{
 	/**
 	 * The update‘s unique identifier. 
 	 * Update identifiers start from a certain positive number and increase sequentially. 

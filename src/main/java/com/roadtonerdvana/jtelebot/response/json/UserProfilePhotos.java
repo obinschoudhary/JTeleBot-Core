@@ -2,7 +2,7 @@ package com.roadtonerdvana.jtelebot.response.json;
 
 import org.codehaus.jackson.annotate.JsonProperty;
 
-public class UserProfilePhotos extends Result {
+public class UserProfilePhotos{
 
 	/**
 	 * Total number of profile pictures the target user has

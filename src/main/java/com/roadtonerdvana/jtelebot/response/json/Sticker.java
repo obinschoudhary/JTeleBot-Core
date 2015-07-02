@@ -8,7 +8,7 @@ import org.codehaus.jackson.annotate.JsonProperty;
 
  *
  */
-public class Sticker extends Result{
+public class Sticker{
 	/**
 	 * Unique identifier for this file
 	 */

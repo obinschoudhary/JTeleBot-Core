@@ -8,7 +8,7 @@ import org.codehaus.jackson.annotate.JsonProperty;
 
  *
  */
-public class PhotoSize extends Result{
+public class PhotoSize{
 	/**
 	 * Unique identifier for this file
 	 */

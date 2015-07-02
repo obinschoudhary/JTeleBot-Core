@@ -25,7 +25,7 @@ import com.roadtonerdvana.jtelebot.response.json.User;
 
 public class ConnectionTest {
 
-	public 	String token = "botPUT_TOKEN_HERE";
+	public 	String token = "bot";
 
 	
 	@Test
