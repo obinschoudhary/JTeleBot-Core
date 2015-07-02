@@ -2,7 +2,6 @@ package com.roadtonerdvana.jtelebot.response.json;
 
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.annotate.JsonProperty;
-import org.codehaus.jackson.map.ObjectMapper;
 
 import com.roadtonerdvana.jtelebot.mapper.json.MapperHandler;
 

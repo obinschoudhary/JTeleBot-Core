@@ -12,11 +12,11 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.message.BasicNameValuePair;
-import org.codehaus.jackson.map.ObjectMapper;
 
 import com.roadtonerdvana.jtelebot.client.BotRequestHandler;
 import com.roadtonerdvana.jtelebot.client.HttpClientFactory;
 import com.roadtonerdvana.jtelebot.client.RequestType;
+import com.roadtonerdvana.jtelebot.mapper.json.MapperHandler;
 import com.roadtonerdvana.jtelebot.response.json.TelegramResponse;
 import com.roadtonerdvana.jtelebot.response.json.Update;
 import com.roadtonerdvana.jtelebot.response.json.User;
@@ -103,24 +103,17 @@ public class DefaultBotRequestHandler implements BotRequestHandler {
 	private TelegramResponse<?> parseJsonResponse(final String jsonResponse,
 			final Class responseClass, final Class resultTypeClass) {
 		try {
-			ObjectMapper mapper = new ObjectMapper();
+
 			TelegramResponse<?> telegramResponse = null;
 
-			if (responseClass == TelegramResponse.class) {
-				telegramResponse = (TelegramResponse<?>) mapper.readValue(
+			telegramResponse = (TelegramResponse<?>) MapperHandler.INSTANCE.getObjectMapper().readValue(
 						jsonResponse,
-						mapper.getTypeFactory().constructParametricType(
+						MapperHandler.INSTANCE.getObjectMapper().getTypeFactory().constructParametricType(
 								responseClass, resultTypeClass));
 
-			} else if (responseClass == TelegramResponse.class) {
-				telegramResponse = (TelegramResponse<?>) mapper
-						.readValue(
-								jsonResponse,
-								mapper.getTypeFactory()
-										.constructParametricType(responseClass,
-												resultTypeClass));
 
-			}
+
+			
 			System.out.println("TelegramResponse: \n" + telegramResponse);
 			return telegramResponse;
 
