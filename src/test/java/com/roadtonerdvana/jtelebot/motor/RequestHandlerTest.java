@@ -1,11 +1,11 @@
 package com.roadtonerdvana.jtelebot.motor;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.http.Consts;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
+
 import org.apache.http.message.BasicNameValuePair;
 import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.map.JsonMappingException;
@@ -15,23 +15,21 @@ import org.junit.Test;
 import com.roadtonerdvana.jtelebot.client.BotRequestHandler;
 import com.roadtonerdvana.jtelebot.client.RequestType;
 import com.roadtonerdvana.jtelebot.client.impl.DefaultBotRequestHandler;
-import com.roadtonerdvana.jtelebot.mapper.json.MapperHandler;
 import com.roadtonerdvana.jtelebot.request.factory.TelegramRequestFactory;
 import com.roadtonerdvana.jtelebot.response.json.ReplyKeyboardHide;
-import com.roadtonerdvana.jtelebot.response.json.ReplyKeyboardMarkup;
 import com.roadtonerdvana.jtelebot.response.json.TelegramResponse;
 
 public class RequestHandlerTest {
 
 	// PUT YOUR TEST TOKEN HERE...
-	private static final String TEST_TOKEN = "put token here";
+	private static final String TEST_TOKEN = "toke here plizz";
 	
 	private BotRequestHandler handler;
 	
 	@Before
 	public void setUp() {
 		handler = new DefaultBotRequestHandler(TEST_TOKEN);   
-	}
+	}///Users/buzz/Documents/testImg.jpg
 	
 	@Test
 	public void testGetMeService() {
@@ -39,6 +37,20 @@ public class RequestHandlerTest {
 		final TelegramResponse<?> jsonResponse = handler.sendRequest(TelegramRequestFactory.createGetMeRequest());
 		System.out.println(jsonResponse);
 	}
+	@Test
+	public void testSendPhoto() throws JsonGenerationException, JsonMappingException, IOException {
+		System.out.println("********[ testSendPhoto ]********");
+		final TelegramResponse<?> jsonResponse = handler.sendRequest(TelegramRequestFactory.createSendPhotoRequest(-7155093, new File("/Users/buzz/Documents/testImg.jpg"), null, null, null));
+		System.out.println(jsonResponse);
+	}
+	
+	@Test
+	public void testSendAudio() throws JsonGenerationException, JsonMappingException, IOException {
+		System.out.println("********[ testSendAudio ]********");
+		final TelegramResponse<?> jsonResponse = handler.sendRequest(TelegramRequestFactory.createSendAudioRequest(-7155093, new File("/Users/buzz/Documents/testAudio.m4a"), null, null));
+		System.out.println(jsonResponse);
+	}
+	
 	
 	@Test
 	public void testSendMessageService() throws JsonGenerationException, JsonMappingException, IOException {

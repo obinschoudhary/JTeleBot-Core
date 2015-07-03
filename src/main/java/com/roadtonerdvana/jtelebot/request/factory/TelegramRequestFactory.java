@@ -101,7 +101,7 @@ public final class TelegramRequestFactory {
 			basicNameValuePair.add(new BasicNameValuePair("reply_markup",jsonString));
 		}
 
-		return new TelegramRequest(RequestType.SEND_PHOTO,basicNameValuePair,inputFile);
+		return new TelegramRequest(RequestType.SEND_PHOTO,basicNameValuePair,inputFile,"photo");
 	}
 	/**
 	 * 
@@ -156,7 +156,7 @@ public final class TelegramRequestFactory {
 			basicNameValuePair.add(new BasicNameValuePair("reply_markup",jsonString));
 		}
 
-		return new TelegramRequest(RequestType.SEND_AUDIO,basicNameValuePair,inputFile);
+		return new TelegramRequest(RequestType.SEND_AUDIO,basicNameValuePair,inputFile,"audio");
 	}
 	/**
 	 * 
@@ -207,7 +207,7 @@ public final class TelegramRequestFactory {
 			basicNameValuePair.add(new BasicNameValuePair("reply_markup",jsonString));
 		}
 
-		return new TelegramRequest(RequestType.SEND_DOCUMENT,basicNameValuePair,inputFile);
+		return new TelegramRequest(RequestType.SEND_DOCUMENT,basicNameValuePair,inputFile,"document");
 	}
 	/**
 	 * 
@@ -258,7 +258,7 @@ public final class TelegramRequestFactory {
 			basicNameValuePair.add(new BasicNameValuePair("reply_markup",jsonString));
 		}
 
-		return new TelegramRequest(RequestType.SEND_STICKER,basicNameValuePair,inputFile);
+		return new TelegramRequest(RequestType.SEND_STICKER,basicNameValuePair,inputFile,"sticker");
 	}
 	/**
 	 * 
@@ -309,7 +309,7 @@ public final class TelegramRequestFactory {
 			basicNameValuePair.add(new BasicNameValuePair("reply_markup",jsonString));
 		}
 
-		return new TelegramRequest(RequestType.SEND_VIDEO,basicNameValuePair,inputFile);
+		return new TelegramRequest(RequestType.SEND_VIDEO,basicNameValuePair,inputFile,"video");
 	}
 	/**
 	 * 

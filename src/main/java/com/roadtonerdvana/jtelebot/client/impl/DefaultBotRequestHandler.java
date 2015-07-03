@@ -12,7 +12,7 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.message.BasicNameValuePair;
-
+import org.apache.http.entity.mime.MultipartEntityBuilder;
 import com.roadtonerdvana.jtelebot.client.BotRequestHandler;
 import com.roadtonerdvana.jtelebot.client.HttpClientFactory;
 import com.roadtonerdvana.jtelebot.client.RequestType;
@@ -41,13 +41,15 @@ public class DefaultBotRequestHandler implements BotRequestHandler {
 	@Override
 	public TelegramResponse<?> sendRequest(TelegramRequest telegramRequest) {
 		TelegramResponse<?> telegramResponse = null;
-		final String response = callHttpService(telegramRequest.getRequestType().getMethodName(), telegramRequest.getParameters());
+		final String response = callHttpService(telegramRequest);
 
 		telegramResponse = parseJsonResponse(response, telegramRequest.getRequestType().getResultClass());
 
 		return telegramResponse;
 	}
 	
+
+
 	@Override
 	public TelegramResponse<?> sendRequest(final RequestType requestType,
 			final List<BasicNameValuePair> parameters) {
@@ -58,6 +60,53 @@ public class DefaultBotRequestHandler implements BotRequestHandler {
 
 		return telegramResponse;
 	
+	}
+	private String callHttpService(TelegramRequest telegramRequest) {
+		final String url = MessageFormat
+				.format(URL_TEMPLATE, token, telegramRequest.getRequestType().getMethodName());
+
+		final HttpPost request = new HttpPost(url);
+		if(telegramRequest.getFile()!=null){
+			final MultipartEntityBuilder mpeb = MultipartEntityBuilder.create();
+			mpeb.addBinaryBody(telegramRequest.getFileType(), telegramRequest.getFile());
+			for(BasicNameValuePair bnvp : telegramRequest.getParameters()){
+				mpeb.addTextBody(bnvp.getName(), bnvp.getValue());
+			}
+			request.setEntity(mpeb.build());
+		}
+		else{
+		request.setEntity(new UrlEncodedFormEntity(telegramRequest.getParameters(), Consts.UTF_8));
+		}
+		try {
+			final HttpResponse response = httpClient.execute(request);
+
+			
+			
+			BufferedReader reader = new BufferedReader(new InputStreamReader(
+					response.getEntity().getContent()));
+
+			StringBuffer result = new StringBuffer();
+			String line = "";
+			while ((line = reader.readLine()) != null) {
+				result.append(line);
+			}
+			
+
+			if(response.getStatusLine().getStatusCode()!=200){
+				/**
+				 * TODO:
+				 * should we throw an exception?
+				 */
+			}
+
+			return result.toString();
+
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return null;		
 	}
 
 	private String callHttpService(final String methodName,
