@@ -17,6 +17,7 @@ import com.roadtonerdvana.jtelebot.client.BotRequestHandler;
 import com.roadtonerdvana.jtelebot.client.HttpClientFactory;
 import com.roadtonerdvana.jtelebot.client.RequestType;
 import com.roadtonerdvana.jtelebot.mapper.json.MapperHandler;
+import com.roadtonerdvana.jtelebot.request.TelegramRequest;
 import com.roadtonerdvana.jtelebot.response.json.TelegramResponse;
 
 
@@ -37,6 +38,16 @@ public class DefaultBotRequestHandler implements BotRequestHandler {
 		this.token = token;
 	}
 
+	@Override
+	public TelegramResponse<?> sendRequest(TelegramRequest telegramRequest) {
+		TelegramResponse<?> telegramResponse = null;
+		final String response = callHttpService(telegramRequest.getRequestType().getMethodName(), telegramRequest.getParameters());
+
+		telegramResponse = parseJsonResponse(response, telegramRequest.getRequestType().getResultClass());
+
+		return telegramResponse;
+	}
+	
 	@Override
 	public TelegramResponse<?> sendRequest(final RequestType requestType,
 			final List<BasicNameValuePair> parameters) {
@@ -118,5 +129,7 @@ public class DefaultBotRequestHandler implements BotRequestHandler {
 	public void setToken(String token) {
 		this.token = token;
 	}
+
+
 
 }

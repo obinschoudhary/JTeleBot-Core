@@ -2,7 +2,7 @@ package com.roadtonerdvana.jtelebot.response.json;
 
 import org.codehaus.jackson.annotate.JsonProperty;
 
-public class ReplyKeyboardMarkup{
+public class ReplyKeyboardMarkup implements CustomReplyKeyboard{
 
 	/**
 	 * Array of button rows, each represented by an Array of Strings
