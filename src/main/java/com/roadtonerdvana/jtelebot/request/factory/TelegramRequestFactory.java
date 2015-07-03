@@ -350,7 +350,7 @@ public final class TelegramRequestFactory {
 	 * @throws JsonMappingException
 	 * @throws IOException
 	 */
-	public static TelegramRequest createSendLocationRequest(final int chatId,final float latitude,final float longitude, final Integer replyToMessageId, final CustomReplyKeyboard customReplyKeyboard) throws JsonGenerationException, JsonMappingException, IOException{
+	public static TelegramRequest createSendLocationRequest(final int chatId,final double latitude,final double longitude, final Integer replyToMessageId, final CustomReplyKeyboard customReplyKeyboard) throws JsonGenerationException, JsonMappingException, IOException{
 		List <BasicNameValuePair>basicNameValuePair = new ArrayList<BasicNameValuePair>();
 		basicNameValuePair.add(new BasicNameValuePair("chat_id",String.valueOf(chatId)));
 		basicNameValuePair.add(new BasicNameValuePair("latitude",String.valueOf(latitude)));
