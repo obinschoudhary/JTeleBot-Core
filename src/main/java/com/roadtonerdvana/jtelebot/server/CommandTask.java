@@ -1,6 +1,6 @@
 package com.roadtonerdvana.jtelebot.server;
 
-public interface CommandHandler {
+public interface CommandTask {
 
 	public void processCommand();
 

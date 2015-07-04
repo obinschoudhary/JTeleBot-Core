@@ -4,10 +4,11 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import com.roadtonerdvana.jtelebot.server.Command;
+import com.roadtonerdvana.jtelebot.server.CommandDispatcher;
 import com.roadtonerdvana.jtelebot.server.CommandQueue;
 import com.roadtonerdvana.jtelebot.server.Service;
 
-public abstract class AbstractCommandDispatcher implements Service, Runnable {
+public abstract class AbstractCommandDispatcher implements CommandDispatcher, Service, Runnable {
 
 	protected ExecutorService executor;
 	protected CommandQueue commandQueue;
@@ -34,12 +35,9 @@ public abstract class AbstractCommandDispatcher implements Service, Runnable {
 		System.out.println("** Starting up command dispatcher...");
 		alive = true;
 		executor = Executors.newFixedThreadPool(threadPoolSize);
-		if (thread == null) {
-			thread = new Thread(this);
-		}
-		if (!thread.isAlive()) {
-			thread.start();
-		}
+
+		thread = new Thread(this);
+		thread.start();
 	}
 
 	@Override
@@ -61,8 +59,11 @@ public abstract class AbstractCommandDispatcher implements Service, Runnable {
 		while (alive) {
 			dispatchCommands();
 		}
+		
+		thread = null;
 	}
 
+	@Override
 	public void enqueueCommand(final Command command) {
 		commandQueue.add(command);
 	}
@@ -71,6 +72,7 @@ public abstract class AbstractCommandDispatcher implements Service, Runnable {
 	 * This method must to be overridden in order to implement the business
 	 * logic to dispatch every Command from the Queue
 	 * */
+	@Override
 	public abstract void dispatchCommands();
 
 	public CommandQueue getCommandQueue() {
