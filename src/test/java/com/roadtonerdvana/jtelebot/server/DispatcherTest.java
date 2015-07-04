@@ -1,4 +1,4 @@
-package com.roadtonerdvana.jtelebot.motor;
+package com.roadtonerdvana.jtelebot.server;
 
 import junit.framework.Assert;
 

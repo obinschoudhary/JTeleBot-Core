@@ -1,4 +1,4 @@
-package com.roadtonerdvana.jtelebot.motor;
+package com.roadtonerdvana.jtelebot.client;
 
 import java.io.File;
 import java.io.IOException;
