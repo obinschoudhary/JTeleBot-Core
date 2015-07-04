@@ -15,13 +15,16 @@ import com.roadtonerdvana.jtelebot.mapper.json.MapperHandler;
 import com.roadtonerdvana.jtelebot.request.TelegramRequest;
 import com.roadtonerdvana.jtelebot.response.json.CustomReplyKeyboard;
 
-
+/**
+ * 
+ * This class is a Factory of TelegramRequest objects
+ *
+ */
 public final class TelegramRequestFactory {
-	
 	/**
 	 * TODO:
-	 * This factory have an awful lot of repeated code... lets just let it be like this and then return here to make it pretty 
-	 *
+	 * Validation class...
+	 * 
 	 */
 	
 	private TelegramRequestFactory(){}
@@ -46,19 +49,11 @@ public final class TelegramRequestFactory {
 	 */
 	public static TelegramRequest createSendMessageRequest(final int chatId,final String text, final boolean disableWebPagePreview, final Integer replyToMessageId, final CustomReplyKeyboard customReplyKeyboard) throws JsonGenerationException, JsonMappingException, IOException{
 		List <BasicNameValuePair>basicNameValuePair = new ArrayList<BasicNameValuePair>();
-
 		basicNameValuePair.add(new BasicNameValuePair("chat_id",String.valueOf(chatId)));
 		basicNameValuePair.add(new BasicNameValuePair("text",text));
 		basicNameValuePair.add(new BasicNameValuePair("disable_web_page_preview",String.valueOf(disableWebPagePreview)));
-		if(replyToMessageId!=null){
-			basicNameValuePair.add(new BasicNameValuePair("reply_to_message_id",replyToMessageId.toString()));
-		}
-		if(customReplyKeyboard!=null){
-			final String jsonString = MapperHandler.INSTANCE.getObjectMapper().writeValueAsString(customReplyKeyboard);
-			basicNameValuePair.add(new BasicNameValuePair("reply_markup",jsonString));
-		}
-
-		
+		TelegramRequestFactory.addIfNotNull("reply_to_message_id",replyToMessageId,basicNameValuePair);
+		TelegramRequestFactory.addIfNotNull("reply_markup",customReplyKeyboard,basicNameValuePair);
 		return new TelegramRequest(RequestType.SEND_MESSAGE,basicNameValuePair);
 	}
 	/**
@@ -90,17 +85,9 @@ public final class TelegramRequestFactory {
 	public static TelegramRequest createSendPhotoRequest(final int chatId,final File inputFile, final String caption, final Integer replyToMessageId, final CustomReplyKeyboard customReplyKeyboard) throws JsonGenerationException, JsonMappingException, IOException{
 		List <BasicNameValuePair>basicNameValuePair = new ArrayList<BasicNameValuePair>();
 		basicNameValuePair.add(new BasicNameValuePair("chat_id",String.valueOf(chatId)));
-		if(caption!=null){
-			basicNameValuePair.add(new BasicNameValuePair("caption",caption));
-		}
-		if(replyToMessageId!=null){
-			basicNameValuePair.add(new BasicNameValuePair("reply_to_message_id",replyToMessageId.toString()));
-		}
-		if(customReplyKeyboard!=null){
-			final String jsonString = MapperHandler.INSTANCE.getObjectMapper().writeValueAsString(customReplyKeyboard);
-			basicNameValuePair.add(new BasicNameValuePair("reply_markup",jsonString));
-		}
-
+		TelegramRequestFactory.addIfNotNull("caption",caption,basicNameValuePair);
+		TelegramRequestFactory.addIfNotNull("reply_to_message_id",replyToMessageId,basicNameValuePair);
+		TelegramRequestFactory.addIfNotNull("reply_markup",customReplyKeyboard,basicNameValuePair);
 		return new TelegramRequest(RequestType.SEND_PHOTO,basicNameValuePair,inputFile,"photo");
 	}
 	/**
@@ -119,18 +106,9 @@ public final class TelegramRequestFactory {
 		List <BasicNameValuePair>basicNameValuePair = new ArrayList<BasicNameValuePair>();
 		basicNameValuePair.add(new BasicNameValuePair("chat_id",String.valueOf(chatId)));
 		basicNameValuePair.add(new BasicNameValuePair("photo",photoId));
-
-		if(caption!=null){
-			basicNameValuePair.add(new BasicNameValuePair("caption",caption));
-		}
-		if(replyToMessageId!=null){
-			basicNameValuePair.add(new BasicNameValuePair("reply_to_message_id",replyToMessageId.toString()));
-		}
-		if(customReplyKeyboard!=null){
-			final String jsonString = MapperHandler.INSTANCE.getObjectMapper().writeValueAsString(customReplyKeyboard);
-			basicNameValuePair.add(new BasicNameValuePair("reply_markup",jsonString));
-		}
-
+		TelegramRequestFactory.addIfNotNull("caption",caption,basicNameValuePair);
+		TelegramRequestFactory.addIfNotNull("reply_to_message_id",replyToMessageId,basicNameValuePair);
+		TelegramRequestFactory.addIfNotNull("reply_markup",customReplyKeyboard,basicNameValuePair);
 		return new TelegramRequest(RequestType.SEND_PHOTO,basicNameValuePair);
 	}
 	/**
@@ -147,15 +125,8 @@ public final class TelegramRequestFactory {
 	public static TelegramRequest createSendAudioRequest(final int chatId,final File inputFile, final Integer replyToMessageId, final CustomReplyKeyboard customReplyKeyboard) throws JsonGenerationException, JsonMappingException, IOException{
 		List <BasicNameValuePair>basicNameValuePair = new ArrayList<BasicNameValuePair>();
 		basicNameValuePair.add(new BasicNameValuePair("chat_id",String.valueOf(chatId)));
-
-		if(replyToMessageId!=null){
-			basicNameValuePair.add(new BasicNameValuePair("reply_to_message_id",replyToMessageId.toString()));
-		}
-		if(customReplyKeyboard!=null){
-			final String jsonString = MapperHandler.INSTANCE.getObjectMapper().writeValueAsString(customReplyKeyboard);
-			basicNameValuePair.add(new BasicNameValuePair("reply_markup",jsonString));
-		}
-
+		TelegramRequestFactory.addIfNotNull("reply_to_message_id",replyToMessageId,basicNameValuePair);
+		TelegramRequestFactory.addIfNotNull("reply_markup",customReplyKeyboard,basicNameValuePair);
 		return new TelegramRequest(RequestType.SEND_AUDIO,basicNameValuePair,inputFile,"audio");
 	}
 	/**
@@ -173,15 +144,8 @@ public final class TelegramRequestFactory {
 		List <BasicNameValuePair>basicNameValuePair = new ArrayList<BasicNameValuePair>();
 		basicNameValuePair.add(new BasicNameValuePair("chat_id",String.valueOf(chatId)));
 		basicNameValuePair.add(new BasicNameValuePair("audio",audioId));
-
-		if(replyToMessageId!=null){
-			basicNameValuePair.add(new BasicNameValuePair("reply_to_message_id",replyToMessageId.toString()));
-		}
-		if(customReplyKeyboard!=null){
-			final String jsonString = MapperHandler.INSTANCE.getObjectMapper().writeValueAsString(customReplyKeyboard);
-			basicNameValuePair.add(new BasicNameValuePair("reply_markup",jsonString));
-		}
-
+		TelegramRequestFactory.addIfNotNull("reply_to_message_id",replyToMessageId,basicNameValuePair);
+		TelegramRequestFactory.addIfNotNull("reply_markup",customReplyKeyboard,basicNameValuePair);
 		return new TelegramRequest(RequestType.SEND_AUDIO,basicNameValuePair);
 	}
 	/**
@@ -198,15 +162,8 @@ public final class TelegramRequestFactory {
 	public static TelegramRequest createSendDocumentRequest(final int chatId,final File inputFile, final Integer replyToMessageId, final CustomReplyKeyboard customReplyKeyboard) throws JsonGenerationException, JsonMappingException, IOException{
 		List <BasicNameValuePair>basicNameValuePair = new ArrayList<BasicNameValuePair>();
 		basicNameValuePair.add(new BasicNameValuePair("chat_id",String.valueOf(chatId)));
-
-		if(replyToMessageId!=null){
-			basicNameValuePair.add(new BasicNameValuePair("reply_to_message_id",replyToMessageId.toString()));
-		}
-		if(customReplyKeyboard!=null){
-			final String jsonString = MapperHandler.INSTANCE.getObjectMapper().writeValueAsString(customReplyKeyboard);
-			basicNameValuePair.add(new BasicNameValuePair("reply_markup",jsonString));
-		}
-
+		TelegramRequestFactory.addIfNotNull("reply_to_message_id",replyToMessageId,basicNameValuePair);
+		TelegramRequestFactory.addIfNotNull("reply_markup",customReplyKeyboard,basicNameValuePair);
 		return new TelegramRequest(RequestType.SEND_DOCUMENT,basicNameValuePair,inputFile,"document");
 	}
 	/**
@@ -224,15 +181,8 @@ public final class TelegramRequestFactory {
 		List <BasicNameValuePair>basicNameValuePair = new ArrayList<BasicNameValuePair>();
 		basicNameValuePair.add(new BasicNameValuePair("chat_id",String.valueOf(chatId)));
 		basicNameValuePair.add(new BasicNameValuePair("document",documentId));
-
-		if(replyToMessageId!=null){
-			basicNameValuePair.add(new BasicNameValuePair("reply_to_message_id",replyToMessageId.toString()));
-		}
-		if(customReplyKeyboard!=null){
-			final String jsonString = MapperHandler.INSTANCE.getObjectMapper().writeValueAsString(customReplyKeyboard);
-			basicNameValuePair.add(new BasicNameValuePair("reply_markup",jsonString));
-		}
-
+		TelegramRequestFactory.addIfNotNull("reply_to_message_id",replyToMessageId,basicNameValuePair);
+		TelegramRequestFactory.addIfNotNull("reply_markup",customReplyKeyboard,basicNameValuePair);
 		return new TelegramRequest(RequestType.SEND_DOCUMENT,basicNameValuePair);
 	}
 	/**
@@ -249,15 +199,8 @@ public final class TelegramRequestFactory {
 	public static TelegramRequest createSendStickerRequest(final int chatId,final File inputFile, final Integer replyToMessageId, final CustomReplyKeyboard customReplyKeyboard) throws JsonGenerationException, JsonMappingException, IOException{
 		List <BasicNameValuePair>basicNameValuePair = new ArrayList<BasicNameValuePair>();
 		basicNameValuePair.add(new BasicNameValuePair("chat_id",String.valueOf(chatId)));
-
-		if(replyToMessageId!=null){
-			basicNameValuePair.add(new BasicNameValuePair("reply_to_message_id",replyToMessageId.toString()));
-		}
-		if(customReplyKeyboard!=null){
-			final String jsonString = MapperHandler.INSTANCE.getObjectMapper().writeValueAsString(customReplyKeyboard);
-			basicNameValuePair.add(new BasicNameValuePair("reply_markup",jsonString));
-		}
-
+		TelegramRequestFactory.addIfNotNull("reply_to_message_id",replyToMessageId,basicNameValuePair);
+		TelegramRequestFactory.addIfNotNull("reply_markup",customReplyKeyboard,basicNameValuePair);
 		return new TelegramRequest(RequestType.SEND_STICKER,basicNameValuePair,inputFile,"sticker");
 	}
 	/**
@@ -275,15 +218,8 @@ public final class TelegramRequestFactory {
 		List <BasicNameValuePair>basicNameValuePair = new ArrayList<BasicNameValuePair>();
 		basicNameValuePair.add(new BasicNameValuePair("chat_id",String.valueOf(chatId)));
 		basicNameValuePair.add(new BasicNameValuePair("sticker",stickerId));
-
-		if(replyToMessageId!=null){
-			basicNameValuePair.add(new BasicNameValuePair("reply_to_message_id",replyToMessageId.toString()));
-		}
-		if(customReplyKeyboard!=null){
-			final String jsonString = MapperHandler.INSTANCE.getObjectMapper().writeValueAsString(customReplyKeyboard);
-			basicNameValuePair.add(new BasicNameValuePair("reply_markup",jsonString));
-		}
-
+		TelegramRequestFactory.addIfNotNull("reply_to_message_id",replyToMessageId,basicNameValuePair);
+		TelegramRequestFactory.addIfNotNull("reply_markup",customReplyKeyboard,basicNameValuePair);
 		return new TelegramRequest(RequestType.SEND_STICKER,basicNameValuePair);
 	}
 	/**
@@ -300,15 +236,8 @@ public final class TelegramRequestFactory {
 	public static TelegramRequest createSendVideoRequest(final int chatId,final File inputFile, final Integer replyToMessageId, final CustomReplyKeyboard customReplyKeyboard) throws JsonGenerationException, JsonMappingException, IOException{
 		List <BasicNameValuePair>basicNameValuePair = new ArrayList<BasicNameValuePair>();
 		basicNameValuePair.add(new BasicNameValuePair("chat_id",String.valueOf(chatId)));
-
-		if(replyToMessageId!=null){
-			basicNameValuePair.add(new BasicNameValuePair("reply_to_message_id",replyToMessageId.toString()));
-		}
-		if(customReplyKeyboard!=null){
-			final String jsonString = MapperHandler.INSTANCE.getObjectMapper().writeValueAsString(customReplyKeyboard);
-			basicNameValuePair.add(new BasicNameValuePair("reply_markup",jsonString));
-		}
-
+		TelegramRequestFactory.addIfNotNull("reply_to_message_id",replyToMessageId,basicNameValuePair);
+		TelegramRequestFactory.addIfNotNull("reply_markup",customReplyKeyboard,basicNameValuePair);
 		return new TelegramRequest(RequestType.SEND_VIDEO,basicNameValuePair,inputFile,"video");
 	}
 	/**
@@ -326,15 +255,8 @@ public final class TelegramRequestFactory {
 		List <BasicNameValuePair>basicNameValuePair = new ArrayList<BasicNameValuePair>();
 		basicNameValuePair.add(new BasicNameValuePair("chat_id",String.valueOf(chatId)));
 		basicNameValuePair.add(new BasicNameValuePair("video",videoId));
-
-		if(replyToMessageId!=null){
-			basicNameValuePair.add(new BasicNameValuePair("reply_to_message_id",replyToMessageId.toString()));
-		}
-		if(customReplyKeyboard!=null){
-			final String jsonString = MapperHandler.INSTANCE.getObjectMapper().writeValueAsString(customReplyKeyboard);
-			basicNameValuePair.add(new BasicNameValuePair("reply_markup",jsonString));
-		}
-
+		TelegramRequestFactory.addIfNotNull("reply_to_message_id",replyToMessageId,basicNameValuePair);
+		TelegramRequestFactory.addIfNotNull("reply_markup",customReplyKeyboard,basicNameValuePair);
 		return new TelegramRequest(RequestType.SEND_VIDEO,basicNameValuePair);
 	}
 	
@@ -355,15 +277,8 @@ public final class TelegramRequestFactory {
 		basicNameValuePair.add(new BasicNameValuePair("chat_id",String.valueOf(chatId)));
 		basicNameValuePair.add(new BasicNameValuePair("latitude",String.valueOf(latitude)));
 		basicNameValuePair.add(new BasicNameValuePair("longitude",String.valueOf(longitude)));
-
-		if(replyToMessageId!=null){
-			basicNameValuePair.add(new BasicNameValuePair("reply_to_message_id",replyToMessageId.toString()));
-		}
-		if(customReplyKeyboard!=null){
-			final String jsonString = MapperHandler.INSTANCE.getObjectMapper().writeValueAsString(customReplyKeyboard);
-			basicNameValuePair.add(new BasicNameValuePair("reply_markup",jsonString));
-		}
-
+		TelegramRequestFactory.addIfNotNull("reply_to_message_id",replyToMessageId,basicNameValuePair);
+		TelegramRequestFactory.addIfNotNull("reply_markup",customReplyKeyboard,basicNameValuePair);
 		return new TelegramRequest(RequestType.SEND_LOCATION,basicNameValuePair);
 	}
 	/**
@@ -388,12 +303,8 @@ public final class TelegramRequestFactory {
 	public static TelegramRequest createGetUserProfilePhotosRequest(final int userId,final Integer offset, final Integer limit){
 		List <BasicNameValuePair>basicNameValuePair = new ArrayList<BasicNameValuePair>();
 		basicNameValuePair.add(new BasicNameValuePair("user_id",String.valueOf(userId)));
-		if(offset!=null){
-			basicNameValuePair.add(new BasicNameValuePair("offset",offset.toString()));
-		}
-		if(limit!=null){
-			basicNameValuePair.add(new BasicNameValuePair("limit",limit.toString()));
-		}
+		TelegramRequestFactory.addIfNotNull("offset",offset,basicNameValuePair);
+		TelegramRequestFactory.addIfNotNull("limit",limit,basicNameValuePair);
 		return new TelegramRequest(RequestType.GET_USER_PROFILE_PHOTOS,basicNameValuePair);
 	}
 	/**
@@ -409,5 +320,34 @@ public final class TelegramRequestFactory {
 		basicNameValuePair.add(new BasicNameValuePair("limit",String.valueOf(limit)));
 		basicNameValuePair.add(new BasicNameValuePair("timeout",String.valueOf(timeout)));
 		return new TelegramRequest(RequestType.GET_UPDATES,basicNameValuePair);
+	}
+	
+	/**
+	 * 
+	 * @param url
+	 * @return
+	 */
+	public static TelegramRequest createSetWebhookRequest(final String url){
+		List <BasicNameValuePair>basicNameValuePair = new ArrayList<BasicNameValuePair>();
+		basicNameValuePair.add(new BasicNameValuePair("url",String.valueOf(url)));
+		return new TelegramRequest(RequestType.SET_WEBHOOK,basicNameValuePair);
+	}
+	
+	private static void addIfNotNull(final String name, final String value, List <BasicNameValuePair>basicNameValuePair){
+		if(value!=null){
+			basicNameValuePair.add(new BasicNameValuePair(name,value));
+		}
+	}
+	private static void addIfNotNull(final String name, final Integer value, List <BasicNameValuePair>basicNameValuePair){
+		if(value!=null){
+			basicNameValuePair.add(new BasicNameValuePair(name,value.toString()));
+		}
+	}
+	
+	private static void addIfNotNull(final String name, final CustomReplyKeyboard customReplyKeyboard, List <BasicNameValuePair>basicNameValuePair) throws JsonGenerationException, JsonMappingException, IOException{
+		if(customReplyKeyboard!=null){
+			final String jsonString = MapperHandler.INSTANCE.getObjectMapper().writeValueAsString(customReplyKeyboard);
+			basicNameValuePair.add(new BasicNameValuePair(name,jsonString));
+		}
 	}
 }
