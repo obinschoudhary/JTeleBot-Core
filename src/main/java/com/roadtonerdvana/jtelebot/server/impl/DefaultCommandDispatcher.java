@@ -16,7 +16,7 @@ public class DefaultCommandDispatcher extends AbstractCommandDispatcher {
 	@Override
 	public void dispatchCommands() {
 		try {
-			for (int i = 0; i < commandQueue.size(); i++) {
+			while (!commandQueue.isEmpty()) {
 				executor.execute(new DefaultCommandTask(commandQueue.poll(),
 						delay));
 			}

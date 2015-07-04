@@ -19,6 +19,11 @@ public interface CommandQueue {
 	public int size();
 
 	/**
+	 * @return Returns true if this Queue contains no element; false otherwise.
+	 * */
+	public boolean isEmpty();
+
+	/**
 	 * @return Returns true if given Command is inside the Queue; false
 	 *         otherwise.
 	 * */

@@ -23,6 +23,11 @@ public class DefaultCommandQueue implements CommandQueue {
 	public Command poll() {
 		return commandQueue.poll();
 	}
+	
+	@Override
+	public boolean isEmpty() {
+		return commandQueue.isEmpty();
+	}
 
 	@Override
 	public int size() {
