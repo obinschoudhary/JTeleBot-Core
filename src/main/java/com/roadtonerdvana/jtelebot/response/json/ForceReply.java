@@ -35,6 +35,39 @@ public class ForceReply implements CustomReplyKeyboard{
 	public void setSelective(final Boolean selective) {
 		this.selective = selective;
 	}
+	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result
+				+ ((forceReply == null) ? 0 : forceReply.hashCode());
+		result = prime * result
+				+ ((selective == null) ? 0 : selective.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ForceReply other = (ForceReply) obj;
+		if (forceReply == null) {
+			if (other.forceReply != null)
+				return false;
+		} else if (!forceReply.equals(other.forceReply))
+			return false;
+		if (selective == null) {
+			if (other.selective != null)
+				return false;
+		} else if (!selective.equals(other.selective))
+			return false;
+		return true;
+	}
 
 	@Override
 	public String toString() {

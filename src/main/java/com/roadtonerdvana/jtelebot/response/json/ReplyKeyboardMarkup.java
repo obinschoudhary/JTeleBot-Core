@@ -1,5 +1,7 @@
 package com.roadtonerdvana.jtelebot.response.json;
 
+import java.util.Arrays;
+
 import org.codehaus.jackson.annotate.JsonProperty;
 
 public class ReplyKeyboardMarkup implements CustomReplyKeyboard{
@@ -69,6 +71,49 @@ public class ReplyKeyboardMarkup implements CustomReplyKeyboard{
 
 	public void setSelective(final Boolean selective) {
 		this.selective = selective;
+	}
+	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + Arrays.hashCode(keyboard);
+		result = prime * result
+				+ ((oneTimeKeyboard == null) ? 0 : oneTimeKeyboard.hashCode());
+		result = prime * result
+				+ ((resizeKeyboard == null) ? 0 : resizeKeyboard.hashCode());
+		result = prime * result
+				+ ((selective == null) ? 0 : selective.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ReplyKeyboardMarkup other = (ReplyKeyboardMarkup) obj;
+		if (!Arrays.deepEquals(keyboard, other.keyboard))
+			return false;
+		if (oneTimeKeyboard == null) {
+			if (other.oneTimeKeyboard != null)
+				return false;
+		} else if (!oneTimeKeyboard.equals(other.oneTimeKeyboard))
+			return false;
+		if (resizeKeyboard == null) {
+			if (other.resizeKeyboard != null)
+				return false;
+		} else if (!resizeKeyboard.equals(other.resizeKeyboard))
+			return false;
+		if (selective == null) {
+			if (other.selective != null)
+				return false;
+		} else if (!selective.equals(other.selective))
+			return false;
+		return true;
 	}
 
 	@Override

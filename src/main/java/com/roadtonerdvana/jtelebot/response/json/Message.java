@@ -1,5 +1,7 @@
 package com.roadtonerdvana.jtelebot.response.json;
 
+import java.util.Arrays;
+
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.annotate.JsonProperty;
 
@@ -162,6 +164,7 @@ public class Message{
 		return chat;
 	}
 
+	@JsonProperty
 	public void setChat(final JsonNode chat) {
 		if(chat!=null&&(chat.toString()!=null&&chat.toString().length()!=0)){
 			if(chat.toString().contains("title")){//must be groupchat
@@ -170,6 +173,10 @@ public class Message{
 				this.chat = MapperHandler.INSTANCE.getObjectMapper().convertValue(chat, User.class);
 			}
 		}
+	}
+	
+	public void setChat(final Chat chat) {
+		this.chat = chat;
 	}
 
 	public User getForwardFromUser() {
@@ -306,6 +313,158 @@ public class Message{
 
 	public void setGroupChatCreated(final Boolean groupChatCreated) {
 		this.groupChatCreated = groupChatCreated;
+	}
+
+	
+	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((audio == null) ? 0 : audio.hashCode());
+		result = prime * result + ((chat == null) ? 0 : chat.hashCode());
+		result = prime * result + ((contact == null) ? 0 : contact.hashCode());
+		result = prime * result
+				+ ((deleteChatPhoto == null) ? 0 : deleteChatPhoto.hashCode());
+		result = prime * result
+				+ ((document == null) ? 0 : document.hashCode());
+		result = prime * result
+				+ ((forwardDate == null) ? 0 : forwardDate.hashCode());
+		result = prime * result
+				+ ((forwardFromUser == null) ? 0 : forwardFromUser.hashCode());
+		result = prime * result
+				+ ((fromUser == null) ? 0 : fromUser.hashCode());
+		result = prime
+				* result
+				+ ((groupChatCreated == null) ? 0 : groupChatCreated.hashCode());
+		result = prime * result + id;
+		result = prime
+				* result
+				+ ((leftChatParticipantUser == null) ? 0
+						: leftChatParticipantUser.hashCode());
+		result = prime * result
+				+ ((location == null) ? 0 : location.hashCode());
+		result = prime
+				* result
+				+ ((newChatParticipantUser == null) ? 0
+						: newChatParticipantUser.hashCode());
+		result = prime * result + Arrays.hashCode(newChatPhoto);
+		result = prime * result
+				+ ((newChatTitle == null) ? 0 : newChatTitle.hashCode());
+		result = prime * result + Arrays.hashCode(photo);
+		result = prime * result
+				+ ((replyToMessage == null) ? 0 : replyToMessage.hashCode());
+		result = prime * result + ((sticker == null) ? 0 : sticker.hashCode());
+		result = prime * result + ((text == null) ? 0 : text.hashCode());
+		result = prime * result + unixTimeDate;
+		result = prime * result + ((video == null) ? 0 : video.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Message other = (Message) obj;
+		if (audio == null) {
+			if (other.audio != null)
+				return false;
+		} else if (!audio.equals(other.audio))
+			return false;
+		if (chat == null) {
+			if (other.chat != null)
+				return false;
+		} else if (!chat.equals(other.chat))
+			return false;
+		if (contact == null) {
+			if (other.contact != null)
+				return false;
+		} else if (!contact.equals(other.contact))
+			return false;
+		if (deleteChatPhoto == null) {
+			if (other.deleteChatPhoto != null)
+				return false;
+		} else if (!deleteChatPhoto.equals(other.deleteChatPhoto))
+			return false;
+		if (document == null) {
+			if (other.document != null)
+				return false;
+		} else if (!document.equals(other.document))
+			return false;
+		if (forwardDate == null) {
+			if (other.forwardDate != null)
+				return false;
+		} else if (!forwardDate.equals(other.forwardDate))
+			return false;
+		if (forwardFromUser == null) {
+			if (other.forwardFromUser != null)
+				return false;
+		} else if (!forwardFromUser.equals(other.forwardFromUser))
+			return false;
+		if (fromUser == null) {
+			if (other.fromUser != null)
+				return false;
+		} else if (!fromUser.equals(other.fromUser))
+			return false;
+		if (groupChatCreated == null) {
+			if (other.groupChatCreated != null)
+				return false;
+		} else if (!groupChatCreated.equals(other.groupChatCreated))
+			return false;
+		if (id != other.id)
+			return false;
+		if (leftChatParticipantUser == null) {
+			if (other.leftChatParticipantUser != null)
+				return false;
+		} else if (!leftChatParticipantUser
+				.equals(other.leftChatParticipantUser))
+			return false;
+		if (location == null) {
+			if (other.location != null)
+				return false;
+		} else if (!location.equals(other.location))
+			return false;
+		if (newChatParticipantUser == null) {
+			if (other.newChatParticipantUser != null)
+				return false;
+		} else if (!newChatParticipantUser.equals(other.newChatParticipantUser))
+			return false;
+		if (!Arrays.equals(newChatPhoto, other.newChatPhoto))
+			return false;
+		if (newChatTitle == null) {
+			if (other.newChatTitle != null)
+				return false;
+		} else if (!newChatTitle.equals(other.newChatTitle))
+			return false;
+		if (!Arrays.equals(photo, other.photo))
+			return false;
+		if (replyToMessage == null) {
+			if (other.replyToMessage != null)
+				return false;
+		} else if (!replyToMessage.equals(other.replyToMessage))
+			return false;
+		if (sticker == null) {
+			if (other.sticker != null)
+				return false;
+		} else if (!sticker.equals(other.sticker))
+			return false;
+		if (text == null) {
+			if (other.text != null)
+				return false;
+		} else if (!text.equals(other.text))
+			return false;
+		if (unixTimeDate != other.unixTimeDate)
+			return false;
+		if (video == null) {
+			if (other.video != null)
+				return false;
+		} else if (!video.equals(other.video))
+			return false;
+		return true;
 	}
 
 	@Override

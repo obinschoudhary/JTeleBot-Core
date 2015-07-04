@@ -27,7 +27,7 @@ public class ReplyKeyboardHide implements CustomReplyKeyboard{
 		return hideKeyboard;
 	}
 
-	public void setHideKeyboard(Boolean hideKeyboard) {
+	public void setHideKeyboard(final Boolean hideKeyboard) {
 		this.hideKeyboard = hideKeyboard;
 	}
 
@@ -35,8 +35,43 @@ public class ReplyKeyboardHide implements CustomReplyKeyboard{
 		return selective;
 	}
 
-	public void setSelective(Boolean selective) {
+	public void setSelective(final Boolean selective) {
 		this.selective = selective;
+	}
+	
+	
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result
+				+ ((hideKeyboard == null) ? 0 : hideKeyboard.hashCode());
+		result = prime * result
+				+ ((selective == null) ? 0 : selective.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ReplyKeyboardHide other = (ReplyKeyboardHide) obj;
+		if (hideKeyboard == null) {
+			if (other.hideKeyboard != null)
+				return false;
+		} else if (!hideKeyboard.equals(other.hideKeyboard))
+			return false;
+		if (selective == null) {
+			if (other.selective != null)
+				return false;
+		} else if (!selective.equals(other.selective))
+			return false;
+		return true;
 	}
 
 	@Override

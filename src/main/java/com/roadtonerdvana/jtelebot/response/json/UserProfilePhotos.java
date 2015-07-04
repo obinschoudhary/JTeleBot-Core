@@ -1,5 +1,7 @@
 package com.roadtonerdvana.jtelebot.response.json;
 
+import java.util.Arrays;
+
 import org.codehaus.jackson.annotate.JsonProperty;
 
 public class UserProfilePhotos{
@@ -30,6 +32,37 @@ public class UserProfilePhotos{
 
 	public void setPhotos(final PhotoSize[][] photos) {
 		this.photos = photos;
+	}
+	
+	
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + Arrays.hashCode(photos);
+		result = prime * result
+				+ ((totalCount == null) ? 0 : totalCount.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		UserProfilePhotos other = (UserProfilePhotos) obj;
+		if (!Arrays.deepEquals(photos, other.photos))
+			return false;
+		if (totalCount == null) {
+			if (other.totalCount != null)
+				return false;
+		} else if (!totalCount.equals(other.totalCount))
+			return false;
+		return true;
 	}
 
 	@Override
