@@ -163,21 +163,11 @@ public class Message{
 	}
 
 	public void setChat(final JsonNode chat) {
-		/**
-		 * NOT SURE IF UGLY HACK 
-		 * 
-		 * http://meatified.com/wp-content/uploads/2013/10/futurama-fry-not-sure-if.jpg
-		 * 
-		 * OF GENIOUS 
-		 */
-		if(chat!=null){
-			if(chat.asText()!=null&&chat.asText().contains("title")){//must be groupchat
+		if(chat!=null&&(chat.toString()!=null&&chat.toString().length()!=0)){
+			if(chat.toString().contains("title")){//must be groupchat
 				this.chat = MapperHandler.INSTANCE.getObjectMapper().convertValue(chat, GroupChat.class);
-				return;
-			}
-			if(chat.asText()!=null&&chat.asText().contains("username")){//must be user
+			} else if(chat.toString().contains("username")){//must be user
 				this.chat = MapperHandler.INSTANCE.getObjectMapper().convertValue(chat, User.class);
-				return;
 			}
 		}
 	}

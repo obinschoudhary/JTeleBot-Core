@@ -396,4 +396,18 @@ public final class TelegramRequestFactory {
 		}
 		return new TelegramRequest(RequestType.GET_USER_PROFILE_PHOTOS,basicNameValuePair);
 	}
+	/**
+	 * 
+	 * @param offset
+	 * @param limit
+	 * @param timeout
+	 * @return
+	 */
+	public static TelegramRequest createGetUpdatesRequest(final Integer offset, final Integer limit, final Integer timeout){
+		List <BasicNameValuePair>basicNameValuePair = new ArrayList<BasicNameValuePair>();
+		basicNameValuePair.add(new BasicNameValuePair("offset",String.valueOf(offset)));
+		basicNameValuePair.add(new BasicNameValuePair("limit",String.valueOf(limit)));
+		basicNameValuePair.add(new BasicNameValuePair("timeout",String.valueOf(timeout)));
+		return new TelegramRequest(RequestType.GET_UPDATES,basicNameValuePair);
+	}
 }

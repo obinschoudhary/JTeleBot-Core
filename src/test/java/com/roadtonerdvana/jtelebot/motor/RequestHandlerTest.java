@@ -22,7 +22,7 @@ import com.roadtonerdvana.jtelebot.response.json.TelegramResponse;
 public class RequestHandlerTest {
 
 	// PUT YOUR TEST TOKEN HERE...
-	private static final String TEST_TOKEN = "token here";
+	private static final String TEST_TOKEN = "token goes rigth here";
 	
 	private BotRequestHandler handler;
 	
@@ -37,6 +37,9 @@ public class RequestHandlerTest {
 		final TelegramResponse<?> jsonResponse = handler.sendRequest(TelegramRequestFactory.createGetMeRequest());
 		System.out.println(jsonResponse);
 	}
+	
+
+	
 	@Test
 	public void testSendPhoto() throws JsonGenerationException, JsonMappingException, IOException {
 		System.out.println("********[ testSendPhoto ]********");
@@ -106,7 +109,7 @@ public class RequestHandlerTest {
 		parameters.add(new BasicNameValuePair("limit", "100"));
 		parameters.add(new BasicNameValuePair("timeout", "0"));
 		
-		final TelegramResponse<?> jsonResponse = handler.sendRequest(RequestType.GET_UPDATES, parameters);
+		final TelegramResponse<?> jsonResponse = handler.sendRequest(TelegramRequestFactory.createGetUpdatesRequest(0, 100, 0));
 		System.out.println(jsonResponse);
 
 	}
