@@ -1,13 +1,10 @@
 package com.roadtonerdvana.jtelebot.server.impl;
 
-import java.util.ArrayList;
-import java.util.List;
 
-import org.apache.http.message.BasicNameValuePair;
 
 import com.roadtonerdvana.jtelebot.client.BotRequestHandler;
-import com.roadtonerdvana.jtelebot.client.RequestType;
 import com.roadtonerdvana.jtelebot.client.impl.DefaultBotRequestHandler;
+import com.roadtonerdvana.jtelebot.request.factory.TelegramRequestFactory;
 import com.roadtonerdvana.jtelebot.response.json.TelegramResponse;
 import com.roadtonerdvana.jtelebot.response.json.Update;
 import com.roadtonerdvana.jtelebot.server.Service;
@@ -68,8 +65,7 @@ public class DefaultCommandMonitor implements Service, Runnable {
 			}
 
 			System.out.println("\t..Resuming CommandMonitor");
-			TelegramResponse<?> response = handler.sendRequest(
-					RequestType.GET_UPDATES, buildParameters(0, 100, 0));
+			TelegramResponse<?> response = handler.sendRequest(TelegramRequestFactory.createGetUpdatesRequest(0, 100, 0));
 
 			handleUpdates(response);
 
@@ -95,16 +91,6 @@ public class DefaultCommandMonitor implements Service, Runnable {
 		}
 	}
 
-	private List<BasicNameValuePair> buildParameters(final long offset,
-			final long limit, final long timeout) {
-		List<BasicNameValuePair> parameters = new ArrayList<BasicNameValuePair>();
-		parameters.add(new BasicNameValuePair("offset", Long.toString(offset)));
-		parameters.add(new BasicNameValuePair("limit", Long.toString(limit)));
-		parameters
-				.add(new BasicNameValuePair("timeout", Long.toString(timeout)));
-
-		return parameters;
-	}
 
 	public BotRequestHandler getHandler() {
 		return handler;

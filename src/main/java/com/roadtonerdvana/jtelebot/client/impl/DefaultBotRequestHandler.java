@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.text.MessageFormat;
-import java.util.List;
 
 import org.apache.http.Consts;
 import org.apache.http.HttpResponse;
@@ -15,7 +14,6 @@ import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.entity.mime.MultipartEntityBuilder;
 import com.roadtonerdvana.jtelebot.client.BotRequestHandler;
 import com.roadtonerdvana.jtelebot.client.HttpClientFactory;
-import com.roadtonerdvana.jtelebot.client.RequestType;
 import com.roadtonerdvana.jtelebot.mapper.json.MapperHandler;
 import com.roadtonerdvana.jtelebot.request.TelegramRequest;
 import com.roadtonerdvana.jtelebot.response.json.TelegramResponse;
@@ -49,18 +47,6 @@ public class DefaultBotRequestHandler implements BotRequestHandler {
 	}
 	
 
-
-	@Override
-	public TelegramResponse<?> sendRequest(final RequestType requestType,
-			final List<BasicNameValuePair> parameters) {
-		TelegramResponse<?> telegramResponse = null;
-		final String response = callHttpService(requestType.getMethodName(), parameters);
-
-		telegramResponse = parseJsonResponse(response, requestType.getResultClass());
-
-		return telegramResponse;
-	
-	}
 	private String callHttpService(TelegramRequest telegramRequest) {
 		final String url = MessageFormat
 				.format(URL_TEMPLATE, token, telegramRequest.getRequestType().getMethodName());
@@ -107,46 +93,6 @@ public class DefaultBotRequestHandler implements BotRequestHandler {
 		}
 
 		return null;		
-	}
-
-	private String callHttpService(final String methodName,
-			final List<BasicNameValuePair> parameters) {
-		final String url = MessageFormat
-				.format(URL_TEMPLATE, token, methodName);
-
-		final HttpPost request = new HttpPost(url);
-		request.setEntity(new UrlEncodedFormEntity(parameters, Consts.UTF_8));
-
-		try {
-			final HttpResponse response = httpClient.execute(request);
-
-			
-			
-			BufferedReader reader = new BufferedReader(new InputStreamReader(
-					response.getEntity().getContent()));
-
-			StringBuffer result = new StringBuffer();
-			String line = "";
-			while ((line = reader.readLine()) != null) {
-				result.append(line);
-			}
-			
-
-			if(response.getStatusLine().getStatusCode()!=200){
-				/**
-				 * TODO:
-				 * should we throw an exception?
-				 */
-			}
-
-			return result.toString();
-
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		return null;
 	}
 
 	// TODO This method should be implemented in a ResponseParser class

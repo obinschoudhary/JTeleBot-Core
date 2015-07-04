@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-
 import org.apache.http.message.BasicNameValuePair;
 import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.map.JsonMappingException;
@@ -13,7 +12,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.roadtonerdvana.jtelebot.client.BotRequestHandler;
-import com.roadtonerdvana.jtelebot.client.RequestType;
+import com.roadtonerdvana.jtelebot.client.BroadcastActionType;
 import com.roadtonerdvana.jtelebot.client.impl.DefaultBotRequestHandler;
 import com.roadtonerdvana.jtelebot.request.factory.TelegramRequestFactory;
 import com.roadtonerdvana.jtelebot.response.json.ReplyKeyboardHide;
@@ -22,14 +21,14 @@ import com.roadtonerdvana.jtelebot.response.json.TelegramResponse;
 public class RequestHandlerTest {
 
 	// PUT YOUR TEST TOKEN HERE...
-	private static final String TEST_TOKEN = "token goes rigth here";
+	private static final String TEST_TOKEN = "put token here";
 	
 	private BotRequestHandler handler;
 	
 	@Before
 	public void setUp() {
 		handler = new DefaultBotRequestHandler(TEST_TOKEN);   
-	}///Users/buzz/Documents/testImg.jpg
+	}
 	
 	@Test
 	public void testGetMeService() {
@@ -117,11 +116,8 @@ public class RequestHandlerTest {
 	@Test
 	public void testSendChatAction() {
 		System.out.println("********[ testSendChatAction ]********");
-		List<BasicNameValuePair> parameters = new ArrayList<BasicNameValuePair>();
-		parameters.add(new BasicNameValuePair("chat_id", "-7155093"));
-		parameters.add(new BasicNameValuePair("action", "upload_document"));
 		
-		final TelegramResponse<?> jsonResponse = handler.sendRequest(RequestType.SEND_CHAT_ACTION, parameters);
+		final TelegramResponse<?> jsonResponse = handler.sendRequest(TelegramRequestFactory.createSendChatActionRequest(-7155093, BroadcastActionType.FIND_LOCATION));
 		System.out.println(jsonResponse);
 		System.out.println(jsonResponse.getResult().get(0).getClass());
 
