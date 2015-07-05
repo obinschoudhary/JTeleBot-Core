@@ -10,14 +10,14 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
-import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.entity.mime.MultipartEntityBuilder;
+import org.apache.http.message.BasicNameValuePair;
+
 import com.roadtonerdvana.jtelebot.client.BotRequestHandler;
 import com.roadtonerdvana.jtelebot.client.HttpClientFactory;
 import com.roadtonerdvana.jtelebot.mapper.json.MapperHandler;
 import com.roadtonerdvana.jtelebot.request.TelegramRequest;
 import com.roadtonerdvana.jtelebot.response.json.TelegramResponse;
-
 
 public class DefaultBotRequestHandler implements BotRequestHandler {
 
@@ -41,33 +41,32 @@ public class DefaultBotRequestHandler implements BotRequestHandler {
 		TelegramResponse<?> telegramResponse = null;
 		final String response = callHttpService(telegramRequest);
 
-		telegramResponse = parseJsonResponse(response, telegramRequest.getRequestType().getResultClass());
+		telegramResponse = parseJsonResponse(response, telegramRequest
+				.getRequestType().getResultClass());
 
 		return telegramResponse;
 	}
-	
 
 	private String callHttpService(TelegramRequest telegramRequest) {
-		final String url = MessageFormat
-				.format(URL_TEMPLATE, token, telegramRequest.getRequestType().getMethodName());
+		final String url = MessageFormat.format(URL_TEMPLATE, token,
+				telegramRequest.getRequestType().getMethodName());
 
 		final HttpPost request = new HttpPost(url);
-		if(telegramRequest.getFile()!=null){
+		if (telegramRequest.getFile() != null) {
 			final MultipartEntityBuilder mpeb = MultipartEntityBuilder.create();
-			mpeb.addBinaryBody(telegramRequest.getFileType(), telegramRequest.getFile());
-			for(BasicNameValuePair bnvp : telegramRequest.getParameters()){
+			mpeb.addBinaryBody(telegramRequest.getFileType(),
+					telegramRequest.getFile());
+			for (BasicNameValuePair bnvp : telegramRequest.getParameters()) {
 				mpeb.addTextBody(bnvp.getName(), bnvp.getValue());
 			}
 			request.setEntity(mpeb.build());
-		}
-		else{
-		request.setEntity(new UrlEncodedFormEntity(telegramRequest.getParameters(), Consts.UTF_8));
+		} else {
+			request.setEntity(new UrlEncodedFormEntity(telegramRequest
+					.getParameters(), Consts.UTF_8));
 		}
 		try {
 			final HttpResponse response = httpClient.execute(request);
 
-			
-			
 			BufferedReader reader = new BufferedReader(new InputStreamReader(
 					response.getEntity().getContent()));
 
@@ -76,12 +75,11 @@ public class DefaultBotRequestHandler implements BotRequestHandler {
 			while ((line = reader.readLine()) != null) {
 				result.append(line);
 			}
-			
 
-			if(response.getStatusLine().getStatusCode()!=200){
+			if (response.getStatusLine().getStatusCode() != 200) {
+				System.err.println("Request to Telegram failed!");
 				/**
-				 * TODO:
-				 * should we throw an exception?
+				 * TODO: should we throw an exception?
 				 */
 			}
 
@@ -92,20 +90,23 @@ public class DefaultBotRequestHandler implements BotRequestHandler {
 			e.printStackTrace();
 		}
 
-		return null;		
+		return null;
 	}
 
 	// TODO This method should be implemented in a ResponseParser class
-	private TelegramResponse<?> parseJsonResponse(final String jsonResponse, final Class<?> resultTypeClass) {
+	private TelegramResponse<?> parseJsonResponse(final String jsonResponse,
+			final Class<?> resultTypeClass) {
 		try {
 
-
-			final TelegramResponse<?> telegramResponse = (TelegramResponse<?>) MapperHandler.INSTANCE.getObjectMapper().readValue(
-						jsonResponse,
-						MapperHandler.INSTANCE.getObjectMapper().getTypeFactory().constructParametricType(
-								TelegramResponse.class, resultTypeClass));
-
-
+			final TelegramResponse<?> telegramResponse = (TelegramResponse<?>) MapperHandler.INSTANCE
+					.getObjectMapper().readValue(
+							jsonResponse,
+							MapperHandler.INSTANCE
+									.getObjectMapper()
+									.getTypeFactory()
+									.constructParametricType(
+											TelegramResponse.class,
+											resultTypeClass));
 
 			return telegramResponse;
 
@@ -124,7 +125,5 @@ public class DefaultBotRequestHandler implements BotRequestHandler {
 	public void setToken(String token) {
 		this.token = token;
 	}
-
-
 
 }

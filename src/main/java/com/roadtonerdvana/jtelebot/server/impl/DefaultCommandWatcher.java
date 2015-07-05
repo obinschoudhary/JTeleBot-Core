@@ -25,9 +25,8 @@ public class DefaultCommandWatcher extends AbstractCommandWatcher {
 	private CommandDispatcher commandDispatcher;
 	private BotRequestHandler requestHandler;
 
-	private Class<? extends Command> commandClass;
+	private Class<? extends AbstractCommand> commandClass;
 
-	
 	private long offset;
 	private long limit;
 	private long timeout;
@@ -35,12 +34,21 @@ public class DefaultCommandWatcher extends AbstractCommandWatcher {
 	private ConcurrentMap<String, Message> cache;
 
 	public DefaultCommandWatcher() {
-		this(0, MAX_CACHE_CAPACITY, null, null,null);
+		this(0, MAX_CACHE_CAPACITY, null, null, null);
+	}
+
+	public DefaultCommandWatcher(final String telegramToken,
+			CommandDispatcher commandDispatcher,
+			final Class<? extends AbstractCommand> commandClass) {
+		this(0, MAX_CACHE_CAPACITY, telegramToken, commandDispatcher,
+				commandClass);
 	}
 
 	public DefaultCommandWatcher(final long delayInMillis,
 			final long cacheCapacity, final String telegramToken,
-			CommandDispatcher commandDispatcher,final Class<? extends Command> commandClass) {
+			CommandDispatcher commandDispatcher,
+			final Class<? extends AbstractCommand> commandClass) {
+
 		super(delayInMillis);
 		this.commandClass = commandClass;
 
@@ -48,8 +56,7 @@ public class DefaultCommandWatcher extends AbstractCommandWatcher {
 		this.requestHandler = new DefaultBotRequestHandler(telegramToken);
 
 		// TODO These parameters must be persisted (i.e. DB,
-		// configuration file, etc.), and the offset must be incremented as per
-		// new updates received
+		// configuration file, etc.)
 		this.offset = 0;
 		this.limit = 100;
 		this.timeout = 0;
@@ -63,7 +70,8 @@ public class DefaultCommandWatcher extends AbstractCommandWatcher {
 		LOG.debug("\tPolling Telegram updates (offset:" + offset + ", limit:"
 				+ limit + ", timeout=" + timeout + ")...");
 		TelegramResponse<?> response = requestHandler
-				.sendRequest(TelegramRequestFactory.createGetUpdatesRequest(offset, limit, timeout));
+				.sendRequest(TelegramRequestFactory.createGetUpdatesRequest(
+						offset, limit, timeout));
 		if (response.isSuccessful()) {
 			handleUpdates(response);
 		} else {
@@ -74,7 +82,7 @@ public class DefaultCommandWatcher extends AbstractCommandWatcher {
 		}
 	}
 
-	private void handleUpdates(final TelegramResponse<?> response)  {
+	private void handleUpdates(final TelegramResponse<?> response) {
 		int newUpdatesCounter = 0;
 
 		for (final Object updateObj : response.getResult()) {
@@ -93,13 +101,14 @@ public class DefaultCommandWatcher extends AbstractCommandWatcher {
 				newUpdatesCounter++;
 				// Instantiate a new Command, attach the Message object, enqueue
 				// Command via the Dispatcher
-				try{
-					Constructor<?> ctor = commandClass.getConstructor(Message.class,BotRequestHandler.class);
-					Object object = ctor.newInstance(new Object[]{update.getMessage(),requestHandler});
-					commandDispatcher.enqueueCommand((Command) object);
-				}
-				catch(Exception e){
-					//gotta catch 'em all
+				try {
+					Constructor<?> constructor = commandClass.getConstructor(
+							Message.class, BotRequestHandler.class);
+					Object commandObj = constructor.newInstance(new Object[] {
+							update.getMessage(), requestHandler });
+					commandDispatcher.enqueueCommand((Command) commandObj);
+				} catch (Exception e) {
+					// gotta catch 'em all
 					LOG.error(e);
 				}
 				// Update offset in order to fetch a new slot the next time

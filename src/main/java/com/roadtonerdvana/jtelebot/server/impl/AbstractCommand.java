@@ -1,18 +1,18 @@
 package com.roadtonerdvana.jtelebot.server.impl;
 
-import org.apache.log4j.Logger;
-
+import com.roadtonerdvana.jtelebot.client.BotRequestHandler;
 import com.roadtonerdvana.jtelebot.response.json.Message;
 import com.roadtonerdvana.jtelebot.server.Command;
 
 public abstract class AbstractCommand implements Command {
 
-	private static final Logger LOG = Logger.getLogger(AbstractCommand.class);
-
 	protected Message message;
+	protected BotRequestHandler requestHandler;
 
-	public AbstractCommand(final Message message) {
+	public AbstractCommand(final Message message,
+			final BotRequestHandler requestHandler) {
 		this.message = message;
+		this.requestHandler = requestHandler;
 	}
 
 	public Message getMessage() {
@@ -21,6 +21,14 @@ public abstract class AbstractCommand implements Command {
 
 	public void setMessage(Message message) {
 		this.message = message;
+	}
+
+	public BotRequestHandler getRequestHandler() {
+		return requestHandler;
+	}
+
+	public void setRequestHandler(BotRequestHandler requestHandler) {
+		this.requestHandler = requestHandler;
 	}
 
 	@Override
