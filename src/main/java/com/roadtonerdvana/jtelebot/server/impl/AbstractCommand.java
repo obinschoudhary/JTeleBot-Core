@@ -1,16 +1,16 @@
 package com.roadtonerdvana.jtelebot.server.impl;
 
-import com.roadtonerdvana.jtelebot.client.BotRequestHandler;
+import com.roadtonerdvana.jtelebot.client.RequestHandler;
 import com.roadtonerdvana.jtelebot.response.json.Message;
 import com.roadtonerdvana.jtelebot.server.Command;
 
 public abstract class AbstractCommand implements Command {
 
 	protected Message message;
-	protected BotRequestHandler requestHandler;
+	protected RequestHandler requestHandler;
 
 	public AbstractCommand(final Message message,
-			final BotRequestHandler requestHandler) {
+			final RequestHandler requestHandler) {
 		this.message = message;
 		this.requestHandler = requestHandler;
 	}
@@ -23,11 +23,11 @@ public abstract class AbstractCommand implements Command {
 		this.message = message;
 	}
 
-	public BotRequestHandler getRequestHandler() {
+	public RequestHandler getRequestHandler() {
 		return requestHandler;
 	}
 
-	public void setRequestHandler(BotRequestHandler requestHandler) {
+	public void setRequestHandler(RequestHandler requestHandler) {
 		this.requestHandler = requestHandler;
 	}
 

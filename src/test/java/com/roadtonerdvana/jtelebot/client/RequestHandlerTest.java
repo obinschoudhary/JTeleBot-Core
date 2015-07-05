@@ -11,9 +11,9 @@ import org.codehaus.jackson.map.JsonMappingException;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.roadtonerdvana.jtelebot.client.BotRequestHandler;
+import com.roadtonerdvana.jtelebot.client.RequestHandler;
 import com.roadtonerdvana.jtelebot.client.BroadcastActionType;
-import com.roadtonerdvana.jtelebot.client.impl.DefaultBotRequestHandler;
+import com.roadtonerdvana.jtelebot.client.impl.DefaultRequestHandler;
 import com.roadtonerdvana.jtelebot.request.factory.TelegramRequestFactory;
 import com.roadtonerdvana.jtelebot.response.json.ReplyKeyboardHide;
 import com.roadtonerdvana.jtelebot.response.json.TelegramResponse;
@@ -23,11 +23,11 @@ public class RequestHandlerTest {
 	// PUT YOUR TEST TOKEN HERE...
 	private static final String TEST_TOKEN = "put token here";
 	
-	private BotRequestHandler handler;
+	private RequestHandler handler;
 	
 	@Before
 	public void setUp() {
-		handler = new DefaultBotRequestHandler(TEST_TOKEN);   
+		handler = new DefaultRequestHandler(TEST_TOKEN);   
 	}
 	
 	@Test

@@ -6,8 +6,8 @@ import java.util.concurrent.ConcurrentMap;
 import org.apache.log4j.Logger;
 
 import com.googlecode.concurrentlinkedhashmap.ConcurrentLinkedHashMap;
-import com.roadtonerdvana.jtelebot.client.BotRequestHandler;
-import com.roadtonerdvana.jtelebot.client.impl.DefaultBotRequestHandler;
+import com.roadtonerdvana.jtelebot.client.RequestHandler;
+import com.roadtonerdvana.jtelebot.client.impl.DefaultRequestHandler;
 import com.roadtonerdvana.jtelebot.request.factory.TelegramRequestFactory;
 import com.roadtonerdvana.jtelebot.response.json.Message;
 import com.roadtonerdvana.jtelebot.response.json.TelegramResponse;
@@ -23,7 +23,7 @@ public class DefaultCommandWatcher extends AbstractCommandWatcher {
 	private static final long MAX_CACHE_CAPACITY = 1000;
 
 	private CommandDispatcher commandDispatcher;
-	private BotRequestHandler requestHandler;
+	private RequestHandler requestHandler;
 
 	private Class<? extends AbstractCommand> commandClass;
 
@@ -53,7 +53,7 @@ public class DefaultCommandWatcher extends AbstractCommandWatcher {
 		this.commandClass = commandClass;
 
 		this.commandDispatcher = commandDispatcher;
-		this.requestHandler = new DefaultBotRequestHandler(telegramToken);
+		this.requestHandler = new DefaultRequestHandler(telegramToken);
 
 		// TODO These parameters must be persisted (i.e. DB,
 		// configuration file, etc.)
@@ -103,7 +103,7 @@ public class DefaultCommandWatcher extends AbstractCommandWatcher {
 				// Command via the Dispatcher
 				try {
 					Constructor<?> constructor = commandClass.getConstructor(
-							Message.class, BotRequestHandler.class);
+							Message.class, RequestHandler.class);
 					Object commandObj = constructor.newInstance(new Object[] {
 							update.getMessage(), requestHandler });
 					commandDispatcher.enqueueCommand((Command) commandObj);
@@ -129,11 +129,11 @@ public class DefaultCommandWatcher extends AbstractCommandWatcher {
 		this.commandDispatcher = commandDispatcher;
 	}
 
-	public BotRequestHandler getRequestHandler() {
+	public RequestHandler getRequestHandler() {
 		return requestHandler;
 	}
 
-	public void setRequestHandler(BotRequestHandler requestHandler) {
+	public void setRequestHandler(RequestHandler requestHandler) {
 		this.requestHandler = requestHandler;
 	}
 

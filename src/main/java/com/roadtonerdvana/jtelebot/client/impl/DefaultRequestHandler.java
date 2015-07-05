@@ -13,13 +13,13 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.mime.MultipartEntityBuilder;
 import org.apache.http.message.BasicNameValuePair;
 
-import com.roadtonerdvana.jtelebot.client.BotRequestHandler;
+import com.roadtonerdvana.jtelebot.client.RequestHandler;
 import com.roadtonerdvana.jtelebot.client.HttpClientFactory;
 import com.roadtonerdvana.jtelebot.mapper.json.MapperHandler;
 import com.roadtonerdvana.jtelebot.request.TelegramRequest;
 import com.roadtonerdvana.jtelebot.response.json.TelegramResponse;
 
-public class DefaultBotRequestHandler implements BotRequestHandler {
+public class DefaultRequestHandler implements RequestHandler {
 
 	// TODO This should be in a CommonConstants class
 	private static final String URL_TEMPLATE = "https://api.telegram.org/bot{0}/{1}";
@@ -27,11 +27,11 @@ public class DefaultBotRequestHandler implements BotRequestHandler {
 	private HttpClient httpClient;
 	private String token;
 
-	public DefaultBotRequestHandler() {
+	public DefaultRequestHandler() {
 		httpClient = HttpClientFactory.createHttpClient();
 	}
 
-	public DefaultBotRequestHandler(final String token) {
+	public DefaultRequestHandler(final String token) {
 		this();
 		this.token = token;
 	}
