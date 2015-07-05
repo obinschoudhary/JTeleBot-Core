@@ -1,0 +1,8 @@
+com.roadtonerdvana.jtelebot.client
+com.roadtonerdvana.jtelebot.client.impl
+com.roadtonerdvana.jtelebot.mapper.json
+com.roadtonerdvana.jtelebot.request
+com.roadtonerdvana.jtelebot.request.factory
+com.roadtonerdvana.jtelebot.response.json
+com.roadtonerdvana.jtelebot.server
+com.roadtonerdvana.jtelebot.server.impl
