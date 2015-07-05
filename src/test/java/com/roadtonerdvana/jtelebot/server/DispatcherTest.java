@@ -17,18 +17,18 @@ public class DispatcherTest {
 	private static final int THREAD_POOL = 3;
 	private static final long CMD_EXEC_DELAY = 5000;
 
-	private DefaultCommandDispatcher dispatcher;
+	private DefaultCommandDispatcher commandDispatcher;
 
 	@Before
 	public void setup() {
-		dispatcher = new DefaultCommandDispatcher(THREAD_POOL, CMD_EXEC_DELAY,
+		commandDispatcher = new DefaultCommandDispatcher(THREAD_POOL, CMD_EXEC_DELAY,
 				new DefaultCommandQueue());
 	}
 
 	@Test
 	public void testStartAndStop() {
 
-		dispatcher.enqueueCommand(new Command() {
+		commandDispatcher.enqueueCommand(new Command() {
 			@Override
 			public void execute() {
 				System.out.println("\tRunning Test Command ");
@@ -40,23 +40,23 @@ public class DispatcherTest {
 			}
 		});
 
-		dispatcher.startUp();
-		Assert.assertTrue(dispatcher.isAlive());
+		commandDispatcher.startUp();
+		Assert.assertTrue(commandDispatcher.isAlive());
 
 		pause(10000);
 
-		dispatcher.shutdown();
-		Assert.assertFalse(dispatcher.isAlive());
+		commandDispatcher.shutdown();
+		Assert.assertFalse(commandDispatcher.isAlive());
 
 		pause(5000);
 
-		dispatcher.startUp();
-		Assert.assertTrue(dispatcher.isAlive());
+		commandDispatcher.startUp();
+		Assert.assertTrue(commandDispatcher.isAlive());
 
 		pause(10000);
 
-		dispatcher.shutdown();
-		Assert.assertFalse(dispatcher.isAlive());
+		commandDispatcher.shutdown();
+		Assert.assertFalse(commandDispatcher.isAlive());
 
 	}
 

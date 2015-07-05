@@ -1,21 +1,29 @@
 package com.roadtonerdvana.jtelebot.server.impl;
 
-import com.roadtonerdvana.jtelebot.response.json.Update;
+import org.apache.log4j.Logger;
+
+import com.roadtonerdvana.jtelebot.response.json.Message;
 import com.roadtonerdvana.jtelebot.server.Command;
 
 public abstract class AbstractCommand implements Command {
 
-	private Update update;
+	private static final Logger LOG = Logger.getLogger(AbstractCommand.class);
 
-	public AbstractCommand(final Update update) {
-		this.update = update;
+	protected Message message;
+
+	public AbstractCommand(final Message message) {
+		this.message = message;
+	}
+
+	public Message getMessage() {
+		return message;
+	}
+
+	public void setMessage(Message message) {
+		this.message = message;
 	}
 
 	@Override
-	public void execute() {
-		if (update != null) {
-
-		}
-	}
+	public abstract void execute();
 
 }

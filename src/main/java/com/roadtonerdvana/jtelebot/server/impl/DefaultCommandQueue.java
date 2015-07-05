@@ -3,10 +3,14 @@ package com.roadtonerdvana.jtelebot.server.impl;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
+import org.apache.log4j.Logger;
+
 import com.roadtonerdvana.jtelebot.server.Command;
 import com.roadtonerdvana.jtelebot.server.CommandQueue;
 
 public class DefaultCommandQueue implements CommandQueue {
+
+	private static final Logger LOG = Logger.getLogger(DefaultCommandQueue.class);
 
 	private Queue<Command> commandQueue;
 
@@ -37,6 +41,11 @@ public class DefaultCommandQueue implements CommandQueue {
 	@Override
 	public boolean contains(Command command) {
 		return commandQueue.contains(command);
+	}
+	
+	@Override
+	public String toString() {
+		return commandQueue.toString();
 	}
 
 }

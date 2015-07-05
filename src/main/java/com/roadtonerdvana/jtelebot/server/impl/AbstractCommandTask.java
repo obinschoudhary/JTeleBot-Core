@@ -1,9 +1,17 @@
 package com.roadtonerdvana.jtelebot.server.impl;
 
+import java.util.Observable;
+
+import org.apache.log4j.Logger;
+
 import com.roadtonerdvana.jtelebot.server.Command;
 import com.roadtonerdvana.jtelebot.server.CommandTask;
 
-public abstract class AbstractCommandTask implements CommandTask, Runnable {
+public abstract class AbstractCommandTask extends Observable implements
+		CommandTask, Runnable {
+
+	private static final Logger LOG = Logger
+			.getLogger(AbstractCommandTask.class);
 
 	protected Command command;
 	protected long delay;
@@ -20,6 +28,7 @@ public abstract class AbstractCommandTask implements CommandTask, Runnable {
 	@Override
 	public void run() {
 		processCommand();
+		notifyObserver();
 	}
 
 	/**
@@ -28,6 +37,16 @@ public abstract class AbstractCommandTask implements CommandTask, Runnable {
 	 * */
 	@Override
 	public abstract void processCommand();
+
+	public abstract void notifyObserver();
+
+	public Command getCommand() {
+		return command;
+	}
+
+	public void setCommand(Command command) {
+		this.command = command;
+	}
 
 	@Override
 	public String toString() {

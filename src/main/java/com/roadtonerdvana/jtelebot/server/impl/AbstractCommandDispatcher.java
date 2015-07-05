@@ -1,14 +1,22 @@
 package com.roadtonerdvana.jtelebot.server.impl;
 
+import java.util.Observable;
+import java.util.Observer;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+
+import org.apache.log4j.Logger;
 
 import com.roadtonerdvana.jtelebot.server.Command;
 import com.roadtonerdvana.jtelebot.server.CommandDispatcher;
 import com.roadtonerdvana.jtelebot.server.CommandQueue;
 import com.roadtonerdvana.jtelebot.server.Service;
 
-public abstract class AbstractCommandDispatcher implements CommandDispatcher, Service, Runnable {
+public abstract class AbstractCommandDispatcher implements CommandDispatcher,
+		Observer, Service, Runnable {
+
+	private static final Logger LOG = Logger
+			.getLogger(AbstractCommandDispatcher.class);
 
 	protected ExecutorService executor;
 	protected CommandQueue commandQueue;
@@ -20,7 +28,7 @@ public abstract class AbstractCommandDispatcher implements CommandDispatcher, Se
 	private Thread thread;
 
 	public AbstractCommandDispatcher() {
-		this(5, 0, new DefaultCommandQueue());
+		this(5, 1000, new DefaultCommandQueue());
 	}
 
 	public AbstractCommandDispatcher(final int threadPoolSize,
@@ -32,7 +40,9 @@ public abstract class AbstractCommandDispatcher implements CommandDispatcher, Se
 
 	@Override
 	public void startUp() {
-		System.out.println("** Starting up command dispatcher...");
+		LOG.info("*************************************");
+		LOG.info("** Starting up command dispatcher...");
+		LOG.info("*************************************");
 		alive = true;
 		executor = Executors.newFixedThreadPool(threadPoolSize);
 
@@ -42,14 +52,16 @@ public abstract class AbstractCommandDispatcher implements CommandDispatcher, Se
 
 	@Override
 	public void shutdown() {
-		System.out.println("** Shutting down command dispatcher...");
+		LOG.info("***************************************");
+		LOG.info("** Shutting down command dispatcher...");
+		LOG.info("***************************************");
 		alive = false;
 		executor.shutdown();
 	}
 
 	@Override
 	public boolean isAlive() {
-		System.out.println("Command dispatcher " + (alive ? "is" : "is not")
+		LOG.debug("Command dispatcher " + (alive ? "is" : "is not")
 				+ " alive...");
 		return alive;
 	}
@@ -57,9 +69,14 @@ public abstract class AbstractCommandDispatcher implements CommandDispatcher, Se
 	@Override
 	public void run() {
 		while (alive) {
+			try {
+				Thread.sleep(delay);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 			dispatchCommands();
 		}
-		
+
 		thread = null;
 	}
 
@@ -74,6 +91,13 @@ public abstract class AbstractCommandDispatcher implements CommandDispatcher, Se
 	 * */
 	@Override
 	public abstract void dispatchCommands();
+
+	/**
+	 * Method used by the Observable object in order to notify this Observer
+	 * class about any particular change event in Observable side.
+	 * */
+	@Override
+	public abstract void update(Observable observableTask, Object arg);
 
 	public CommandQueue getCommandQueue() {
 		return commandQueue;
