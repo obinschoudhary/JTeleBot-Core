@@ -1,6 +1,5 @@
 package com.roadtonerdvana.jtelebot.server.impl;
 
-import java.lang.reflect.Constructor;
 import java.util.concurrent.ConcurrentMap;
 
 import org.apache.log4j.Logger;
@@ -14,6 +13,7 @@ import com.roadtonerdvana.jtelebot.response.json.TelegramResponse;
 import com.roadtonerdvana.jtelebot.response.json.Update;
 import com.roadtonerdvana.jtelebot.server.Command;
 import com.roadtonerdvana.jtelebot.server.CommandDispatcher;
+import com.roadtonerdvana.jtelebot.server.CommandFactory;
 
 public class DefaultCommandWatcher extends AbstractCommandWatcher {
 
@@ -23,9 +23,10 @@ public class DefaultCommandWatcher extends AbstractCommandWatcher {
 	private static final long MAX_CACHE_CAPACITY = 1000;
 
 	private CommandDispatcher commandDispatcher;
+	
+	private CommandFactory commandFactory;
 	private RequestHandler requestHandler;
 
-	private Class<? extends AbstractCommand> commandClass;
 
 	private long offset;
 	private long limit;
@@ -39,20 +40,19 @@ public class DefaultCommandWatcher extends AbstractCommandWatcher {
 
 	public DefaultCommandWatcher(final String telegramToken,
 			CommandDispatcher commandDispatcher,
-			final Class<? extends AbstractCommand> commandClass) {
+			final CommandFactory commandFactory) {
 		this(0, MAX_CACHE_CAPACITY, telegramToken, commandDispatcher,
-				commandClass);
+				commandFactory);
 	}
 
 	public DefaultCommandWatcher(final long delayInMillis,
 			final long cacheCapacity, final String telegramToken,
 			CommandDispatcher commandDispatcher,
-			final Class<? extends AbstractCommand> commandClass) {
+			final CommandFactory commandFactory) {
 
 		super(delayInMillis);
-		this.commandClass = commandClass;
-
 		this.commandDispatcher = commandDispatcher;
+		this.commandFactory = commandFactory;
 		this.requestHandler = new DefaultRequestHandler(telegramToken);
 
 		// TODO These parameters must be persisted (i.e. DB,
@@ -102,11 +102,8 @@ public class DefaultCommandWatcher extends AbstractCommandWatcher {
 				// Instantiate a new Command, attach the Message object, enqueue
 				// Command via the Dispatcher
 				try {
-					Constructor<?> constructor = commandClass.getConstructor(
-							Message.class, RequestHandler.class);
-					Object commandObj = constructor.newInstance(new Object[] {
-							update.getMessage(), requestHandler });
-					commandDispatcher.enqueueCommand((Command) commandObj);
+					final Command command = commandFactory.createCommand(update.getMessage(), requestHandler);
+					commandDispatcher.enqueueCommand(command);
 				} catch (Exception e) {
 					// gotta catch 'em all
 					LOG.error(e);
