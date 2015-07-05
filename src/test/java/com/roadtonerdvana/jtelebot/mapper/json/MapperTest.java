@@ -190,7 +190,7 @@ public class MapperTest {
 		originalMessage.setForwardFromUser(originalUser0);
 		originalMessage.setFromUser(originalUser1);
 		originalMessage.setGroupChatCreated(false);
-		originalMessage.setId(352345);
+		originalMessage.setId(352345L);
 		originalMessage.setLeftChatParticipantUser(originalUser2);
 		originalMessage.setLocation(originalLocation);
 		originalMessage.setNewChatParticipantUser(originalUser3);
@@ -198,16 +198,16 @@ public class MapperTest {
 		originalMessage.setNewChatTitle("new chat title");
 		originalMessage.setPhoto(new PhotoSize[]{originalPhotoSize3, originalPhotoSize4});
 		originalMessage0 = new Message();
-		originalMessage0.setId(325);
+		originalMessage0.setId(325L);
 		originalMessage0.setText("its gonna rain rain rain");
 		originalMessage.setReplyToMessage(originalMessage0);
 		originalMessage.setSticker(originalSticker);
 		originalMessage.setText("text text text");
-		originalMessage.setUnixTimeDate(2325252);
+		originalMessage.setUnixTimeDate(2325252L);
 		originalMessage.setVideo(originalVideo);
 		originalUpdate = new Update();
 		originalUpdate.setMessage(originalMessage);
-		originalUpdate.setUpdateId(524352);
+		originalUpdate.setUpdateId(524352L);
 		originalUserProfilePhotos = new UserProfilePhotos();
 		originalUserProfilePhotos.setTotalCount(10);
 		originalUserProfilePhotos.setPhotos(new PhotoSize[][]{{originalPhotoSize0},{originalPhotoSize1,originalPhotoSize4},{originalPhotoSize2,originalPhotoSize3}});

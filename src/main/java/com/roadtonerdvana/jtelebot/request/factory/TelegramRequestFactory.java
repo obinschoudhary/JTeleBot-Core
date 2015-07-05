@@ -314,7 +314,7 @@ public final class TelegramRequestFactory {
 	 * @param timeout
 	 * @return
 	 */
-	public static TelegramRequest createGetUpdatesRequest(final Integer offset, final Integer limit, final Integer timeout){
+	public static TelegramRequest createGetUpdatesRequest(final Long offset, final Long limit, final Long timeout){
 		List <BasicNameValuePair>basicNameValuePair = new ArrayList<BasicNameValuePair>();
 		basicNameValuePair.add(new BasicNameValuePair("offset",String.valueOf(offset)));
 		basicNameValuePair.add(new BasicNameValuePair("limit",String.valueOf(limit)));

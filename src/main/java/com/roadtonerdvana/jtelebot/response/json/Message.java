@@ -12,12 +12,12 @@ import com.roadtonerdvana.jtelebot.mapper.json.MapperHandler;
  * This object represents a message.
  *
  */
-public class Message{
+public class Message {
 	/**
 	 * Unique message identifier
 	 */
 	@JsonProperty("message_id")
-	private int id;
+	private Long id;
 	/**
 	 * Sender
 	 */
@@ -27,7 +27,7 @@ public class Message{
 	 * Date the message was sent in Unix time
 	 */
 	@JsonProperty("date")
-	private int unixTimeDate;
+	private Long unixTimeDate;
 	/**
 	 * Conversation the message belongs to — user in case of a private message,
 	 * GroupChat in case of a group
@@ -136,11 +136,11 @@ public class Message{
 	@JsonProperty("group_chat_created")
 	private Boolean groupChatCreated;
 
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -152,11 +152,11 @@ public class Message{
 		this.fromUser = fromUser;
 	}
 
-	public int getUnixTimeDate() {
+	public Long getUnixTimeDate() {
 		return unixTimeDate;
 	}
 
-	public void setUnixTimeDate(final int unixTimeDate) {
+	public void setUnixTimeDate(final Long unixTimeDate) {
 		this.unixTimeDate = unixTimeDate;
 	}
 
@@ -166,15 +166,18 @@ public class Message{
 
 	@JsonProperty
 	public void setChat(final JsonNode chat) {
-		if(chat!=null&&(chat.toString()!=null&&chat.toString().length()!=0)){
-			if(chat.toString().contains("title")){//must be groupchat
-				this.chat = MapperHandler.INSTANCE.getObjectMapper().convertValue(chat, GroupChat.class);
-			} else if(chat.toString().contains("username")){//must be user
-				this.chat = MapperHandler.INSTANCE.getObjectMapper().convertValue(chat, User.class);
+		if (chat != null
+				&& (chat.toString() != null && chat.toString().length() != 0)) {
+			if (chat.toString().contains("title")) {// must be groupchat
+				this.chat = MapperHandler.INSTANCE.getObjectMapper()
+						.convertValue(chat, GroupChat.class);
+			} else if (chat.toString().contains("username")) {// must be user
+				this.chat = MapperHandler.INSTANCE.getObjectMapper()
+						.convertValue(chat, User.class);
 			}
 		}
 	}
-	
+
 	public void setChat(final Chat chat) {
 		this.chat = chat;
 	}
@@ -315,8 +318,6 @@ public class Message{
 		this.groupChatCreated = groupChatCreated;
 	}
 
-	
-	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -337,7 +338,7 @@ public class Message{
 		result = prime
 				* result
 				+ ((groupChatCreated == null) ? 0 : groupChatCreated.hashCode());
-		result = prime * result + id;
+		result = prime * result + id.intValue();
 		result = prime
 				* result
 				+ ((leftChatParticipantUser == null) ? 0
@@ -356,7 +357,7 @@ public class Message{
 				+ ((replyToMessage == null) ? 0 : replyToMessage.hashCode());
 		result = prime * result + ((sticker == null) ? 0 : sticker.hashCode());
 		result = prime * result + ((text == null) ? 0 : text.hashCode());
-		result = prime * result + unixTimeDate;
+		result = prime * result + unixTimeDate.intValue();
 		result = prime * result + ((video == null) ? 0 : video.hashCode());
 		return result;
 	}

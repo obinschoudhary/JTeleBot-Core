@@ -108,7 +108,7 @@ public class RequestHandlerTest {
 		parameters.add(new BasicNameValuePair("limit", "100"));
 		parameters.add(new BasicNameValuePair("timeout", "0"));
 		
-		final TelegramResponse<?> jsonResponse = handler.sendRequest(TelegramRequestFactory.createGetUpdatesRequest(0, 100, 0));
+		final TelegramResponse<?> jsonResponse = handler.sendRequest(TelegramRequestFactory.createGetUpdatesRequest(0L, 100L, 0L));
 		System.out.println(jsonResponse);
 
 	}

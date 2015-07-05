@@ -1,6 +1,5 @@
 package com.roadtonerdvana.jtelebot.server;
 
-import org.apache.log4j.Logger;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -11,33 +10,45 @@ import com.roadtonerdvana.jtelebot.server.impl.DefaultCommandWatcher;
 
 public class WatcherTest {
 
-	private static final Logger LOG = Logger.getLogger(WatcherTest.class);
-
+	// PUT YOUR TEST TOKEN HERE...
 	private static final String TEST_TOKEN = "";
-	private static final long RETRIEVAL_DELAY = 5000;
 
-	private static final int THREAD_POOL = 3;
-	private static final long CMD_EXEC_DELAY = 2000;
+	// Polling Telegram Updates (Watcher)
+	private static final long POLLING_DELAY = 10000;
+	private static final int CACHE_CAPACITY = 1000;
+
+	private static final int DEFAULT_INITIAL_OFFSET = 0;
+	private static final int DEFAULT_UPDATES_LIMIT = 100;
+	private static final int DEFAULT_TIMEOUT = 0;
+
+	// Thread-Pool Executor (Dispatcher)
+	private static final int THREAD_POOL_SIZE = 1;
+	private static final long CMD_EXEC_DELAY = 0;
+
+	private static final long OVERALL_TEST_DURATION = 120000;
 
 	private DefaultCommandWatcher commandWatcher;
 	private DefaultCommandDispatcher commandDispatcher;
 
 	@Before
 	public void setUp() {
-//		BasicConfigurator.configure();
-		
-		commandDispatcher = new DefaultCommandDispatcher(THREAD_POOL,
+		// Init first the Dispatcher...
+		commandDispatcher = new DefaultCommandDispatcher(THREAD_POOL_SIZE,
 				CMD_EXEC_DELAY, new DefaultCommandQueue());
 		commandDispatcher.startUp();
 
-		commandWatcher = new DefaultCommandWatcher(RETRIEVAL_DELAY, TEST_TOKEN,
-				commandDispatcher);
+		// Init the Watcher and bypass a reference to Dispatcher
+		commandWatcher = new DefaultCommandWatcher(POLLING_DELAY,
+				CACHE_CAPACITY, TEST_TOKEN, commandDispatcher);
+		commandWatcher.setOffset(DEFAULT_INITIAL_OFFSET);
+		commandWatcher.setLimit(DEFAULT_UPDATES_LIMIT);
+		commandWatcher.setTimeout(DEFAULT_TIMEOUT);
 	}
 
 	@After
 	public void tearDown() {
 		try {
-			Thread.sleep(30000);
+			Thread.sleep(OVERALL_TEST_DURATION);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
@@ -47,7 +58,7 @@ public class WatcherTest {
 
 	@Test
 	public void testStartAndStop() {
-		LOG.debug("Testing watcher..");
+		// LOG.debug("Testing watcher..");
 		commandWatcher.startUp();
 	}
 
