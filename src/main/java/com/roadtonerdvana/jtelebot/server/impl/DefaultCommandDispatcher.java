@@ -11,7 +11,7 @@ import com.roadtonerdvana.jtelebot.server.CommandQueue;
 public class DefaultCommandDispatcher extends AbstractCommandDispatcher {
 
 	private ConcurrentMap<String, DefaultCommandTask> taskList;
-
+	
 	private static final Logger LOG = Logger
 			.getLogger(DefaultCommandDispatcher.class);
 
@@ -49,9 +49,7 @@ public class DefaultCommandDispatcher extends AbstractCommandDispatcher {
 						commandQueue.poll(), delay);
 
 				task.addObserver(this);
-				taskList.put(
-						String.valueOf(((DefaultCommand) task.getCommand())
-								.getMessage().getId()), task);
+				taskList.put(String.valueOf(task.getCommand().hashCode()), task);
 				// LOG.debug(taskList.keySet());
 
 				executor.execute(task);
@@ -66,8 +64,7 @@ public class DefaultCommandDispatcher extends AbstractCommandDispatcher {
 	@Override
 	public void update(final Observable observableTask, final Object arg) {
 		final DefaultCommandTask task = (DefaultCommandTask) observableTask;
-		final String observableKey = String.valueOf(((DefaultCommand) task
-				.getCommand()).getMessage().getId());
+		final String observableKey = String.valueOf(task.getCommand().hashCode());
 		if (taskList.containsKey(observableKey)) {
 			taskList.remove(observableKey);
 			LOG.debug("Pending tasks: " + taskList.size() + "...");

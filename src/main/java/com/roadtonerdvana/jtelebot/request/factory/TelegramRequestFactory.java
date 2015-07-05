@@ -47,7 +47,7 @@ public final class TelegramRequestFactory {
 	 * @throws JsonMappingException
 	 * @throws IOException
 	 */
-	public static TelegramRequest createSendMessageRequest(final int chatId,final String text, final boolean disableWebPagePreview, final Integer replyToMessageId, final CustomReplyKeyboard customReplyKeyboard) throws JsonGenerationException, JsonMappingException, IOException{
+	public static TelegramRequest createSendMessageRequest(final int chatId,final String text, final boolean disableWebPagePreview, final Long replyToMessageId, final CustomReplyKeyboard customReplyKeyboard) throws JsonGenerationException, JsonMappingException, IOException{
 		List <BasicNameValuePair>basicNameValuePair = new ArrayList<BasicNameValuePair>();
 		basicNameValuePair.add(new BasicNameValuePair("chat_id",String.valueOf(chatId)));
 		basicNameValuePair.add(new BasicNameValuePair("text",text));
@@ -339,6 +339,12 @@ public final class TelegramRequestFactory {
 		}
 	}
 	private static void addIfNotNull(final String name, final Integer value, List <BasicNameValuePair>basicNameValuePair){
+		if(value!=null){
+			basicNameValuePair.add(new BasicNameValuePair(name,value.toString()));
+		}
+	}
+	
+	private static void addIfNotNull(final String name, final Long value, List <BasicNameValuePair>basicNameValuePair){
 		if(value!=null){
 			basicNameValuePair.add(new BasicNameValuePair(name,value.toString()));
 		}

@@ -33,13 +33,14 @@ public class WatcherTest {
 	@Before
 	public void setUp() {
 		// Init first the Dispatcher...
+		DefaultCommandQueue defaultCommandQueue = new  DefaultCommandQueue();
 		commandDispatcher = new DefaultCommandDispatcher(THREAD_POOL_SIZE,
-				CMD_EXEC_DELAY, new DefaultCommandQueue());
+				CMD_EXEC_DELAY, defaultCommandQueue);
 		commandDispatcher.startUp();
 
 		// Init the Watcher and bypass a reference to Dispatcher
 		commandWatcher = new DefaultCommandWatcher(POLLING_DELAY,
-				CACHE_CAPACITY, TEST_TOKEN, commandDispatcher);
+				CACHE_CAPACITY, TEST_TOKEN, commandDispatcher,DummyCommandC.class);
 		commandWatcher.setOffset(DEFAULT_INITIAL_OFFSET);
 		commandWatcher.setLimit(DEFAULT_UPDATES_LIMIT);
 		commandWatcher.setTimeout(DEFAULT_TIMEOUT);

@@ -1,5 +1,6 @@
 package com.roadtonerdvana.jtelebot.server.impl;
 
+import java.lang.reflect.Constructor;
 import java.util.concurrent.ConcurrentMap;
 
 import org.apache.log4j.Logger;
@@ -11,6 +12,7 @@ import com.roadtonerdvana.jtelebot.request.factory.TelegramRequestFactory;
 import com.roadtonerdvana.jtelebot.response.json.Message;
 import com.roadtonerdvana.jtelebot.response.json.TelegramResponse;
 import com.roadtonerdvana.jtelebot.response.json.Update;
+import com.roadtonerdvana.jtelebot.server.Command;
 import com.roadtonerdvana.jtelebot.server.CommandDispatcher;
 
 public class DefaultCommandWatcher extends AbstractCommandWatcher {
@@ -23,6 +25,9 @@ public class DefaultCommandWatcher extends AbstractCommandWatcher {
 	private CommandDispatcher commandDispatcher;
 	private BotRequestHandler requestHandler;
 
+	private Class<? extends Command> commandClass;
+
+	
 	private long offset;
 	private long limit;
 	private long timeout;
@@ -30,13 +35,15 @@ public class DefaultCommandWatcher extends AbstractCommandWatcher {
 	private ConcurrentMap<String, Message> cache;
 
 	public DefaultCommandWatcher() {
-		this(0, MAX_CACHE_CAPACITY, null, null);
+		this(0, MAX_CACHE_CAPACITY, null, null,null);
 	}
 
 	public DefaultCommandWatcher(final long delayInMillis,
 			final long cacheCapacity, final String telegramToken,
-			CommandDispatcher commandDispatcher) {
+			CommandDispatcher commandDispatcher,final Class<? extends Command> commandClass) {
 		super(delayInMillis);
+		this.commandClass = commandClass;
+
 		this.commandDispatcher = commandDispatcher;
 		this.requestHandler = new DefaultBotRequestHandler(telegramToken);
 
@@ -67,7 +74,7 @@ public class DefaultCommandWatcher extends AbstractCommandWatcher {
 		}
 	}
 
-	private void handleUpdates(final TelegramResponse<?> response) {
+	private void handleUpdates(final TelegramResponse<?> response)  {
 		int newUpdatesCounter = 0;
 
 		for (final Object updateObj : response.getResult()) {
@@ -86,9 +93,15 @@ public class DefaultCommandWatcher extends AbstractCommandWatcher {
 				newUpdatesCounter++;
 				// Instantiate a new Command, attach the Message object, enqueue
 				// Command via the Dispatcher
-				commandDispatcher.enqueueCommand(new DefaultCommand(update
-						.getMessage()));
-				
+				try{
+					Constructor<?> ctor = commandClass.getConstructor(Message.class,BotRequestHandler.class);
+					Object object = ctor.newInstance(new Object[]{update.getMessage(),requestHandler});
+					commandDispatcher.enqueueCommand((Command) object);
+				}
+				catch(Exception e){
+					//gotta catch 'em all
+					LOG.error(e);
+				}
 				// Update offset in order to fetch a new slot the next time
 				offset = update.getUpdateId().longValue() + 1L;
 			}
