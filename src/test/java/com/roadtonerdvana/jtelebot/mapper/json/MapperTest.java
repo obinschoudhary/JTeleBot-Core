@@ -186,7 +186,7 @@ public class MapperTest {
 		originalMessage.setContact(originalContact);
 		originalMessage.setDeleteChatPhoto(true);
 		originalMessage.setDocument(originalDocument);
-		originalMessage.setForwardDate(235254);
+		originalMessage.setForwardDate(235254L);
 		originalMessage.setForwardFromUser(originalUser0);
 		originalMessage.setFromUser(originalUser1);
 		originalMessage.setGroupChatCreated(false);
@@ -200,6 +200,7 @@ public class MapperTest {
 		originalMessage0 = new Message();
 		originalMessage0.setId(325L);
 		originalMessage0.setText("its gonna rain rain rain");
+		originalMessage0.setUnixTimeDate(0L);
 		originalMessage.setReplyToMessage(originalMessage0);
 		originalMessage.setSticker(originalSticker);
 		originalMessage.setText("text text text");

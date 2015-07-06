@@ -82,7 +82,7 @@ public final class TelegramRequestFactory {
 	 * @throws JsonMappingException
 	 * @throws IOException
 	 */
-	public static TelegramRequest createSendPhotoRequest(final int chatId,final File inputFile, final String caption, final Integer replyToMessageId, final CustomReplyKeyboard customReplyKeyboard) throws JsonGenerationException, JsonMappingException, IOException{
+	public static TelegramRequest createSendPhotoRequest(final int chatId,final File inputFile, final String caption, final Long replyToMessageId, final CustomReplyKeyboard customReplyKeyboard) throws JsonGenerationException, JsonMappingException, IOException{
 		List <BasicNameValuePair>basicNameValuePair = new ArrayList<BasicNameValuePair>();
 		basicNameValuePair.add(new BasicNameValuePair("chat_id",String.valueOf(chatId)));
 		TelegramRequestFactory.addIfNotNull("caption",caption,basicNameValuePair);
@@ -102,7 +102,7 @@ public final class TelegramRequestFactory {
 	 * @throws JsonMappingException
 	 * @throws IOException
 	 */
-	public static TelegramRequest createSendPhotoRequest(final int chatId,final String photoId, final String caption, final Integer replyToMessageId, final CustomReplyKeyboard customReplyKeyboard) throws JsonGenerationException, JsonMappingException, IOException{
+	public static TelegramRequest createSendPhotoRequest(final int chatId,final String photoId, final String caption, final Long replyToMessageId, final CustomReplyKeyboard customReplyKeyboard) throws JsonGenerationException, JsonMappingException, IOException{
 		List <BasicNameValuePair>basicNameValuePair = new ArrayList<BasicNameValuePair>();
 		basicNameValuePair.add(new BasicNameValuePair("chat_id",String.valueOf(chatId)));
 		basicNameValuePair.add(new BasicNameValuePair("photo",photoId));
@@ -122,7 +122,7 @@ public final class TelegramRequestFactory {
 	 * @throws JsonMappingException
 	 * @throws IOException
 	 */
-	public static TelegramRequest createSendAudioRequest(final int chatId,final File inputFile, final Integer replyToMessageId, final CustomReplyKeyboard customReplyKeyboard) throws JsonGenerationException, JsonMappingException, IOException{
+	public static TelegramRequest createSendAudioRequest(final int chatId,final File inputFile, final Long replyToMessageId, final CustomReplyKeyboard customReplyKeyboard) throws JsonGenerationException, JsonMappingException, IOException{
 		List <BasicNameValuePair>basicNameValuePair = new ArrayList<BasicNameValuePair>();
 		basicNameValuePair.add(new BasicNameValuePair("chat_id",String.valueOf(chatId)));
 		TelegramRequestFactory.addIfNotNull("reply_to_message_id",replyToMessageId,basicNameValuePair);
@@ -140,7 +140,7 @@ public final class TelegramRequestFactory {
 	 * @throws JsonMappingException
 	 * @throws IOException
 	 */
-	public static TelegramRequest createSendAudioRequest(final int chatId,final String audioId, final Integer replyToMessageId, final CustomReplyKeyboard customReplyKeyboard) throws JsonGenerationException, JsonMappingException, IOException{
+	public static TelegramRequest createSendAudioRequest(final int chatId,final String audioId, final Long replyToMessageId, final CustomReplyKeyboard customReplyKeyboard) throws JsonGenerationException, JsonMappingException, IOException{
 		List <BasicNameValuePair>basicNameValuePair = new ArrayList<BasicNameValuePair>();
 		basicNameValuePair.add(new BasicNameValuePair("chat_id",String.valueOf(chatId)));
 		basicNameValuePair.add(new BasicNameValuePair("audio",audioId));
@@ -159,7 +159,7 @@ public final class TelegramRequestFactory {
 	 * @throws JsonMappingException
 	 * @throws IOException
 	 */
-	public static TelegramRequest createSendDocumentRequest(final int chatId,final File inputFile, final Integer replyToMessageId, final CustomReplyKeyboard customReplyKeyboard) throws JsonGenerationException, JsonMappingException, IOException{
+	public static TelegramRequest createSendDocumentRequest(final int chatId,final File inputFile, final Long replyToMessageId, final CustomReplyKeyboard customReplyKeyboard) throws JsonGenerationException, JsonMappingException, IOException{
 		List <BasicNameValuePair>basicNameValuePair = new ArrayList<BasicNameValuePair>();
 		basicNameValuePair.add(new BasicNameValuePair("chat_id",String.valueOf(chatId)));
 		TelegramRequestFactory.addIfNotNull("reply_to_message_id",replyToMessageId,basicNameValuePair);
@@ -177,7 +177,7 @@ public final class TelegramRequestFactory {
 	 * @throws JsonMappingException
 	 * @throws IOException
 	 */
-	public static TelegramRequest createSendDocumentRequest(final int chatId,final String documentId, final Integer replyToMessageId, final CustomReplyKeyboard customReplyKeyboard) throws JsonGenerationException, JsonMappingException, IOException{
+	public static TelegramRequest createSendDocumentRequest(final int chatId,final String documentId, final Long replyToMessageId, final CustomReplyKeyboard customReplyKeyboard) throws JsonGenerationException, JsonMappingException, IOException{
 		List <BasicNameValuePair>basicNameValuePair = new ArrayList<BasicNameValuePair>();
 		basicNameValuePair.add(new BasicNameValuePair("chat_id",String.valueOf(chatId)));
 		basicNameValuePair.add(new BasicNameValuePair("document",documentId));
@@ -196,7 +196,7 @@ public final class TelegramRequestFactory {
 	 * @throws JsonMappingException
 	 * @throws IOException
 	 */
-	public static TelegramRequest createSendStickerRequest(final int chatId,final File inputFile, final Integer replyToMessageId, final CustomReplyKeyboard customReplyKeyboard) throws JsonGenerationException, JsonMappingException, IOException{
+	public static TelegramRequest createSendStickerRequest(final int chatId,final File inputFile, final Long replyToMessageId, final CustomReplyKeyboard customReplyKeyboard) throws JsonGenerationException, JsonMappingException, IOException{
 		List <BasicNameValuePair>basicNameValuePair = new ArrayList<BasicNameValuePair>();
 		basicNameValuePair.add(new BasicNameValuePair("chat_id",String.valueOf(chatId)));
 		TelegramRequestFactory.addIfNotNull("reply_to_message_id",replyToMessageId,basicNameValuePair);
@@ -214,7 +214,7 @@ public final class TelegramRequestFactory {
 	 * @throws JsonMappingException
 	 * @throws IOException
 	 */
-	public static TelegramRequest createSendStickerRequest(final int chatId,final String stickerId, final Integer replyToMessageId, final CustomReplyKeyboard customReplyKeyboard) throws JsonGenerationException, JsonMappingException, IOException{
+	public static TelegramRequest createSendStickerRequest(final int chatId,final String stickerId, final Long replyToMessageId, final CustomReplyKeyboard customReplyKeyboard) throws JsonGenerationException, JsonMappingException, IOException{
 		List <BasicNameValuePair>basicNameValuePair = new ArrayList<BasicNameValuePair>();
 		basicNameValuePair.add(new BasicNameValuePair("chat_id",String.valueOf(chatId)));
 		basicNameValuePair.add(new BasicNameValuePair("sticker",stickerId));
@@ -233,7 +233,7 @@ public final class TelegramRequestFactory {
 	 * @throws JsonMappingException
 	 * @throws IOException
 	 */
-	public static TelegramRequest createSendVideoRequest(final int chatId,final File inputFile, final Integer replyToMessageId, final CustomReplyKeyboard customReplyKeyboard) throws JsonGenerationException, JsonMappingException, IOException{
+	public static TelegramRequest createSendVideoRequest(final int chatId,final File inputFile, final Long replyToMessageId, final CustomReplyKeyboard customReplyKeyboard) throws JsonGenerationException, JsonMappingException, IOException{
 		List <BasicNameValuePair>basicNameValuePair = new ArrayList<BasicNameValuePair>();
 		basicNameValuePair.add(new BasicNameValuePair("chat_id",String.valueOf(chatId)));
 		TelegramRequestFactory.addIfNotNull("reply_to_message_id",replyToMessageId,basicNameValuePair);
@@ -251,7 +251,7 @@ public final class TelegramRequestFactory {
 	 * @throws JsonMappingException
 	 * @throws IOException
 	 */
-	public static TelegramRequest createSendVideoRequest(final int chatId,final String videoId, final Integer replyToMessageId, final CustomReplyKeyboard customReplyKeyboard) throws JsonGenerationException, JsonMappingException, IOException{
+	public static TelegramRequest createSendVideoRequest(final int chatId,final String videoId, final Long replyToMessageId, final CustomReplyKeyboard customReplyKeyboard) throws JsonGenerationException, JsonMappingException, IOException{
 		List <BasicNameValuePair>basicNameValuePair = new ArrayList<BasicNameValuePair>();
 		basicNameValuePair.add(new BasicNameValuePair("chat_id",String.valueOf(chatId)));
 		basicNameValuePair.add(new BasicNameValuePair("video",videoId));
@@ -272,7 +272,7 @@ public final class TelegramRequestFactory {
 	 * @throws JsonMappingException
 	 * @throws IOException
 	 */
-	public static TelegramRequest createSendLocationRequest(final int chatId,final double latitude,final double longitude, final Integer replyToMessageId, final CustomReplyKeyboard customReplyKeyboard) throws JsonGenerationException, JsonMappingException, IOException{
+	public static TelegramRequest createSendLocationRequest(final int chatId,final double latitude,final double longitude, final Long replyToMessageId, final CustomReplyKeyboard customReplyKeyboard) throws JsonGenerationException, JsonMappingException, IOException{
 		List <BasicNameValuePair>basicNameValuePair = new ArrayList<BasicNameValuePair>();
 		basicNameValuePair.add(new BasicNameValuePair("chat_id",String.valueOf(chatId)));
 		basicNameValuePair.add(new BasicNameValuePair("latitude",String.valueOf(latitude)));

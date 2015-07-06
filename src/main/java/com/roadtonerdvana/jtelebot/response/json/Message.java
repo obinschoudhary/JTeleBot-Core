@@ -29,7 +29,7 @@ public class Message {
 	@JsonProperty("date")
 	private Long unixTimeDate;
 	/**
-	 * Conversation the message belongs to — user in case of a private message,
+	 * Conversation the message belongs to ��� user in case of a private message,
 	 * GroupChat in case of a group
 	 */
 	@JsonProperty("chat")
@@ -44,7 +44,7 @@ public class Message {
 	 * Unix time
 	 */
 	@JsonProperty("forward_date")
-	private Integer forwardDate;
+	private Long forwardDate;
 	/**
 	 * Optional. For replies, the original message. Note that the Message object
 	 * in this field will not contain further reply_to_message fields even if it
@@ -190,11 +190,11 @@ public class Message {
 		this.forwardFromUser = forwardFromUser;
 	}
 
-	public Integer getForwardDate() {
+	public Long getForwardDate() {
 		return forwardDate;
 	}
 
-	public void setForwardDate(final Integer forwardDate) {
+	public void setForwardDate(final Long forwardDate) {
 		this.forwardDate = forwardDate;
 	}
 
@@ -338,7 +338,7 @@ public class Message {
 		result = prime
 				* result
 				+ ((groupChatCreated == null) ? 0 : groupChatCreated.hashCode());
-		result = prime * result + id.intValue();
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime
 				* result
 				+ ((leftChatParticipantUser == null) ? 0
@@ -357,7 +357,8 @@ public class Message {
 				+ ((replyToMessage == null) ? 0 : replyToMessage.hashCode());
 		result = prime * result + ((sticker == null) ? 0 : sticker.hashCode());
 		result = prime * result + ((text == null) ? 0 : text.hashCode());
-		result = prime * result + unixTimeDate.intValue();
+		result = prime * result
+				+ ((unixTimeDate == null) ? 0 : unixTimeDate.hashCode());
 		result = prime * result + ((video == null) ? 0 : video.hashCode());
 		return result;
 	}
@@ -416,7 +417,10 @@ public class Message {
 				return false;
 		} else if (!groupChatCreated.equals(other.groupChatCreated))
 			return false;
-		if (id != other.id)
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
 			return false;
 		if (leftChatParticipantUser == null) {
 			if (other.leftChatParticipantUser != null)
@@ -458,7 +462,10 @@ public class Message {
 				return false;
 		} else if (!text.equals(other.text))
 			return false;
-		if (unixTimeDate != other.unixTimeDate)
+		if (unixTimeDate == null) {
+			if (other.unixTimeDate != null)
+				return false;
+		} else if (!unixTimeDate.equals(other.unixTimeDate))
 			return false;
 		if (video == null) {
 			if (other.video != null)
@@ -475,13 +482,15 @@ public class Message {
 				+ ", forwardFromUser=" + forwardFromUser + ", forwardDate="
 				+ forwardDate + ", replyToMessage=" + replyToMessage
 				+ ", text=" + text + ", audio=" + audio + ", document="
-				+ document + ", photo=" + photo + ", sticker=" + sticker
-				+ ", video=" + video + ", contact=" + contact + ", location="
-				+ location + ", newChatParticipantUser="
+				+ document + ", photo=" + Arrays.toString(photo) + ", sticker="
+				+ sticker + ", video=" + video + ", contact=" + contact
+				+ ", location=" + location + ", newChatParticipantUser="
 				+ newChatParticipantUser + ", leftChatParticipantUser="
 				+ leftChatParticipantUser + ", newChatTitle=" + newChatTitle
-				+ ", newChatPhoto=" + newChatPhoto + ", deleteChatPhoto="
-				+ deleteChatPhoto + ", groupChatCreated=" + groupChatCreated
-				+ "]";
+				+ ", newChatPhoto=" + Arrays.toString(newChatPhoto)
+				+ ", deleteChatPhoto=" + deleteChatPhoto
+				+ ", groupChatCreated=" + groupChatCreated + "]";
 	}
+
+	
 }
