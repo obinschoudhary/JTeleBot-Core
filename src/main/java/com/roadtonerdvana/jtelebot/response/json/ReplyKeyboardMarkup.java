@@ -1,3 +1,11 @@
+/**
+ * 
+ * Copyright (C) 2015 Roberto Dominguez Estrada and Juan Carlos Sedano Salas
+ *
+ * This material is provided "as is", with absolutely no warranty expressed
+ * or implied. Any use is at your own risk.
+ *
+ */
 package com.roadtonerdvana.jtelebot.response.json;
 
 import java.util.Arrays;
@@ -34,9 +42,9 @@ public class ReplyKeyboardMarkup implements CustomReplyKeyboard{
 	 * Message object; 2) if the bot's message is a reply (has
 	 * reply_to_message_id), sender of the original message.
 	 * 
-	 * Example: A user requests to change the bot���s language, bot replies to the
+	 * Example: A user requests to change the bot���������s language, bot replies to the
 	 * request with a keyboard to select the new language. Other users in the
-	 * group don���t see the keyboard.
+	 * group don���������t see the keyboard.
 	 * */
 	@JsonProperty("selective")
 	private Boolean selective;

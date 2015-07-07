@@ -1,3 +1,11 @@
+/**
+ * 
+ * Copyright (C) 2015 Roberto Dominguez Estrada and Juan Carlos Sedano Salas
+ *
+ * This material is provided "as is", with absolutely no warranty expressed
+ * or implied. Any use is at your own risk.
+ *
+ */
 package com.roadtonerdvana.jtelebot.response.json;
 
 import org.codehaus.jackson.annotate.JsonProperty;
@@ -9,16 +17,16 @@ import org.codehaus.jackson.annotate.JsonProperty;
  */
 public class Update {
 	/**
-	 * The update‘s unique identifier. Update identifiers start from a certain
+	 * The update���s unique identifier. Update identifiers start from a certain
 	 * positive number and increase sequentially. This ID becomes especially
-	 * handy if you’re using Webhooks, since it allows you to ignore repeated
+	 * handy if you���re using Webhooks, since it allows you to ignore repeated
 	 * updates or to restore the correct update sequence, should they get out of
 	 * order.
 	 */
 	@JsonProperty("update_id")
 	private Long updateId;
 	/**
-	 * Optional. New incoming message of any kind — text, photo, sticker, etc.
+	 * Optional. New incoming message of any kind ��� text, photo, sticker, etc.
 	 */
 	@JsonProperty("message")
 	private Message message;

@@ -1,3 +1,11 @@
+/**
+ * 
+ * Copyright (C) 2015 Roberto Dominguez Estrada and Juan Carlos Sedano Salas
+ *
+ * This material is provided "as is", with absolutely no warranty expressed
+ * or implied. Any use is at your own risk.
+ *
+ */
 package com.roadtonerdvana.jtelebot.response.json;
 
 import org.codehaus.jackson.annotate.JsonProperty;
@@ -11,17 +19,17 @@ public class User extends Chat{
 
 	
 	/**
-	 * String	User‘s or bot’s first name
+	 * String	User���s or bot���s first name
 	 */
 	@JsonProperty("first_name")
 	private String firstName;
 	/**
-	 * String	Optional. User‘s or bot’s last name
+	 * String	Optional. User���s or bot���s last name
 	 */
 	@JsonProperty("last_name")
 	private String lastName;	
 	/**
-	 * Optional. User‘s or bot’s username
+	 * Optional. User���s or bot���s username
 	 */
 	@JsonProperty("username")
 	private String username;

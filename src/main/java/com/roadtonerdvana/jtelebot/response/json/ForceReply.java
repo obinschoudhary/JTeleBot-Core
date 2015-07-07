@@ -1,3 +1,11 @@
+/**
+ * 
+ * Copyright (C) 2015 Roberto Dominguez Estrada and Juan Carlos Sedano Salas
+ *
+ * This material is provided "as is", with absolutely no warranty expressed
+ * or implied. Any use is at your own risk.
+ *
+ */
 package com.roadtonerdvana.jtelebot.response.json;
 
 import org.codehaus.jackson.annotate.JsonProperty;
@@ -5,8 +13,8 @@ import org.codehaus.jackson.annotate.JsonProperty;
 public class ForceReply implements CustomReplyKeyboard{
 
 	/**
-	 * Shows reply interface to the user, as if they manually selected the bot���s
-	 * message and tapped ���Reply'
+	 * Shows reply interface to the user, as if they manually selected the bot���������s
+	 * message and tapped ���������Reply'
 	 * */
 	@JsonProperty("force_reply")
 	private Boolean forceReply;
