@@ -16,12 +16,12 @@ public class Chat{
 	 * Unique identifier for this user or group chat
 	 */
 	@JsonProperty("id")
-	private Integer id;
+	private Long id;
 	
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
-	public void setId(final Integer id) {
+	public void setId(final Long id) {
 		this.id = id;
 	}
 	@Override
@@ -47,6 +47,11 @@ public class Chat{
 			return false;
 		return true;
 	}
+	@Override
+	public String toString() {
+		return "Chat [id=" + id + "]";
+	}
+
 
 	
 	

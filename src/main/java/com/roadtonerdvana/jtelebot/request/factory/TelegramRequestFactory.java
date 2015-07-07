@@ -55,7 +55,7 @@ public final class TelegramRequestFactory {
 	 * @throws JsonMappingException
 	 * @throws IOException
 	 */
-	public static TelegramRequest createSendMessageRequest(final int chatId,final String text, final boolean disableWebPagePreview, final Long replyToMessageId, final CustomReplyKeyboard customReplyKeyboard) throws JsonGenerationException, JsonMappingException, IOException{
+	public static TelegramRequest createSendMessageRequest(final long chatId,final String text, final boolean disableWebPagePreview, final Long replyToMessageId, final CustomReplyKeyboard customReplyKeyboard) throws JsonGenerationException, JsonMappingException, IOException{
 		List <BasicNameValuePair>basicNameValuePair = new ArrayList<BasicNameValuePair>();
 		basicNameValuePair.add(new BasicNameValuePair("chat_id",String.valueOf(chatId)));
 		basicNameValuePair.add(new BasicNameValuePair("text",text));
