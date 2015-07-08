@@ -51,7 +51,7 @@ public class DefaultCommandDispatcher extends AbstractCommandDispatcher {
 		try {
 			// LOG.debug("CommandQueue: " + commandQueue.toString());
 			while (!commandQueue.isEmpty()) {
-				LOG.debug("About to dispatch " + commandQueue.size()
+				LOG.trace("About to dispatch " + commandQueue.size()
 						+ " commands enqueued...");
 				
 				final DefaultCommandTask task = new DefaultCommandTask(

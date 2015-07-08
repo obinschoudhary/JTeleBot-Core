@@ -9,6 +9,7 @@
 package io.github.nixtabyte.jtelebot.client.impl;
 
 import io.github.nixtabyte.jtelebot.client.HttpClientFactory;
+import io.github.nixtabyte.jtelebot.client.HttpProxy;
 import io.github.nixtabyte.jtelebot.client.RequestHandler;
 import io.github.nixtabyte.jtelebot.mapper.json.MapperHandler;
 import io.github.nixtabyte.jtelebot.request.TelegramRequest;
@@ -20,8 +21,10 @@ import java.io.InputStreamReader;
 import java.text.MessageFormat;
 
 import org.apache.http.Consts;
+import org.apache.http.HttpHost;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.mime.MultipartEntityBuilder;
@@ -55,7 +58,24 @@ public class DefaultRequestHandler implements RequestHandler {
 		return telegramResponse;
 	}
 
+	@Override
+	public TelegramResponse<?> sendRequest(TelegramRequest telegramRequest,
+			HttpProxy proxy) {
+		TelegramResponse<?> telegramResponse = null;
+		final String response = callHttpService(telegramRequest, proxy);
+
+		telegramResponse = parseJsonResponse(response, telegramRequest
+				.getRequestType().getResultClass());
+
+		return telegramResponse;
+	}
+
 	private String callHttpService(TelegramRequest telegramRequest) {
+		return this.callHttpService(telegramRequest, null);
+	}
+
+	private String callHttpService(TelegramRequest telegramRequest,
+			HttpProxy proxy) {
 		final String url = MessageFormat.format(URL_TEMPLATE, token,
 				telegramRequest.getRequestType().getMethodName());
 
@@ -67,6 +87,16 @@ public class DefaultRequestHandler implements RequestHandler {
 			for (BasicNameValuePair bnvp : telegramRequest.getParameters()) {
 				mpeb.addTextBody(bnvp.getName(), bnvp.getValue());
 			}
+
+			// PROXY Usage
+			if (proxy != null) {
+				HttpHost proxyHost = new HttpHost(proxy.getHost(),
+						proxy.getPort(), proxy.getProtocol());
+				RequestConfig config = RequestConfig.custom()
+						.setProxy(proxyHost).build();
+				request.setConfig(config);
+			}
+
 			request.setEntity(mpeb.build());
 		} else {
 			request.setEntity(new UrlEncodedFormEntity(telegramRequest

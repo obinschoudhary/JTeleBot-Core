@@ -8,12 +8,13 @@
  */
 package io.github.nixtabyte.jtelebot.client;
 
-
-
 import io.github.nixtabyte.jtelebot.request.TelegramRequest;
 import io.github.nixtabyte.jtelebot.response.json.TelegramResponse;
+
 public interface RequestHandler {
-	
+
 	public TelegramResponse<?> sendRequest(final TelegramRequest telegramRequest);
+	
+	public TelegramResponse<?> sendRequest(final TelegramRequest telegramRequest, HttpProxy proxy);
 
 }

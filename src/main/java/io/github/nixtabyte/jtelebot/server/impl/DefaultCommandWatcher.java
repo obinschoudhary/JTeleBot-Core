@@ -97,7 +97,7 @@ public class DefaultCommandWatcher extends AbstractCommandWatcher {
 		for (final Object updateObj : response.getResult()) {
 			final Update update = (Update) updateObj;
 
-			LOG.debug("Watching... UpdateId:" + update.getUpdateId()
+			LOG.trace("Watching... UpdateId:" + update.getUpdateId()
 					+ " - MessageID:" + update.getMessage().getId() + " - "
 					+ update.getMessage().getFromUser().getId() + ":"
 					+ update.getMessage().getFromUser().getUsername());
@@ -122,9 +122,16 @@ public class DefaultCommandWatcher extends AbstractCommandWatcher {
 			}
 		}
 
-		LOG.info("\tFound " + response.getResult().size() + " updates, "
-				+ newUpdatesCounter
-				+ " new updates added - History cache size: " + cache.size());
+		if (LOG.isInfoEnabled() && response.getResult().size() > 0) {
+			LOG.info("\tFound " + response.getResult().size() + " updates, "
+					+ newUpdatesCounter
+					+ " new updates added - History cache size: " + cache.size());
+			
+		} else {
+			LOG.trace("\tFound " + response.getResult().size() + " updates, "
+					+ newUpdatesCounter
+					+ " new updates added - History cache size: " + cache.size());
+		}
 	}
 
 	public CommandDispatcher getCommandDispatcher() {

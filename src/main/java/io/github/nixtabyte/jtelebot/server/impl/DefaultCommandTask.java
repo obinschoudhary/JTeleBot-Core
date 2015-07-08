@@ -28,10 +28,10 @@ public class DefaultCommandTask extends AbstractCommandTask {
 	@Override
 	public void processCommand() {
 		try {
-			LOG.debug("\tSTART processing command {" + command + "}");
+			LOG.trace("\tSTART processing command {" + command + "}");
 			Thread.sleep(delay);
 			command.execute();
-			LOG.debug("\tEND processing command {" + command + "}");
+			LOG.trace("\tEND processing command {" + command + "}");
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
