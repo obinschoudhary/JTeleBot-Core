@@ -1,0 +1,47 @@
+/**
+ * 
+ * Copyright (C) 2015 Roberto Dominguez Estrada and Juan Carlos Sedano Salas
+ *
+ * This material is provided "as is", with absolutely no warranty expressed
+ * or implied. Any use is at your own risk.
+ *
+ */
+package io.github.nixtabyte.jtelebot.server;
+
+import io.github.nixtabyte.jtelebot.client.RequestHandler;
+import io.github.nixtabyte.jtelebot.request.factory.TelegramRequestFactory;
+import io.github.nixtabyte.jtelebot.response.json.Message;
+import io.github.nixtabyte.jtelebot.server.impl.AbstractCommand;
+
+import java.io.IOException;
+
+import org.codehaus.jackson.JsonGenerationException;
+import org.codehaus.jackson.map.JsonMappingException;
+
+public class DummyCommandImpl extends AbstractCommand{
+
+	public DummyCommandImpl(Message message, RequestHandler requestHandler) {
+		super(message, requestHandler);
+	}
+
+	@Override
+	public void execute() {
+		System.out.println("\t*** Executing CustomCommandImpl");
+		try {
+			requestHandler.sendRequest(TelegramRequestFactory
+					.createSendMessageRequest(message.getChat().getId(),
+							"Command response: " + message.getText(), false,
+							message.getId(), null));
+		} catch (JsonGenerationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (JsonMappingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
+	}
+
+}
