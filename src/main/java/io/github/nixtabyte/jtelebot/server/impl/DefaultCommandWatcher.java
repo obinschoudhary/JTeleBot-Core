@@ -8,6 +8,7 @@
  */
 package io.github.nixtabyte.jtelebot.server.impl;
 
+import io.github.nixtabyte.jtelebot.client.HttpProxy;
 import io.github.nixtabyte.jtelebot.client.RequestHandler;
 import io.github.nixtabyte.jtelebot.client.impl.DefaultRequestHandler;
 import io.github.nixtabyte.jtelebot.request.factory.TelegramRequestFactory;
@@ -32,10 +33,11 @@ public class DefaultCommandWatcher extends AbstractCommandWatcher {
 	private static final long MAX_CACHE_CAPACITY = 1000;
 
 	private CommandDispatcher commandDispatcher;
-	
+
 	private CommandFactory commandFactory;
 	private RequestHandler requestHandler;
 
+	private HttpProxy proxy;
 
 	private long offset;
 	private long limit;
@@ -44,25 +46,34 @@ public class DefaultCommandWatcher extends AbstractCommandWatcher {
 	private ConcurrentMap<String, Message> cache;
 
 	public DefaultCommandWatcher() {
-		this(0, MAX_CACHE_CAPACITY, null, null, null);
+		this(0, MAX_CACHE_CAPACITY, null, null, null, null);
 	}
 
 	public DefaultCommandWatcher(final String telegramToken,
 			CommandDispatcher commandDispatcher,
 			final CommandFactory commandFactory) {
 		this(0, MAX_CACHE_CAPACITY, telegramToken, commandDispatcher,
-				commandFactory);
+				commandFactory, null);
 	}
 
 	public DefaultCommandWatcher(final long delayInMillis,
 			final long cacheCapacity, final String telegramToken,
-			CommandDispatcher commandDispatcher,
+			final CommandDispatcher commandDispatcher,
 			final CommandFactory commandFactory) {
+		this(delayInMillis, cacheCapacity, telegramToken, commandDispatcher,
+				commandFactory, null);
+	}
+
+	public DefaultCommandWatcher(final long delayInMillis,
+			final long cacheCapacity, final String telegramToken,
+			final CommandDispatcher commandDispatcher,
+			final CommandFactory commandFactory, final HttpProxy proxy) {
 
 		super(delayInMillis);
 		this.commandDispatcher = commandDispatcher;
 		this.commandFactory = commandFactory;
 		this.requestHandler = new DefaultRequestHandler(telegramToken);
+		this.proxy = proxy;
 
 		// TODO These parameters must be persisted (i.e. DB,
 		// configuration file, etc.)
@@ -78,9 +89,9 @@ public class DefaultCommandWatcher extends AbstractCommandWatcher {
 	public void retrieveCommands() {
 		LOG.debug("\tPolling Telegram updates (offset:" + offset + ", limit:"
 				+ limit + ", timeout=" + timeout + ")...");
-		TelegramResponse<?> response = requestHandler
-				.sendRequest(TelegramRequestFactory.createGetUpdatesRequest(
-						offset, limit, timeout));
+		TelegramResponse<?> response = requestHandler.sendRequest(
+				TelegramRequestFactory.createGetUpdatesRequest(offset, limit,
+						timeout), proxy);
 		if (response.isSuccessful()) {
 			handleUpdates(response);
 		} else {
@@ -111,7 +122,8 @@ public class DefaultCommandWatcher extends AbstractCommandWatcher {
 				// Instantiate a new Command, attach the Message object, enqueue
 				// Command via the Dispatcher
 				try {
-					final Command command = commandFactory.createCommand(update.getMessage(), requestHandler);
+					final Command command = commandFactory.createCommand(
+							update.getMessage(), requestHandler);
 					commandDispatcher.enqueueCommand(command);
 				} catch (Exception e) {
 					// gotta catch 'em all
@@ -125,12 +137,14 @@ public class DefaultCommandWatcher extends AbstractCommandWatcher {
 		if (LOG.isInfoEnabled() && response.getResult().size() > 0) {
 			LOG.info("\tFound " + response.getResult().size() + " updates, "
 					+ newUpdatesCounter
-					+ " new updates added - History cache size: " + cache.size());
-			
+					+ " new updates added - History cache size: "
+					+ cache.size());
+
 		} else {
 			LOG.trace("\tFound " + response.getResult().size() + " updates, "
 					+ newUpdatesCounter
-					+ " new updates added - History cache size: " + cache.size());
+					+ " new updates added - History cache size: "
+					+ cache.size());
 		}
 	}
 
