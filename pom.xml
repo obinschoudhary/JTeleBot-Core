@@ -33,13 +33,12 @@
 
 	<issueManagement>
 		<system>github</system>
-		<url>http://github.com/xetorthio/jedis/issues</url>
+		<url>http://github.com/nixtabyte/JTeleBot-Core/issues</url>
 	</issueManagement>
 
 	<scm>
-		<connection>scm:git:git@github.com:jsedano/JTeleBotCore.git</connection>
-		<url>scm:git:git@github.com:jsedano/JTeleBotCore.git</url>
-		<developerConnection>scm:git:git@github.com:jsedano/JTeleBotCore.git</developerConnection>
+        <connection>scm:git:https://jsedano@github.com/JTeleBot-Core.git</connection>
+        <developerConnection>scm:git:https://jsedano@github.com/JTeleBot-Core.git</developerConnection>
   </scm>
 
 	<distributionManagement>
