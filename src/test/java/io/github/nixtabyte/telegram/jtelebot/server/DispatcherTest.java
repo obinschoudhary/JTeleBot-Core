@@ -17,9 +17,6 @@ import org.junit.Test;
 
 public class DispatcherTest {
 
-	// PUT YOUR TEST TOKEN HERE...
-	private static final String TEST_TOKEN = "";
-
 	private static final int THREAD_POOL = 3;
 	private static final long CMD_EXEC_DELAY = 5000;
 

@@ -16,7 +16,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-public class WatcherTest {
+public class WatcherIntegrationTest {
 
 	// PUT YOUR TEST TOKEN HERE...
 	private static final String TEST_TOKEN = "";

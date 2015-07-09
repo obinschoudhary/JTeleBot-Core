@@ -31,20 +31,18 @@ import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.message.BasicNameValuePair;
 import org.junit.Test;
 
-public class ConnectionTest {
+public class ConnectionIntegrationTest {
 
-	public 	String token = "bot";
+	// PUT YOUR TEST TOKEN HERE...
+	public String token = "";
 
-	
 	@Test
 	public void testSendMessage() throws ClientProtocolException, IOException {
 		String method = "sendMessage";
-		String url = "https://api.telegram.org/" + token + "/" + method;
+		String url = "https://api.telegram.org/bot" + token + "/" + method;
 
 		HttpClient client = HttpClientBuilder.create().build();
 		HttpPost request = new HttpPost(url);
-
-
 
 		List<BasicNameValuePair> nvps = new ArrayList<BasicNameValuePair>();
 		nvps.add(new BasicNameValuePair("chat_id", "-7155093"));
@@ -55,7 +53,8 @@ public class ConnectionTest {
 		keyboard.setOneTimeKeyboard(true);
 		keyboard.setResizeKeyboard(false);
 		keyboard.setSelective(false);
-		nvps.add(new BasicNameValuePair("reply_markup", MapperHandler.INSTANCE.getObjectMapper().writeValueAsString(keyboard)));
+		nvps.add(new BasicNameValuePair("reply_markup", MapperHandler.INSTANCE
+				.getObjectMapper().writeValueAsString(keyboard)));
 		UrlEncodedFormEntity uefe = new UrlEncodedFormEntity(nvps, Consts.UTF_8);
 		request.setEntity(uefe);
 
@@ -70,10 +69,14 @@ public class ConnectionTest {
 		while ((line = rd.readLine()) != null) {
 			result.append(line);
 		}
-		TelegramResponse<Message> telegramResponse = MapperHandler.INSTANCE.getObjectMapper().readValue(
-				result.toString(),
-				MapperHandler.INSTANCE.getObjectMapper().getTypeFactory().constructParametricType(
-						TelegramResponse.class, Message.class));
+		TelegramResponse<Message> telegramResponse = MapperHandler.INSTANCE
+				.getObjectMapper().readValue(
+						result.toString(),
+						MapperHandler.INSTANCE
+								.getObjectMapper()
+								.getTypeFactory()
+								.constructParametricType(
+										TelegramResponse.class, Message.class));
 
 		System.out.println(telegramResponse);
 
@@ -106,11 +109,15 @@ public class ConnectionTest {
 		while ((line = rd.readLine()) != null) {
 			result.append(line);
 		}
-		
-		TelegramResponse<Update> telegramResponse = MapperHandler.INSTANCE.getObjectMapper().readValue(
-				result.toString(),
-				MapperHandler.INSTANCE.getObjectMapper().getTypeFactory().constructParametricType(
-						TelegramResponse.class, Update.class));
+
+		TelegramResponse<Update> telegramResponse = MapperHandler.INSTANCE
+				.getObjectMapper().readValue(
+						result.toString(),
+						MapperHandler.INSTANCE
+								.getObjectMapper()
+								.getTypeFactory()
+								.constructParametricType(
+										TelegramResponse.class, Update.class));
 
 		System.out.println(telegramResponse);
 
@@ -135,10 +142,14 @@ public class ConnectionTest {
 		while ((line = rd.readLine()) != null) {
 			result.append(line);
 		}
-		TelegramResponse<User> telegramResponse = MapperHandler.INSTANCE.getObjectMapper().readValue(
-				result.toString(),
-				MapperHandler.INSTANCE.getObjectMapper().getTypeFactory().constructParametricType(
-						TelegramResponse.class, User.class));
+		TelegramResponse<User> telegramResponse = MapperHandler.INSTANCE
+				.getObjectMapper().readValue(
+						result.toString(),
+						MapperHandler.INSTANCE
+								.getObjectMapper()
+								.getTypeFactory()
+								.constructParametricType(
+										TelegramResponse.class, User.class));
 
 		System.out.println(telegramResponse);
 	}

@@ -26,7 +26,7 @@ import org.codehaus.jackson.map.JsonMappingException;
 import org.junit.Before;
 import org.junit.Test;
 
-public class RequestHandlerTest {
+public class RequestHandlerIntegrationTest {
 
 	// PUT YOUR TEST TOKEN HERE...
 	private static final String TEST_TOKEN = "put token here";
