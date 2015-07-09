@@ -88,6 +88,12 @@ public class DefaultRequestHandler implements RequestHandler {
 				mpeb.addTextBody(bnvp.getName(), bnvp.getValue());
 			}
 
+			request.setEntity(mpeb.build());
+		} else {
+			request.setEntity(new UrlEncodedFormEntity(telegramRequest
+					.getParameters(), Consts.UTF_8));
+		}
+		try {
 			// PROXY Usage
 			if (proxy != null) {
 				HttpHost proxyHost = new HttpHost(proxy.getHost(),
@@ -96,13 +102,7 @@ public class DefaultRequestHandler implements RequestHandler {
 						.setProxy(proxyHost).build();
 				request.setConfig(config);
 			}
-
-			request.setEntity(mpeb.build());
-		} else {
-			request.setEntity(new UrlEncodedFormEntity(telegramRequest
-					.getParameters(), Consts.UTF_8));
-		}
-		try {
+			
 			final HttpResponse response = httpClient.execute(request);
 
 			BufferedReader reader = new BufferedReader(new InputStreamReader(
