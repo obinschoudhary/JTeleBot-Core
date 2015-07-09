@@ -1,0 +1,62 @@
+/**
+ * 
+ * Copyright (C) 2015 Roberto Dominguez Estrada and Juan Carlos Sedano Salas
+ *
+ * This material is provided "as is", with absolutely no warranty expressed
+ * or implied. Any use is at your own risk.
+ *
+ */
+package io.github.nixtabyte.telegram.jtelebot.client;
+
+import io.github.nixtabyte.telegram.jtelebot.response.json.Message;
+import io.github.nixtabyte.telegram.jtelebot.response.json.Update;
+import io.github.nixtabyte.telegram.jtelebot.response.json.User;
+import io.github.nixtabyte.telegram.jtelebot.response.json.UserProfilePhotos;
+
+public enum RequestType {
+	GET_ME("getMe",User.class),
+	GET_UPDATES("getUpdates",Update.class),
+	SEND_MESSAGE("sendMessage"), 
+	FORWARD_MESSAGE("forwardMessage"), 
+	SEND_PHOTO("sendPhoto"), 
+	SEND_AUDIO("sendAudio"), 
+	SEND_DOCUMENT("sendDocument"), 
+	SEND_STICKER("sendSticker"), 
+	SEND_VIDEO("sendVideo"), 
+	SEND_LOCATION("sendLocation"), 
+	SEND_CHAT_ACTION("sendChatAction",Boolean.class), 
+	GET_USER_PROFILE_PHOTOS("getUserProfilePhotos",UserProfilePhotos.class), 
+	SET_WEBHOOK("setWebhook");
+
+	private Class<?> resultClass;
+	private String methodName;
+	/**
+	 * A lot of methods return Message
+	 * @param methodName
+	 */
+	private RequestType(final String methodName){
+		this(methodName,Message.class);
+	}
+	
+
+	private RequestType(final String methodName, final Class<?> clazz){
+		this.resultClass = clazz;
+		this.methodName = methodName;
+	}
+
+	public Class<?> getResultClass() {
+		return resultClass;
+	}
+
+	public String getMethodName() {
+		return methodName;
+	}
+
+
+
+
+
+	
+	
+	
+}
