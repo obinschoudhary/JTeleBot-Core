@@ -2,3 +2,5 @@
 .project
 *.prefs
 **/target
+
+pom.xml.releaseBackup
