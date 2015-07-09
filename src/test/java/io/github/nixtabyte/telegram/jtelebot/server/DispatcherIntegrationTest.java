@@ -15,7 +15,7 @@ import junit.framework.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-public class DispatcherTest {
+public class DispatcherIntegrationTest {
 
 	// PUT YOUR TEST TOKEN HERE...
 	private static final String TEST_TOKEN = "";

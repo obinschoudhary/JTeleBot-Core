@@ -31,7 +31,7 @@ import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.message.BasicNameValuePair;
 import org.junit.Test;
 
-public class ConnectionTest {
+public class ConnectionIntegrationTest {
 
 	public 	String token = "bot";
 
