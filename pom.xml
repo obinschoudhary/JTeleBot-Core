@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>io.github.nixtabyte.telegram</groupId>
 	<artifactId>jtelebot-core</artifactId>
-	<version>0.0.2-SNAPSHOT</version>
+	<version>0.0.2</version>
 	<packaging>jar</packaging>
 	<name>jtelebot-core</name>
 	<description>JTeleBot-Core is an api to easily manage telegram bots</description>
@@ -37,6 +37,7 @@
 	</issueManagement>
 
 	<scm>
+	    <url>scm:git:git@github.com:jsedano/nixtabyte/JTeleBot-Core.git</url>
         <connection>scm:git:https://jsedano@github.com/nixtabyte/JTeleBot-Core.git</connection>
         <developerConnection>scm:git:https://jsedano@github.com/nixtabyte/JTeleBot-Core.git</developerConnection>
   </scm>
