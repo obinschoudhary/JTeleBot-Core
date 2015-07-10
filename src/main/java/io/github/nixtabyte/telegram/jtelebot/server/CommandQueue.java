@@ -8,32 +8,53 @@
  */
 package io.github.nixtabyte.telegram.jtelebot.server;
 
+/**
+ * This class represents a queue to store {@link Command} instances that could
+ * be later dispatched in a chronological order, depending on the executor
+ * implementation.
+ * 
+ * 
+ * @see Command
+ * @since 0.0.1
+ * */
 public interface CommandQueue {
 
 	/**
-	 * Adds a new command to the Queue tail.
+	 * Method to add a new {@link Command} to the queue tail.
+	 * 
+	 * @param command
+	 *            Is the command object being stored at the end of queue.
 	 * */
 	public void add(Command command);
 
 	/**
-	 * Retrieves and removes the head of this queue, or returns null if this
-	 * queue is empty.
+	 * Method to retrieve and remove the {@link Command} object from the queue's
+	 * head.
+	 * 
+	 * @return The {@link Command} object removed or null if empty.
 	 * */
 	public Command poll();
 
 	/**
-	 * @return Returns the number of elements in the Queue
+	 * Method to check the size of queue based on the elements stored.
+	 * 
+	 * @return Returns the number of elements in the queue.
 	 * */
 	public int size();
 
 	/**
-	 * @return Returns true if this Queue contains no element; false otherwise.
+	 * Method to check whether the queue has elements or not.
+	 * 
+	 * @return Returns <b>true</b> if this queue contains no element or
+	 *         <b>false</b> otherwise.
 	 * */
 	public boolean isEmpty();
 
 	/**
-	 * @return Returns true if given Command is inside the Queue; false
-	 *         otherwise.
+	 * Method to check if any {@link Command} instance is enqueued or not.
+	 * 
+	 * @return Returns <b>true</b> if the given Command is inside the queue or
+	 *         <b>false</b> otherwise.
 	 * */
 	public boolean contains(Command command);
 
