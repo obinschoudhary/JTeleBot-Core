@@ -18,8 +18,7 @@ import org.apache.http.message.BasicNameValuePair;
  *
  * This class represents a TelegramRequest
  *
- * @version $Id: $Id
- * @since 0.0.2
+ * @since 0.0.1
  */
 public class TelegramRequest {
 	private RequestType requestType;

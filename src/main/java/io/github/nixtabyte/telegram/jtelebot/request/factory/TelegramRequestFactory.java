@@ -28,10 +28,10 @@ import org.codehaus.jackson.map.JsonMappingException;
  * This class is a Factory of TelegramRequest objects
  * it allows to easily create a request, for more information
  * on the methods that the Telegram Bots api support please check
- * https://core.telegram.org/bots/api#available-methods
+ * See <a href="https://core.telegram.org/bots/api#available-methods">https://core.telegram.org/bots/api#available-methods</a>
+ * 
  *
- * @version $Id: $Id
- * @since 0.0.2
+ * @since 0.0.1
  */
 public final class TelegramRequestFactory {
 	/**
