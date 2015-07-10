@@ -14,24 +14,47 @@ import java.io.File;
 import java.util.List;
 
 import org.apache.http.message.BasicNameValuePair;
-
+/**
+ * 
+ * This class represents a TelegramRequest
+ *
+ */
 public class TelegramRequest {
 	private RequestType requestType;
 	private List<BasicNameValuePair> parameters;
 	private File file;
 	private String fileType;
-	
+	/**
+	 * This constructor instantiates a new TelegramRequest 
+	 * You should not create TelegramRequests objects, instead use the TelegramRequestFactory
+	 * @see TelegramRequestFactory
+	 * 
+	 * @param requestType The type of request
+	 * @param parameters The map of parameters 
+	 */
 	public TelegramRequest(final RequestType requestType, final List<BasicNameValuePair> parameters){
 		this(requestType,parameters,null,null);
 	}
-	
+	/**
+	 * This constructor instantiates a new TelegramRequest 
+	 * You should not create TelegramRequests objects, instead use the TelegramRequestFactory
+	 * @see TelegramRequestFactory
+	 *  
+	 * @param requestType The type of request
+	 * @param parameters The map of parameters 
+	 * @param file	The file to upload 
+	 * @param fileType The type of file to upload (audio, video, photo, document, sticker)
+	 */
 	public TelegramRequest(final RequestType requestType, final List<BasicNameValuePair> parameters, final File file, final String fileType){
 		this.requestType = requestType;
 		this.parameters = parameters;
 		this.file = file;
 		this.fileType = fileType;
 	}
-
+	/**
+	 * 
+	 * @return The request type
+	 */
 	public RequestType getRequestType() {
 		return requestType;
 	}
@@ -44,11 +67,17 @@ public class TelegramRequest {
 		 */
 		return parameters;
 	}
-	
+	/**
+	 * 
+	 * @return the file
+	 */
 	public File getFile(){
 		return file;
 	}
-
+	/**
+	 * 
+	 * @return The file type
+	 */
 	public String getFileType() {
 		return fileType;
 	}
