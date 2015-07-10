@@ -11,51 +11,83 @@ package io.github.nixtabyte.telegram.jtelebot.response.json;
 import org.codehaus.jackson.annotate.JsonProperty;
 
 /**
- * 
+ *
  * This object represents a Telegram user or bot.
  *
+ * @since 0.0.1
  */
 public class User extends Chat{
 
 	
 	/**
-	 * String	User?????????s or bot?????????s first name
+	 * String	Users or bots first name
 	 */
 	@JsonProperty("first_name")
 	private String firstName;
 	/**
-	 * String	Optional. User?????????s or bot?????????s last name
+	 * String	Optional. Users or bots last name
 	 */
 	@JsonProperty("last_name")
 	private String lastName;	
 	/**
-	 * Optional. User?????????s or bot?????????s username
+	 * Optional. Users or bots username
 	 */
 	@JsonProperty("username")
 	private String username;
 	
 
+	/**
+	 * <p>Getter for the field <code>firstName</code>.</p>
+	 *
+	 * @return a {@link java.lang.String} object.
+	 */
 	public String getFirstName() {
 		return firstName;
 	}
+	/**
+	 * <p>Setter for the field <code>firstName</code>.</p>
+	 *
+	 * @param firstName a {@link java.lang.String} object.
+	 */
 	public void setFirstName(final String firstName) {
 		this.firstName = firstName;
 	}
+	/**
+	 * <p>Getter for the field <code>lastName</code>.</p>
+	 *
+	 * @return a {@link java.lang.String} object.
+	 */
 	public String getLastName() {
 		return lastName;
 	}
+	/**
+	 * <p>Setter for the field <code>lastName</code>.</p>
+	 *
+	 * @param lastName a {@link java.lang.String} object.
+	 */
 	public void setLastName(final String lastName) {
 		this.lastName = lastName;
 	}
+	/**
+	 * <p>Getter for the field <code>username</code>.</p>
+	 *
+	 * @return a {@link java.lang.String} object.
+	 */
 	public String getUsername() {
 		return username;
 	}
+	/**
+	 * <p>Setter for the field <code>username</code>.</p>
+	 *
+	 * @param username a {@link java.lang.String} object.
+	 */
 	public void setUsername(final String username) {
 		this.username = username;
 	}
 	
 	
 	
+	/** {@inheritDoc} */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -68,6 +100,7 @@ public class User extends Chat{
 				+ ((username == null) ? 0 : username.hashCode());
 		return result;
 	}
+	/** {@inheritDoc} */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -94,6 +127,7 @@ public class User extends Chat{
 			return false;
 		return true;
 	}
+	/** {@inheritDoc} */
 	@Override
 	public String toString() {
 		return "User [id=" +this.getId()+ " firstName=" + firstName + ", lastName=" + lastName

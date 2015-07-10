@@ -8,10 +8,11 @@
  */
 package io.github.nixtabyte.telegram.jtelebot.client;
 /**
- * 
- * Type of action to broadcast. 
- * Choose one, depending on what the user is about to receive: 
  *
+ * Type of action to broadcast.
+ * Choose one, depending on what the user is about to receive:
+ *
+ * @since 0.0.1
  */
 public enum BroadcastActionType {
 
@@ -30,6 +31,11 @@ public enum BroadcastActionType {
 		  this.actionToBroadcast = actionToBroadcast;
 	  }
 
+	/**
+	 * <p>Getter for the field <code>actionToBroadcast</code>.</p>
+	 *
+	 * @return a {@link java.lang.String} object.
+	 */
 	public String getActionToBroadcast() {
 		return actionToBroadcast;
 	}

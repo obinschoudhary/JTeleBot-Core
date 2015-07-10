@@ -1,5 +1,6 @@
+
 /**
- * 
+ *
  * Copyright (C) 2015 Roberto Dominguez Estrada and Juan Carlos Sedano Salas
  *
  * This material is provided "as is", with absolutely no warranty expressed
@@ -9,7 +10,12 @@
 package io.github.nixtabyte.telegram.jtelebot.response.json;
 
 import org.codehaus.jackson.annotate.JsonProperty;
-
+/**
+*
+* Location
+*
+* @since 0.0.1
+*/
 public class Location{
 
 	/**
@@ -26,24 +32,45 @@ public class Location{
 
 	public Double getLongitude() {
 		return longitude;
+	/**
+	 * <p>Getter for the field <code>longitude</code>.</p>
+	 *
+	 * @return a {@link java.lang.Double} object.
+	 */
 	}
 
 	public void setLongitude(final Double longitude) {
 		this.longitude = longitude;
+	/**
+	 * <p>Setter for the field <code>longitude</code>.</p>
+	 *
+	 * @param longitude a {@link java.lang.Double} object.
+	 */
 	}
 
 	public Double getLatitude() {
 		return latitude;
+	/**
+	 * <p>Getter for the field <code>latitude</code>.</p>
+	 *
+	 * @return a {@link java.lang.Double} object.
+	 */
 	}
 
 	public void setLatitude(final Double latitude) {
 		this.latitude = latitude;
+	/**
+	 * <p>Setter for the field <code>latitude</code>.</p>
+	 *
+	 * @param latitude a {@link java.lang.Double} object.
+	 */
 	}
 	
 	
 
 	@Override
 	public int hashCode() {
+		/** {@inheritDoc} */
 		final int prime = 31;
 		int result = 1;
 		result = prime * result
@@ -55,6 +82,7 @@ public class Location{
 
 	@Override
 	public boolean equals(Object obj) {
+		/** {@inheritDoc} */
 		if (this == obj)
 			return true;
 		if (obj == null)
@@ -77,6 +105,7 @@ public class Location{
 
 	@Override
 	public String toString() {
+		/** {@inheritDoc} */
 		return "Location [longitude=" + longitude + ", latitude=" + latitude
 				+ "]";
 	}

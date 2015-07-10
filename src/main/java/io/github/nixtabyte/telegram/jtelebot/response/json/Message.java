@@ -16,9 +16,10 @@ import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.annotate.JsonProperty;
 
 /**
- * 
+ *
  * This object represents a message.
  *
+ * @since 0.0.1
  */
 public class Message {
 	/**
@@ -151,34 +152,74 @@ public class Message {
 	public void setId(Long id) {
 		this.id = id;
 	}
+/**
+ * <p>Getter for the field <code>id</code>.</p>
+ *
+ * @return a {@link java.lang.Long} object.
+ */
 
 	public User getFromUser() {
 		return fromUser;
 	}
+/**
+ * <p>Setter for the field <code>id</code>.</p>
+ *
+ * @param id a {@link java.lang.Long} object.
+ */
 
 	public void setFromUser(final User fromUser) {
 		this.fromUser = fromUser;
 	}
+/**
+ * <p>Getter for the field <code>fromUser</code>.</p>
+ *
+ * @return a {@link io.github.nixtabyte.telegram.jtelebot.response.json.User} object.
+ */
 
 	public Long getUnixTimeDate() {
 		return unixTimeDate;
 	}
+/**
+ * <p>Setter for the field <code>fromUser</code>.</p>
+ *
+ * @param fromUser a {@link io.github.nixtabyte.telegram.jtelebot.response.json.User} object.
+ */
 
 	public void setUnixTimeDate(final Long unixTimeDate) {
 		this.unixTimeDate = unixTimeDate;
 	}
+/**
+ * <p>Getter for the field <code>unixTimeDate</code>.</p>
+ *
+ * @return a {@link java.lang.Long} object.
+ */
 
 	public Chat getChat() {
 		return chat;
 	}
+/**
+ * <p>Setter for the field <code>unixTimeDate</code>.</p>
+ *
+ * @param unixTimeDate a {@link java.lang.Long} object.
+ */
 
 	@JsonProperty
 	public void setChat(final JsonNode chat) {
 		if (chat != null
+				/**
+				 * <p>Getter for the field <code>chat</code>.</p>
+				 *
+				 * @return a {@link io.github.nixtabyte.telegram.jtelebot.response.json.Chat} object.
+				 */
 				&& (chat.toString() != null && chat.toString().length() != 0)) {
 			if (chat.toString().contains("title")) {// must be groupchat
 				this.chat = MapperHandler.INSTANCE.getObjectMapper()
 						.convertValue(chat, GroupChat.class);
+			/**
+			 * <p>Setter for the field <code>chat</code>.</p>
+			 *
+			 * @param chat a {@link org.codehaus.jackson.JsonNode} object.
+			 */
 			} else if (chat.toString().contains("username")) {// must be user
 				this.chat = MapperHandler.INSTANCE.getObjectMapper()
 						.convertValue(chat, User.class);
@@ -193,146 +234,322 @@ public class Message {
 	public User getForwardFromUser() {
 		return forwardFromUser;
 	}
+/**
+ * <p>Setter for the field <code>chat</code>.</p>
+ *
+ * @param chat a {@link io.github.nixtabyte.telegram.jtelebot.response.json.Chat} object.
+ */
 
 	public void setForwardFromUser(final User forwardFromUser) {
 		this.forwardFromUser = forwardFromUser;
 	}
+/**
+ * <p>Getter for the field <code>forwardFromUser</code>.</p>
+ *
+ * @return a {@link io.github.nixtabyte.telegram.jtelebot.response.json.User} object.
+ */
 
 	public Long getForwardDate() {
 		return forwardDate;
 	}
+/**
+ * <p>Setter for the field <code>forwardFromUser</code>.</p>
+ *
+ * @param forwardFromUser a {@link io.github.nixtabyte.telegram.jtelebot.response.json.User} object.
+ */
 
 	public void setForwardDate(final Long forwardDate) {
 		this.forwardDate = forwardDate;
 	}
+/**
+ * <p>Getter for the field <code>forwardDate</code>.</p>
+ *
+ * @return a {@link java.lang.Long} object.
+ */
 
 	public Message getReplyToMessage() {
 		return replyToMessage;
 	}
+/**
+ * <p>Setter for the field <code>forwardDate</code>.</p>
+ *
+ * @param forwardDate a {@link java.lang.Long} object.
+ */
 
 	public void setReplyToMessage(final Message replyToMessage) {
 		this.replyToMessage = replyToMessage;
 	}
+/**
+ * <p>Getter for the field <code>replyToMessage</code>.</p>
+ *
+ * @return a {@link io.github.nixtabyte.telegram.jtelebot.response.json.Message} object.
+ */
 
 	public String getText() {
 		return text;
 	}
+/**
+ * <p>Setter for the field <code>replyToMessage</code>.</p>
+ *
+ * @param replyToMessage a {@link io.github.nixtabyte.telegram.jtelebot.response.json.Message} object.
+ */
 
 	public void setText(final String text) {
 		this.text = text;
 	}
+/**
+ * <p>Getter for the field <code>text</code>.</p>
+ *
+ * @return a {@link java.lang.String} object.
+ */
 
 	public Audio getAudio() {
 		return audio;
 	}
+/**
+ * <p>Setter for the field <code>text</code>.</p>
+ *
+ * @param text a {@link java.lang.String} object.
+ */
 
 	public void setAudio(final Audio audio) {
 		this.audio = audio;
 	}
+/**
+ * <p>Getter for the field <code>audio</code>.</p>
+ *
+ * @return a {@link io.github.nixtabyte.telegram.jtelebot.response.json.Audio} object.
+ */
 
 	public Document getDocument() {
 		return document;
 	}
+/**
+ * <p>Setter for the field <code>audio</code>.</p>
+ *
+ * @param audio a {@link io.github.nixtabyte.telegram.jtelebot.response.json.Audio} object.
+ */
 
 	public void setDocument(final Document document) {
 		this.document = document;
 	}
+/**
+ * <p>Getter for the field <code>document</code>.</p>
+ *
+ * @return a {@link io.github.nixtabyte.telegram.jtelebot.response.json.Document} object.
+ */
 
 	public PhotoSize[] getPhoto() {
 		return photo;
 	}
+/**
+ * <p>Setter for the field <code>document</code>.</p>
+ *
+ * @param document a {@link io.github.nixtabyte.telegram.jtelebot.response.json.Document} object.
+ */
 
 	public void setPhoto(final PhotoSize[] photo) {
 		this.photo = photo;
 	}
+/**
+ * <p>Getter for the field <code>photo</code>.</p>
+ *
+ * @return an array of {@link io.github.nixtabyte.telegram.jtelebot.response.json.PhotoSize} objects.
+ */
 
 	public Sticker getSticker() {
 		return sticker;
 	}
+/**
+ * <p>Setter for the field <code>photo</code>.</p>
+ *
+ * @param photo an array of {@link io.github.nixtabyte.telegram.jtelebot.response.json.PhotoSize} objects.
+ */
 
 	public void setSticker(final Sticker sticker) {
 		this.sticker = sticker;
 	}
+/**
+ * <p>Getter for the field <code>sticker</code>.</p>
+ *
+ * @return a {@link io.github.nixtabyte.telegram.jtelebot.response.json.Sticker} object.
+ */
 
 	public Video getVideo() {
 		return video;
 	}
+/**
+ * <p>Setter for the field <code>sticker</code>.</p>
+ *
+ * @param sticker a {@link io.github.nixtabyte.telegram.jtelebot.response.json.Sticker} object.
+ */
 
 	public void setVideo(final Video video) {
 		this.video = video;
 	}
+/**
+ * <p>Getter for the field <code>video</code>.</p>
+ *
+ * @return a {@link io.github.nixtabyte.telegram.jtelebot.response.json.Video} object.
+ */
 
 	public Contact getContact() {
 		return contact;
 	}
+/**
+ * <p>Setter for the field <code>video</code>.</p>
+ *
+ * @param video a {@link io.github.nixtabyte.telegram.jtelebot.response.json.Video} object.
+ */
 
 	public void setContact(final Contact contact) {
 		this.contact = contact;
 	}
+/**
+ * <p>Getter for the field <code>contact</code>.</p>
+ *
+ * @return a {@link io.github.nixtabyte.telegram.jtelebot.response.json.Contact} object.
+ */
 
 	public Location getLocation() {
 		return location;
 	}
+/**
+ * <p>Setter for the field <code>contact</code>.</p>
+ *
+ * @param contact a {@link io.github.nixtabyte.telegram.jtelebot.response.json.Contact} object.
+ */
 
 	public void setLocation(final Location location) {
 		this.location = location;
 	}
+/**
+ * <p>Getter for the field <code>location</code>.</p>
+ *
+ * @return a {@link io.github.nixtabyte.telegram.jtelebot.response.json.Location} object.
+ */
 
 	public User getNewChatParticipantUser() {
 		return newChatParticipantUser;
 	}
+/**
+ * <p>Setter for the field <code>location</code>.</p>
+ *
+ * @param location a {@link io.github.nixtabyte.telegram.jtelebot.response.json.Location} object.
+ */
 
 	public void setNewChatParticipantUser(final User newChatParticipantUser) {
 		this.newChatParticipantUser = newChatParticipantUser;
 	}
+/**
+ * <p>Getter for the field <code>newChatParticipantUser</code>.</p>
+ *
+ * @return a {@link io.github.nixtabyte.telegram.jtelebot.response.json.User} object.
+ */
 
 	public User getLeftChatParticipantUser() {
 		return leftChatParticipantUser;
 	}
+/**
+ * <p>Setter for the field <code>newChatParticipantUser</code>.</p>
+ *
+ * @param newChatParticipantUser a {@link io.github.nixtabyte.telegram.jtelebot.response.json.User} object.
+ */
 
 	public void setLeftChatParticipantUser(final User leftChatParticipantUser) {
 		this.leftChatParticipantUser = leftChatParticipantUser;
 	}
+/**
+ * <p>Getter for the field <code>leftChatParticipantUser</code>.</p>
+ *
+ * @return a {@link io.github.nixtabyte.telegram.jtelebot.response.json.User} object.
+ */
 
 	public String getNewChatTitle() {
 		return newChatTitle;
 	}
+/**
+ * <p>Setter for the field <code>leftChatParticipantUser</code>.</p>
+ *
+ * @param leftChatParticipantUser a {@link io.github.nixtabyte.telegram.jtelebot.response.json.User} object.
+ */
 
 	public void setNewChatTitle(final String newChatTitle) {
 		this.newChatTitle = newChatTitle;
 	}
+/**
+ * <p>Getter for the field <code>newChatTitle</code>.</p>
+ *
+ * @return a {@link java.lang.String} object.
+ */
 
 	public PhotoSize[] getNewChatPhoto() {
 		return newChatPhoto;
 	}
+/**
+ * <p>Setter for the field <code>newChatTitle</code>.</p>
+ *
+ * @param newChatTitle a {@link java.lang.String} object.
+ */
 
 	public void setNewChatPhoto(final PhotoSize[] newChatPhoto) {
 		this.newChatPhoto = newChatPhoto;
 	}
+/**
+ * <p>Getter for the field <code>newChatPhoto</code>.</p>
+ *
+ * @return an array of {@link io.github.nixtabyte.telegram.jtelebot.response.json.PhotoSize} objects.
+ */
 
 	public Boolean getDeleteChatPhoto() {
 		return deleteChatPhoto;
 	}
+/**
+ * <p>Setter for the field <code>newChatPhoto</code>.</p>
+ *
+ * @param newChatPhoto an array of {@link io.github.nixtabyte.telegram.jtelebot.response.json.PhotoSize} objects.
+ */
 
 	public void setDeleteChatPhoto(final Boolean deleteChatPhoto) {
 		this.deleteChatPhoto = deleteChatPhoto;
 	}
+/**
+ * <p>Getter for the field <code>deleteChatPhoto</code>.</p>
+ *
+ * @return a {@link java.lang.Boolean} object.
+ */
 
 	public Boolean getGroupChatCreated() {
 		return groupChatCreated;
 	}
+/**
+ * <p>Setter for the field <code>deleteChatPhoto</code>.</p>
+ *
+ * @param deleteChatPhoto a {@link java.lang.Boolean} object.
+ */
 
 	public void setGroupChatCreated(final Boolean groupChatCreated) {
 		this.groupChatCreated = groupChatCreated;
 	}
+/**
+ * <p>Getter for the field <code>groupChatCreated</code>.</p>
+ *
+ * @return a {@link java.lang.Boolean} object.
+ */
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
+		/**
+		 * <p>Setter for the field <code>groupChatCreated</code>.</p>
+		 *
+		 * @param groupChatCreated a {@link java.lang.Boolean} object.
+		 */
 		int result = 1;
 		result = prime * result + ((audio == null) ? 0 : audio.hashCode());
 		result = prime * result + ((chat == null) ? 0 : chat.hashCode());
 		result = prime * result + ((contact == null) ? 0 : contact.hashCode());
+		/** {@inheritDoc} */
 		result = prime * result
 				+ ((deleteChatPhoto == null) ? 0 : deleteChatPhoto.hashCode());
 		result = prime * result
@@ -378,6 +595,7 @@ public class Message {
 		if (obj == null)
 			return false;
 		if (getClass() != obj.getClass())
+			/** {@inheritDoc} */
 			return false;
 		Message other = (Message) obj;
 		if (audio == null) {
@@ -490,6 +708,7 @@ public class Message {
 				+ ", forwardFromUser=" + forwardFromUser + ", forwardDate="
 				+ forwardDate + ", replyToMessage=" + replyToMessage
 				+ ", text=" + text + ", audio=" + audio + ", document="
+				/** {@inheritDoc} */
 				+ document + ", photo=" + Arrays.toString(photo) + ", sticker="
 				+ sticker + ", video=" + video + ", contact=" + contact
 				+ ", location=" + location + ", newChatParticipantUser="

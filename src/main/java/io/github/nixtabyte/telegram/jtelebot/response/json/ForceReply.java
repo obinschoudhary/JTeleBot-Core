@@ -1,20 +1,29 @@
+
 /**
- * 
+ *
  * Copyright (C) 2015 Roberto Dominguez Estrada and Juan Carlos Sedano Salas
  *
  * This material is provided "as is", with absolutely no warranty expressed
  * or implied. Any use is at your own risk.
  *
+ * @author buzz
+ * @version $Id: $Id
+ * @since 0.0.2
  */
 package io.github.nixtabyte.telegram.jtelebot.response.json;
 
 import org.codehaus.jackson.annotate.JsonProperty;
-
+/**
+*
+* ForceReplay
+*
+* @since 0.0.1
+*/
 public class ForceReply implements CustomReplyKeyboard{
 
 	/**
-	 * Shows reply interface to the user, as if they manually selected the bot???????????????????????????s
-	 * message and tapped ???????????????????????????Reply'
+	 * Shows reply interface to the user, as if they manually selected the bots
+	 * message and tapped Reply'
 	 * */
 	@JsonProperty("force_reply")
 	private Boolean forceReply;
@@ -34,22 +43,43 @@ public class ForceReply implements CustomReplyKeyboard{
 
 	public void setForceReply(final Boolean forceReply) {
 		this.forceReply = forceReply;
+	/**
+	 * <p>isForceReply.</p>
+	 *
+	 * @return a {@link java.lang.Boolean} object.
+	 */
 	}
 
 	public Boolean isSelective() {
 		return selective;
+	/**
+	 * <p>Setter for the field <code>forceReply</code>.</p>
+	 *
+	 * @param forceReply a {@link java.lang.Boolean} object.
+	 */
 	}
 
 	public void setSelective(final Boolean selective) {
 		this.selective = selective;
+	/**
+	 * <p>isSelective.</p>
+	 *
+	 * @return a {@link java.lang.Boolean} object.
+	 */
 	}
 	
 	@Override
 	public int hashCode() {
+		/**
+		 * <p>Setter for the field <code>selective</code>.</p>
+		 *
+		 * @param selective a {@link java.lang.Boolean} object.
+		 */
 		final int prime = 31;
 		int result = 1;
 		result = prime * result
 				+ ((forceReply == null) ? 0 : forceReply.hashCode());
+		/** {@inheritDoc} */
 		result = prime * result
 				+ ((selective == null) ? 0 : selective.hashCode());
 		return result;
@@ -61,6 +91,7 @@ public class ForceReply implements CustomReplyKeyboard{
 			return true;
 		if (obj == null)
 			return false;
+		/** {@inheritDoc} */
 		if (getClass() != obj.getClass())
 			return false;
 		ForceReply other = (ForceReply) obj;

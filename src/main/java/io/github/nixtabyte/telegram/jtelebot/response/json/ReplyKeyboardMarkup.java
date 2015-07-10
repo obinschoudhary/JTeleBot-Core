@@ -1,5 +1,6 @@
+
 /**
- * 
+ *
  * Copyright (C) 2015 Roberto Dominguez Estrada and Juan Carlos Sedano Salas
  *
  * This material is provided "as is", with absolutely no warranty expressed
@@ -11,7 +12,12 @@ package io.github.nixtabyte.telegram.jtelebot.response.json;
 import java.util.Arrays;
 
 import org.codehaus.jackson.annotate.JsonProperty;
-
+/**
+*
+* ReplyKeyboardMarkup
+*
+* @since 0.0.1
+*/
 public class ReplyKeyboardMarkup implements CustomReplyKeyboard{
 
 	/**
@@ -64,38 +70,79 @@ public class ReplyKeyboardMarkup implements CustomReplyKeyboard{
 	public void setResizeKeyboard(final Boolean resizeKeyboard) {
 		this.resizeKeyboard = resizeKeyboard;
 	}
+/**
+ * <p>Getter for the field <code>keyboard</code>.</p>
+ *
+ * @return an array of {@link java.lang.String} objects.
+ */
 
 	public Boolean getOneTimeKeyboard() {
 		return oneTimeKeyboard;
 	}
+/**
+ * <p>Setter for the field <code>keyboard</code>.</p>
+ *
+ * @param keyboard an array of {@link java.lang.String} objects.
+ */
 
 	public void setOneTimeKeyboard(final Boolean oneTimeKeyboard) {
 		this.oneTimeKeyboard = oneTimeKeyboard;
 	}
+/**
+ * <p>Getter for the field <code>resizeKeyboard</code>.</p>
+ *
+ * @return a {@link java.lang.Boolean} object.
+ */
 
 	public Boolean getSelective() {
 		return selective;
 	}
+/**
+ * <p>Setter for the field <code>resizeKeyboard</code>.</p>
+ *
+ * @param resizeKeyboard a {@link java.lang.Boolean} object.
+ */
 
 	public void setSelective(final Boolean selective) {
 		this.selective = selective;
 	}
+/**
+ * <p>Getter for the field <code>oneTimeKeyboard</code>.</p>
+ *
+ * @return a {@link java.lang.Boolean} object.
+ */
 	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
+		/**
+		 * <p>Setter for the field <code>oneTimeKeyboard</code>.</p>
+		 *
+		 * @param oneTimeKeyboard a {@link java.lang.Boolean} object.
+		 */
 		int result = 1;
 		result = prime * result + Arrays.hashCode(keyboard);
 		result = prime * result
 				+ ((oneTimeKeyboard == null) ? 0 : oneTimeKeyboard.hashCode());
+		/**
+		 * <p>Getter for the field <code>selective</code>.</p>
+		 *
+		 * @return a {@link java.lang.Boolean} object.
+		 */
 		result = prime * result
 				+ ((resizeKeyboard == null) ? 0 : resizeKeyboard.hashCode());
 		result = prime * result
 				+ ((selective == null) ? 0 : selective.hashCode());
+		/**
+		 * <p>Setter for the field <code>selective</code>.</p>
+		 *
+		 * @param selective a {@link java.lang.Boolean} object.
+		 */
 		return result;
 	}
 
 	@Override
+	/** {@inheritDoc} */
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
@@ -110,6 +157,7 @@ public class ReplyKeyboardMarkup implements CustomReplyKeyboard{
 			if (other.oneTimeKeyboard != null)
 				return false;
 		} else if (!oneTimeKeyboard.equals(other.oneTimeKeyboard))
+			/** {@inheritDoc} */
 			return false;
 		if (resizeKeyboard == null) {
 			if (other.resizeKeyboard != null)

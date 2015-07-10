@@ -11,9 +11,10 @@ package io.github.nixtabyte.telegram.jtelebot.response.json;
 import org.codehaus.jackson.annotate.JsonProperty;
 
 /**
- * 
+ *
  * This object represents a video file.
  *
+ * @since 0.0.1
  */
 public class Video {
 	/**
@@ -56,57 +57,138 @@ public class Video {
 	 */
 	@JsonProperty("caption")
 	private String caption;
+	/**
+	 * <p>Getter for the field <code>fileId</code>.</p>
+	 *
+	 * @return a {@link java.lang.String} object.
+	 */
 	public String getFileId() {
 		return fileId;
 	}
+	/**
+	 * <p>Setter for the field <code>fileId</code>.</p>
+	 *
+	 * @param fileId a {@link java.lang.String} object.
+	 */
 	public void setFileId(final String fileId) {
 		this.fileId = fileId;
 	}
+	/**
+	 * <p>Getter for the field <code>width</code>.</p>
+	 *
+	 * @return a {@link java.lang.Integer} object.
+	 */
 	public Integer getWidth() {
 		return width;
 	}
+	/**
+	 * <p>Setter for the field <code>width</code>.</p>
+	 *
+	 * @param width a {@link java.lang.Integer} object.
+	 */
 	public void setWidth(final Integer width) {
 		this.width = width;
 	}
+	/**
+	 * <p>Getter for the field <code>height</code>.</p>
+	 *
+	 * @return a {@link java.lang.Integer} object.
+	 */
 	public Integer getHeight() {
 		return height;
 	}
+	/**
+	 * <p>Setter for the field <code>height</code>.</p>
+	 *
+	 * @param height a {@link java.lang.Integer} object.
+	 */
 	public void setHeight(final Integer height) {
 		this.height = height;
 	}
+	/**
+	 * <p>Getter for the field <code>duration</code>.</p>
+	 *
+	 * @return a {@link java.lang.Integer} object.
+	 */
 	public Integer getDuration() {
 		return duration;
 	}
+	/**
+	 * <p>Setter for the field <code>duration</code>.</p>
+	 *
+	 * @param duration a {@link java.lang.Integer} object.
+	 */
 	public void setDuration(final Integer duration) {
 		this.duration = duration;
 	}
+	/**
+	 * <p>Getter for the field <code>thumb</code>.</p>
+	 *
+	 * @return a {@link io.github.nixtabyte.telegram.jtelebot.response.json.PhotoSize} object.
+	 */
 	public PhotoSize getThumb() {
 		return thumb;
 	}
+	/**
+	 * <p>Setter for the field <code>thumb</code>.</p>
+	 *
+	 * @param thumbnail a {@link io.github.nixtabyte.telegram.jtelebot.response.json.PhotoSize} object.
+	 */
 	public void setThumb(final PhotoSize thumbnail) {
 		this.thumb = thumbnail;
 	}
+	/**
+	 * <p>Getter for the field <code>mimeType</code>.</p>
+	 *
+	 * @return a {@link java.lang.String} object.
+	 */
 	public String getMimeType() {
 		return mimeType;
 	}
+	/**
+	 * <p>Setter for the field <code>mimeType</code>.</p>
+	 *
+	 * @param mimeType a {@link java.lang.String} object.
+	 */
 	public void setMimeType(final String mimeType) {
 		this.mimeType = mimeType;
 	}
+	/**
+	 * <p>Getter for the field <code>fileSize</code>.</p>
+	 *
+	 * @return a {@link java.lang.Integer} object.
+	 */
 	public Integer getFileSize() {
 		return fileSize;
 	}
+	/**
+	 * <p>Setter for the field <code>fileSize</code>.</p>
+	 *
+	 * @param fileSize a {@link java.lang.Integer} object.
+	 */
 	public void setFileSize(final Integer fileSize) {
 		this.fileSize = fileSize;
 	}
+	/**
+	 * <p>Getter for the field <code>caption</code>.</p>
+	 *
+	 * @return a {@link java.lang.String} object.
+	 */
 	public String getCaption() {
 		return caption;
 	}
+	/**
+	 * <p>Setter for the field <code>caption</code>.</p>
+	 *
+	 * @param caption a {@link java.lang.String} object.
+	 */
 	public void setCaption(final String caption) {
 		this.caption = caption;
 	}
 	
 	
 	
+	/** {@inheritDoc} */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -125,6 +207,7 @@ public class Video {
 		result = prime * result + ((width == null) ? 0 : width.hashCode());
 		return result;
 	}
+	/** {@inheritDoc} */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -176,6 +259,7 @@ public class Video {
 			return false;
 		return true;
 	}
+	/** {@inheritDoc} */
 	@Override
 	public String toString() {
 		return "Video [fileId=" + fileId + ", width=" + width + ", height="

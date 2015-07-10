@@ -1,5 +1,6 @@
+
 /**
- * 
+ *
  * Copyright (C) 2015 Roberto Dominguez Estrada and Juan Carlos Sedano Salas
  *
  * This material is provided "as is", with absolutely no warranty expressed
@@ -29,7 +30,12 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.mime.MultipartEntityBuilder;
 import org.apache.http.message.BasicNameValuePair;
-
+/**
+*
+* This is the default request handler
+*
+* @since 0.0.1
+*/
 public class DefaultRequestHandler implements RequestHandler {
 
 	// TODO This should be in a CommonConstants class
@@ -38,15 +44,24 @@ public class DefaultRequestHandler implements RequestHandler {
 	private HttpClient httpClient;
 	private String token;
 
+	/**
+	 * <p>Constructor for DefaultRequestHandler.</p>
+	 */
 	public DefaultRequestHandler() {
 		httpClient = HttpClientFactory.createHttpClient();
 	}
 
+	/**
+	 * <p>Constructor for DefaultRequestHandler.</p>
+	 *
+	 * @param token a {@link java.lang.String} object.
+	 */
 	public DefaultRequestHandler(final String token) {
 		this();
 		this.token = token;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public TelegramResponse<?> sendRequest(TelegramRequest telegramRequest) {
 		TelegramResponse<?> telegramResponse = null;
@@ -58,6 +73,7 @@ public class DefaultRequestHandler implements RequestHandler {
 		return telegramResponse;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public TelegramResponse<?> sendRequest(TelegramRequest telegramRequest,
 			HttpProxy proxy) {
@@ -156,10 +172,20 @@ public class DefaultRequestHandler implements RequestHandler {
 		return null;
 	}
 
+	/**
+	 * <p>Getter for the field <code>token</code>.</p>
+	 *
+	 * @return a {@link java.lang.String} object.
+	 */
 	public String getToken() {
 		return token;
 	}
 
+	/**
+	 * <p>Setter for the field <code>token</code>.</p>
+	 *
+	 * @param token a {@link java.lang.String} object.
+	 */
 	public void setToken(String token) {
 		this.token = token;
 	}

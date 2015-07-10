@@ -1,5 +1,6 @@
+
 /**
- * 
+ *
  * Copyright (C) 2015 Roberto Dominguez Estrada and Juan Carlos Sedano Salas
  *
  * This material is provided "as is", with absolutely no warranty expressed
@@ -10,6 +11,12 @@ package io.github.nixtabyte.telegram.jtelebot.response.json;
 
 import org.codehaus.jackson.annotate.JsonProperty;
 
+/**
+*
+* This object represents a Chat, could be an User or a Group
+*
+* @since 0.0.1
+*/
 public class Chat{
 
 	/**
@@ -18,12 +25,23 @@ public class Chat{
 	@JsonProperty("id")
 	private Long id;
 	
+	/**
+	 * <p>Getter for the field <code>id</code>.</p>
+	 *
+	 * @return a {@link java.lang.Long} object.
+	 */
 	public Long getId() {
 		return id;
 	}
+	/**
+	 * <p>Setter for the field <code>id</code>.</p>
+	 *
+	 * @param id a {@link java.lang.Long} object.
+	 */
 	public void setId(final Long id) {
 		this.id = id;
 	}
+	/** {@inheritDoc} */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -31,6 +49,7 @@ public class Chat{
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
+	/** {@inheritDoc} */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -47,6 +66,7 @@ public class Chat{
 			return false;
 		return true;
 	}
+	/** {@inheritDoc} */
 	@Override
 	public String toString() {
 		return "Chat [id=" + id + "]";

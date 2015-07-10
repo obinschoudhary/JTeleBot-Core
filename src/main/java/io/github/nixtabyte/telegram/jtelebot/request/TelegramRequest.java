@@ -44,6 +44,7 @@ public class TelegramRequest {
 	 * @param parameters The map of parameters
 	 * @param file	The file to upload
 	 * @param fileType The type of file to upload (audio, video, photo, document, sticker)
+	 * @param fileType The type of file to upload (audio, video, photo, document, sticker)
 	 * @see io.github.nixtabyte.telegram.jtelebot.request.factory.TelegramRequestFactory
 	 */
 	public TelegramRequest(final RequestType requestType, final List<BasicNameValuePair> parameters, final File file, final String fileType){

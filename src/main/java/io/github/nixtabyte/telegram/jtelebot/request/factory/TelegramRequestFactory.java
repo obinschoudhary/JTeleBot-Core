@@ -29,7 +29,6 @@ import org.codehaus.jackson.map.JsonMappingException;
  * it allows to easily create a request, for more information
  * on the methods that the Telegram Bots api support please check
  * See <a href="https://core.telegram.org/bots/api#available-methods">https://core.telegram.org/bots/api#available-methods</a>
- * 
  *
  * @since 0.0.1
  */

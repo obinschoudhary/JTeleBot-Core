@@ -1,5 +1,6 @@
+
 /**
- * 
+ *
  * Copyright (C) 2015 Roberto Dominguez Estrada and Juan Carlos Sedano Salas
  *
  * This material is provided "as is", with absolutely no warranty expressed
@@ -11,7 +12,12 @@ package io.github.nixtabyte.telegram.jtelebot.response.json;
 import java.util.List;
 
 import org.codehaus.jackson.annotate.JsonProperty;
-
+/**
+*
+* The response from Telegram
+*
+* @since 0.0.1
+*/
 public class TelegramResponse<T> {
 
 	/**
@@ -37,40 +43,81 @@ public class TelegramResponse<T> {
 	@JsonProperty("result")
 	private List<T> result;
 
+	/**
+	 * <p>isSuccessful.</p>
+	 *
+	 * @return a {@link java.lang.Boolean} object.
+	 */
 	public Boolean isSuccessful() {
 		return successful;
 	}
 
+	/**
+	 * <p>Setter for the field <code>successful</code>.</p>
+	 *
+	 * @param successful a {@link java.lang.Boolean} object.
+	 */
 	public void setSuccessful(final Boolean successful) {
 		this.successful = successful;
 	}
 
+	/**
+	 * <p>Getter for the field <code>description</code>.</p>
+	 *
+	 * @return a {@link java.lang.String} object.
+	 */
 	public String getDescription() {
 		return description;
 	}
 
+	/**
+	 * <p>Setter for the field <code>description</code>.</p>
+	 *
+	 * @param description a {@link java.lang.String} object.
+	 */
 	public void setDescription(final String description) {
 		this.description = description;
 	}
 
+	/**
+	 * <p>Getter for the field <code>errorCode</code>.</p>
+	 *
+	 * @return a {@link java.lang.Integer} object.
+	 */
 	public Integer getErrorCode() {
 		return errorCode;
 	}
 
+	/**
+	 * <p>Setter for the field <code>errorCode</code>.</p>
+	 *
+	 * @param errorCode a {@link java.lang.Integer} object.
+	 */
 	public void setErrorCode(final Integer errorCode) {
 		this.errorCode = errorCode;
 	}
 
 
+	/**
+	 * <p>Getter for the field <code>result</code>.</p>
+	 *
+	 * @return a {@link java.util.List} object.
+	 */
 	public List<T> getResult() {
 		return result;
 	}
 
+	/**
+	 * <p>Setter for the field <code>result</code>.</p>
+	 *
+	 * @param result a {@link java.util.List} object.
+	 */
 	public void setResult(final List<T> result) {
 		this.result = result;
 	}
 
 
+	/** {@inheritDoc} */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -86,6 +133,7 @@ public class TelegramResponse<T> {
 		return result;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -118,6 +166,7 @@ public class TelegramResponse<T> {
 		return true;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String toString() {
 		return "TelegramResponse [successful=" + successful + ", description="

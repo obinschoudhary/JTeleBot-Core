@@ -11,10 +11,10 @@ package io.github.nixtabyte.telegram.jtelebot.response.json;
 import org.codehaus.jackson.annotate.JsonProperty;
 
 /**
- * 
- * 	This object represents a sticker.
-
  *
+ * 	This object represents a sticker.
+ *
+ * @since 0.0.1
  */
 public class Sticker{
 	/**
@@ -42,39 +42,90 @@ public class Sticker{
 	 */
 	@JsonProperty("file_size")
 	private Integer fileSize;
+	/**
+	 * <p>Getter for the field <code>fileId</code>.</p>
+	 *
+	 * @return a {@link java.lang.String} object.
+	 */
 	public String getFileId() {
 		return fileId;
 	}
+	/**
+	 * <p>Setter for the field <code>fileId</code>.</p>
+	 *
+	 * @param fileId a {@link java.lang.String} object.
+	 */
 	public void setFileId(final String fileId) {
 		this.fileId = fileId;
 	}
+	/**
+	 * <p>Getter for the field <code>width</code>.</p>
+	 *
+	 * @return a {@link java.lang.Integer} object.
+	 */
 	public Integer getWidth() {
 		return width;
 	}
+	/**
+	 * <p>Setter for the field <code>width</code>.</p>
+	 *
+	 * @param width a {@link java.lang.Integer} object.
+	 */
 	public void setWidth(final Integer width) {
 		this.width = width;
 	}
+	/**
+	 * <p>Getter for the field <code>height</code>.</p>
+	 *
+	 * @return a {@link java.lang.Integer} object.
+	 */
 	public Integer getHeight() {
 		return height;
 	}
+	/**
+	 * <p>Setter for the field <code>height</code>.</p>
+	 *
+	 * @param height a {@link java.lang.Integer} object.
+	 */
 	public void setHeight(final Integer height) {
 		this.height = height;
 	}
+	/**
+	 * <p>Getter for the field <code>thumb</code>.</p>
+	 *
+	 * @return a {@link io.github.nixtabyte.telegram.jtelebot.response.json.PhotoSize} object.
+	 */
 	public PhotoSize getThumb() {
 		return thumb;
 	}
+	/**
+	 * <p>Setter for the field <code>thumb</code>.</p>
+	 *
+	 * @param thumb a {@link io.github.nixtabyte.telegram.jtelebot.response.json.PhotoSize} object.
+	 */
 	public void setThumb(final PhotoSize thumb) {
 		this.thumb = thumb;
 	}
+	/**
+	 * <p>Getter for the field <code>fileSize</code>.</p>
+	 *
+	 * @return a {@link java.lang.Integer} object.
+	 */
 	public Integer getFileSize() {
 		return fileSize;
 	}
+	/**
+	 * <p>Setter for the field <code>fileSize</code>.</p>
+	 *
+	 * @param fileSize a {@link java.lang.Integer} object.
+	 */
 	public void setFileSize(final Integer fileSize) {
 		this.fileSize = fileSize;
 	}
 	
 	
 	
+	/** {@inheritDoc} */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -87,6 +138,7 @@ public class Sticker{
 		result = prime * result + ((width == null) ? 0 : width.hashCode());
 		return result;
 	}
+	/** {@inheritDoc} */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -123,6 +175,7 @@ public class Sticker{
 			return false;
 		return true;
 	}
+	/** {@inheritDoc} */
 	@Override
 	public String toString() {
 		return "Sticker [fileId=" + fileId + ", width=" + width + ", height="

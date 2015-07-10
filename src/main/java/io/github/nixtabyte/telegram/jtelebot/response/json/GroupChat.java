@@ -11,9 +11,10 @@ package io.github.nixtabyte.telegram.jtelebot.response.json;
 import org.codehaus.jackson.annotate.JsonProperty;
 
 /**
- * 
+ *
  * This object represents a group chat.
  *
+ * @since 0.0.1
  */
 public class GroupChat extends Chat {
 
@@ -23,15 +24,26 @@ public class GroupChat extends Chat {
 	@JsonProperty("title")
 	private String title;
 
+	/**
+	 * <p>Getter for the field <code>title</code>.</p>
+	 *
+	 * @return a {@link java.lang.String} object.
+	 */
 	public String getTitle() {
 		return title;
 	}
+	/**
+	 * <p>Setter for the field <code>title</code>.</p>
+	 *
+	 * @param title a {@link java.lang.String} object.
+	 */
 	public void setTitle(final String title) {
 		this.title = title;
 	}
 	
 	
 	
+	/** {@inheritDoc} */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -39,6 +51,7 @@ public class GroupChat extends Chat {
 		result = prime * result + ((title == null) ? 0 : title.hashCode());
 		return result;
 	}
+	/** {@inheritDoc} */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -55,6 +68,7 @@ public class GroupChat extends Chat {
 			return false;
 		return true;
 	}
+	/** {@inheritDoc} */
 	@Override
 	public String toString() {
 		return "GroupChat [id="+this.getId()+" title=" + title + "]";

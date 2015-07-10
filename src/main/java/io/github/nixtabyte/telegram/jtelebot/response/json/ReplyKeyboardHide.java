@@ -1,5 +1,6 @@
+
 /**
- * 
+ *
  * Copyright (C) 2015 Roberto Dominguez Estrada and Juan Carlos Sedano Salas
  *
  * This material is provided "as is", with absolutely no warranty expressed
@@ -9,7 +10,12 @@
 package io.github.nixtabyte.telegram.jtelebot.response.json;
 
 import org.codehaus.jackson.annotate.JsonProperty;
-
+/**
+*
+* ReplyKeyboardHide
+*
+* @since 0.0.1
+*/
 public class ReplyKeyboardHide implements CustomReplyKeyboard{
 
 	/**
@@ -40,24 +46,45 @@ public class ReplyKeyboardHide implements CustomReplyKeyboard{
 	}
 
 	public Boolean isSelective() {
+		/**
+		 * <p>isHideKeyboard.</p>
+		 *
+		 * @return a {@link java.lang.Boolean} object.
+		 */
 		return selective;
 	}
 
 	public void setSelective(final Boolean selective) {
+		/**
+		 * <p>Setter for the field <code>hideKeyboard</code>.</p>
+		 *
+		 * @param hideKeyboard a {@link java.lang.Boolean} object.
+		 */
 		this.selective = selective;
 	}
 	
 	
+/**
+ * <p>isSelective.</p>
+ *
+ * @return a {@link java.lang.Boolean} object.
+ */
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
+		/**
+		 * <p>Setter for the field <code>selective</code>.</p>
+		 *
+		 * @param selective a {@link java.lang.Boolean} object.
+		 */
 		int result = 1;
 		result = prime * result
 				+ ((hideKeyboard == null) ? 0 : hideKeyboard.hashCode());
 		result = prime * result
 				+ ((selective == null) ? 0 : selective.hashCode());
 		return result;
+	/** {@inheritDoc} */
 	}
 
 	@Override
@@ -69,6 +96,7 @@ public class ReplyKeyboardHide implements CustomReplyKeyboard{
 		if (getClass() != obj.getClass())
 			return false;
 		ReplyKeyboardHide other = (ReplyKeyboardHide) obj;
+		/** {@inheritDoc} */
 		if (hideKeyboard == null) {
 			if (other.hideKeyboard != null)
 				return false;

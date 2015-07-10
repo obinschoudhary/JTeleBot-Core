@@ -11,9 +11,10 @@ package io.github.nixtabyte.telegram.jtelebot.response.json;
 import org.codehaus.jackson.annotate.JsonProperty;
 
 /**
- * 
+ *
  * This object represents an incoming update.
  *
+ * @since 0.0.1
  */
 public class Update {
 	/**
@@ -31,22 +32,43 @@ public class Update {
 	@JsonProperty("message")
 	private Message message;
 
+	/**
+	 * <p>Getter for the field <code>updateId</code>.</p>
+	 *
+	 * @return a {@link java.lang.Long} object.
+	 */
 	public Long getUpdateId() {
 		return updateId;
 	}
 
+	/**
+	 * <p>Setter for the field <code>updateId</code>.</p>
+	 *
+	 * @param updateId a {@link java.lang.Long} object.
+	 */
 	public void setUpdateId(final Long updateId) {
 		this.updateId = updateId;
 	}
 
+	/**
+	 * <p>Getter for the field <code>message</code>.</p>
+	 *
+	 * @return a {@link io.github.nixtabyte.telegram.jtelebot.response.json.Message} object.
+	 */
 	public Message getMessage() {
 		return message;
 	}
 
+	/**
+	 * <p>Setter for the field <code>message</code>.</p>
+	 *
+	 * @param message a {@link io.github.nixtabyte.telegram.jtelebot.response.json.Message} object.
+	 */
 	public void setMessage(final Message message) {
 		this.message = message;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -57,6 +79,7 @@ public class Update {
 		return result;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -79,6 +102,7 @@ public class Update {
 		return true;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String toString() {
 		return "Update [updateId=" + updateId + ", message=" + message + "]";

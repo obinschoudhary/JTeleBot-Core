@@ -1,5 +1,6 @@
+
 /**
- * 
+ *
  * Copyright (C) 2015 Roberto Dominguez Estrada and Juan Carlos Sedano Salas
  *
  * This material is provided "as is", with absolutely no warranty expressed
@@ -9,9 +10,14 @@
 package io.github.nixtabyte.telegram.jtelebot.response.json;
 
 import java.util.Arrays;
-
 import org.codehaus.jackson.annotate.JsonProperty;
 
+/**
+*
+* UserProfilePhotos
+*
+* @since 0.0.1
+*/
 public class UserProfilePhotos{
 
 	/**
@@ -28,24 +34,45 @@ public class UserProfilePhotos{
 
 	public Integer getTotalCount() {
 		return totalCount;
+	/**
+	 * <p>Getter for the field <code>totalCount</code>.</p>
+	 *
+	 * @return a {@link java.lang.Integer} object.
+	 */
 	}
 
 	public void setTotalCount(final Integer totalCount) {
 		this.totalCount = totalCount;
+	/**
+	 * <p>Setter for the field <code>totalCount</code>.</p>
+	 *
+	 * @param totalCount a {@link java.lang.Integer} object.
+	 */
 	}
 
 	public PhotoSize[][] getPhotos() {
 		return photos;
+	/**
+	 * <p>Getter for the field <code>photos</code>.</p>
+	 *
+	 * @return an array of {@link io.github.nixtabyte.telegram.jtelebot.response.json.PhotoSize} objects.
+	 */
 	}
 
 	public void setPhotos(final PhotoSize[][] photos) {
 		this.photos = photos;
+	/**
+	 * <p>Setter for the field <code>photos</code>.</p>
+	 *
+	 * @param photos an array of {@link io.github.nixtabyte.telegram.jtelebot.response.json.PhotoSize} objects.
+	 */
 	}
 	
 	
 
 	@Override
 	public int hashCode() {
+		/** {@inheritDoc} */
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + Arrays.hashCode(photos);
@@ -56,6 +83,7 @@ public class UserProfilePhotos{
 
 	@Override
 	public boolean equals(Object obj) {
+		/** {@inheritDoc} */
 		if (this == obj)
 			return true;
 		if (obj == null)
@@ -75,6 +103,7 @@ public class UserProfilePhotos{
 
 	@Override
 	public String toString() {
+		/** {@inheritDoc} */
 		return "UserProfilePhotos [totalCount=" + totalCount + ", photos="
 				+ photos + "]";
 	}

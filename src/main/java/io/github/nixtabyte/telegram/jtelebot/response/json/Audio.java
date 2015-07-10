@@ -11,9 +11,10 @@ package io.github.nixtabyte.telegram.jtelebot.response.json;
 import org.codehaus.jackson.annotate.JsonProperty;
 
 /**
- * 
+ *
  * 	This object represents an audio file (voice note).
  *
+ * @since 0.0.1
  */
 public class Audio{
 	/**
@@ -36,32 +37,73 @@ public class Audio{
 	 */
 	@JsonProperty("file_size")
 	private Integer fileSize;
+	/**
+	 * <p>Getter for the field <code>fileId</code>.</p>
+	 *
+	 * @return a {@link java.lang.String} object.
+	 */
 	public String getFileId() {
 		return fileId;
 	}
+	/**
+	 * <p>Setter for the field <code>fileId</code>.</p>
+	 *
+	 * @param fileId a {@link java.lang.String} object.
+	 */
 	public void setFileId(final String fileId) {
 		this.fileId = fileId;
 	}
+	/**
+	 * <p>Getter for the field <code>duration</code>.</p>
+	 *
+	 * @return a {@link java.lang.Integer} object.
+	 */
 	public Integer getDuration() {
 		return duration;
 	}
+	/**
+	 * <p>Setter for the field <code>duration</code>.</p>
+	 *
+	 * @param duration a {@link java.lang.Integer} object.
+	 */
 	public void setDuration(final Integer duration) {
 		this.duration = duration;
 	}
+	/**
+	 * <p>Getter for the field <code>mimeType</code>.</p>
+	 *
+	 * @return a {@link java.lang.String} object.
+	 */
 	public String getMimeType() {
 		return mimeType;
 	}
+	/**
+	 * <p>Setter for the field <code>mimeType</code>.</p>
+	 *
+	 * @param mimeType a {@link java.lang.String} object.
+	 */
 	public void setMimeType(final String mimeType) {
 		this.mimeType = mimeType;
 	}
+	/**
+	 * <p>Getter for the field <code>fileSize</code>.</p>
+	 *
+	 * @return a {@link java.lang.Integer} object.
+	 */
 	public Integer getFileSize() {
 		return fileSize;
 	}
+	/**
+	 * <p>Setter for the field <code>fileSize</code>.</p>
+	 *
+	 * @param fileSize a {@link java.lang.Integer} object.
+	 */
 	public void setFileSize(final Integer fileSize) {
 		this.fileSize = fileSize;
 	}
 	
 	
+	/** {@inheritDoc} */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -75,6 +117,7 @@ public class Audio{
 				+ ((mimeType == null) ? 0 : mimeType.hashCode());
 		return result;
 	}
+	/** {@inheritDoc} */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -106,6 +149,7 @@ public class Audio{
 			return false;
 		return true;
 	}
+	/** {@inheritDoc} */
 	@Override
 	public String toString() {
 		return "Audio [fileId=" + fileId + ", duration=" + duration

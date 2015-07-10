@@ -1,15 +1,20 @@
+
 /**
- * 
+ *
  * Copyright (C) 2015 Roberto Dominguez Estrada and Juan Carlos Sedano Salas
  *
  * This material is provided "as is", with absolutely no warranty expressed
  * or implied. Any use is at your own risk.
- *
  */
 package io.github.nixtabyte.telegram.jtelebot.response.json;
 
 import org.codehaus.jackson.annotate.JsonProperty;
-
+/**
+*
+* Contact class
+*
+* @since 0.0.1
+*/
 public class Contact {
 
 	/**
@@ -40,40 +45,81 @@ public class Contact {
 		return phoneNumber;
 	}
 
+	/**
+	 * <p>Getter for the field <code>phoneNumber</code>.</p>
+	 *
+	 * @return a {@link java.lang.String} object.
+	 */
 	public void setPhoneNumber(final String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
 
+	/**
+	 * <p>Setter for the field <code>phoneNumber</code>.</p>
+	 *
+	 * @param phoneNumber a {@link java.lang.String} object.
+	 */
 	public String getFirstName() {
 		return firstName;
 	}
 
+	/**
+	 * <p>Getter for the field <code>firstName</code>.</p>
+	 *
+	 * @return a {@link java.lang.String} object.
+	 */
 	public void setFirstName(final String firstName) {
 		this.firstName = firstName;
 	}
 
+	/**
+	 * <p>Setter for the field <code>firstName</code>.</p>
+	 *
+	 * @param firstName a {@link java.lang.String} object.
+	 */
 	public String getLastName() {
 		return lastName;
 	}
 
+	/**
+	 * <p>Getter for the field <code>lastName</code>.</p>
+	 *
+	 * @return a {@link java.lang.String} object.
+	 */
 	public void setLastName(final String lastName) {
 		this.lastName = lastName;
 	}
 
+	/**
+	 * <p>Setter for the field <code>lastName</code>.</p>
+	 *
+	 * @param lastName a {@link java.lang.String} object.
+	 */
 	public String getUserId() {
 		return userId;
 	}
 
+	/**
+	 * <p>Getter for the field <code>userId</code>.</p>
+	 *
+	 * @return a {@link java.lang.String} object.
+	 */
 	public void setUserId(final String userId) {
 		this.userId = userId;
 	}
 
+/**
+ * <p>Setter for the field <code>userId</code>.</p>
+ *
+ * @param userId a {@link java.lang.String} object.
+ */
 	
 	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		/** {@inheritDoc} */
 		result = prime * result
 				+ ((firstName == null) ? 0 : firstName.hashCode());
 		result = prime * result
@@ -88,6 +134,7 @@ public class Contact {
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
+		/** {@inheritDoc} */
 		if (obj == null)
 			return false;
 		if (getClass() != obj.getClass())
@@ -120,6 +167,7 @@ public class Contact {
 	public String toString() {
 		return "Contact [phoneNumber=" + phoneNumber + ", firstName="
 				+ firstName + ", lastName=" + lastName + ", userId=" + userId
+				/** {@inheritDoc} */
 				+ "]";
 	}
 }
