@@ -31,41 +31,41 @@ public class UserProfilePhotos{
 	 * */
 	@JsonProperty("photos")
 	private PhotoSize[][] photos;
-
-	public Integer getTotalCount() {
-		return totalCount;
 	/**
 	 * <p>Getter for the field <code>totalCount</code>.</p>
 	 *
 	 * @return a {@link java.lang.Integer} object.
 	 */
-	}
+	public Integer getTotalCount() {
+		return totalCount;
 
-	public void setTotalCount(final Integer totalCount) {
-		this.totalCount = totalCount;
+	}
 	/**
 	 * <p>Setter for the field <code>totalCount</code>.</p>
 	 *
 	 * @param totalCount a {@link java.lang.Integer} object.
 	 */
-	}
+	public void setTotalCount(final Integer totalCount) {
+		this.totalCount = totalCount;
 
-	public PhotoSize[][] getPhotos() {
-		return photos;
+	}
 	/**
 	 * <p>Getter for the field <code>photos</code>.</p>
 	 *
 	 * @return an array of {@link io.github.nixtabyte.telegram.jtelebot.response.json.PhotoSize} objects.
 	 */
-	}
+	public PhotoSize[][] getPhotos() {
+		return photos;
 
-	public void setPhotos(final PhotoSize[][] photos) {
-		this.photos = photos;
+	}
 	/**
 	 * <p>Setter for the field <code>photos</code>.</p>
 	 *
 	 * @param photos an array of {@link io.github.nixtabyte.telegram.jtelebot.response.json.PhotoSize} objects.
 	 */
+	public void setPhotos(final PhotoSize[][] photos) {
+		this.photos = photos;
+
 	}
 	
 	

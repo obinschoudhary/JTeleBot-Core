@@ -36,62 +36,61 @@ public class ForceReply implements CustomReplyKeyboard{
 	 * */
 	@JsonProperty("selective")
 	private Boolean selective;
-
-	public Boolean isForceReply() {
-		return forceReply;
-	}
-
-	public void setForceReply(final Boolean forceReply) {
-		this.forceReply = forceReply;
 	/**
 	 * <p>isForceReply.</p>
 	 *
 	 * @return a {@link java.lang.Boolean} object.
 	 */
+	public Boolean isForceReply() {
+		return forceReply;
 	}
 
-	public Boolean isSelective() {
-		return selective;
 	/**
 	 * <p>Setter for the field <code>forceReply</code>.</p>
 	 *
 	 * @param forceReply a {@link java.lang.Boolean} object.
 	 */
-	}
+	public void setForceReply(final Boolean forceReply) {
+		this.forceReply = forceReply;
 
-	public void setSelective(final Boolean selective) {
-		this.selective = selective;
+	}
 	/**
 	 * <p>isSelective.</p>
 	 *
 	 * @return a {@link java.lang.Boolean} object.
 	 */
+	public Boolean isSelective() {
+		return selective;
+
 	}
-	
+	/**
+	 * <p>Setter for the field <code>selective</code>.</p>
+	 *
+	 * @param selective a {@link java.lang.Boolean} object.
+	 */
+	public void setSelective(final Boolean selective) {
+		this.selective = selective;
+
+	}
+	/** {@inheritDoc} */
 	@Override
 	public int hashCode() {
-		/**
-		 * <p>Setter for the field <code>selective</code>.</p>
-		 *
-		 * @param selective a {@link java.lang.Boolean} object.
-		 */
+
 		final int prime = 31;
 		int result = 1;
 		result = prime * result
 				+ ((forceReply == null) ? 0 : forceReply.hashCode());
-		/** {@inheritDoc} */
 		result = prime * result
 				+ ((selective == null) ? 0 : selective.hashCode());
 		return result;
 	}
-
+	/** {@inheritDoc} */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
 		if (obj == null)
 			return false;
-		/** {@inheritDoc} */
 		if (getClass() != obj.getClass())
 			return false;
 		ForceReply other = (ForceReply) obj;

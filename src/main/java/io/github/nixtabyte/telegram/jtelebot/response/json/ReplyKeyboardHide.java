@@ -36,40 +36,46 @@ public class ReplyKeyboardHide implements CustomReplyKeyboard{
 	 * */
 	@JsonProperty("selective")
 	private Boolean selective;
-
+	/**
+	 * <p>isHideKeyboard.</p>
+	 *
+	 * @return a {@link java.lang.Boolean} object.
+	 */
 	public Boolean isHideKeyboard() {
 		return hideKeyboard;
 	}
-
+	/**
+	 * <p>Setter for the field <code>hideKeyboard</code>.</p>
+	 *
+	 * @param hideKeyboard a {@link java.lang.Boolean} object.
+	 */
 	public void setHideKeyboard(final Boolean hideKeyboard) {
 		this.hideKeyboard = hideKeyboard;
 	}
 
+	
+	/**
+	 * <p>isSelective.</p>
+	 *
+	 * @return a {@link java.lang.Boolean} object.
+	 */
 	public Boolean isSelective() {
-		/**
-		 * <p>isHideKeyboard.</p>
-		 *
-		 * @return a {@link java.lang.Boolean} object.
-		 */
+
 		return selective;
 	}
-
+	/**
+	 * <p>Setter for the field <code>selective</code>.</p>
+	 *
+	 * @param selective a {@link java.lang.Boolean} object.
+	 */
 	public void setSelective(final Boolean selective) {
-		/**
-		 * <p>Setter for the field <code>hideKeyboard</code>.</p>
-		 *
-		 * @param hideKeyboard a {@link java.lang.Boolean} object.
-		 */
+
 		this.selective = selective;
 	}
 	
 	
-/**
- * <p>isSelective.</p>
- *
- * @return a {@link java.lang.Boolean} object.
- */
 
+	/** {@inheritDoc} */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -84,9 +90,8 @@ public class ReplyKeyboardHide implements CustomReplyKeyboard{
 		result = prime * result
 				+ ((selective == null) ? 0 : selective.hashCode());
 		return result;
-	/** {@inheritDoc} */
 	}
-
+	/** {@inheritDoc} */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -96,7 +101,6 @@ public class ReplyKeyboardHide implements CustomReplyKeyboard{
 		if (getClass() != obj.getClass())
 			return false;
 		ReplyKeyboardHide other = (ReplyKeyboardHide) obj;
-		/** {@inheritDoc} */
 		if (hideKeyboard == null) {
 			if (other.hideKeyboard != null)
 				return false;

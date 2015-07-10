@@ -29,41 +29,41 @@ public class Location{
 	 * */
 	@JsonProperty("latitude")
 	private Double latitude;
-
-	public Double getLongitude() {
-		return longitude;
 	/**
 	 * <p>Getter for the field <code>longitude</code>.</p>
 	 *
 	 * @return a {@link java.lang.Double} object.
 	 */
-	}
+	public Double getLongitude() {
+		return longitude;
 
-	public void setLongitude(final Double longitude) {
-		this.longitude = longitude;
+	}
 	/**
 	 * <p>Setter for the field <code>longitude</code>.</p>
 	 *
 	 * @param longitude a {@link java.lang.Double} object.
 	 */
-	}
+	public void setLongitude(final Double longitude) {
+		this.longitude = longitude;
 
-	public Double getLatitude() {
-		return latitude;
+	}
 	/**
 	 * <p>Getter for the field <code>latitude</code>.</p>
 	 *
 	 * @return a {@link java.lang.Double} object.
 	 */
-	}
+	public Double getLatitude() {
+		return latitude;
 
-	public void setLatitude(final Double latitude) {
-		this.latitude = latitude;
+	}
 	/**
 	 * <p>Setter for the field <code>latitude</code>.</p>
 	 *
 	 * @param latitude a {@link java.lang.Double} object.
 	 */
+	public void setLatitude(final Double latitude) {
+		this.latitude = latitude;
+
 	}
 	
 	
