@@ -8,19 +8,39 @@
  */
 package io.github.nixtabyte.telegram.jtelebot.server.impl;
 
+import io.github.nixtabyte.telegram.jtelebot.server.Command;
+import io.github.nixtabyte.telegram.jtelebot.server.CommandDispatcher;
 import io.github.nixtabyte.telegram.jtelebot.server.CommandQueue;
 
 import java.util.Observable;
+import java.util.Observer;
 import java.util.concurrent.ConcurrentMap;
 
 import org.apache.log4j.Logger;
 
 import com.googlecode.concurrentlinkedhashmap.ConcurrentLinkedHashMap;
 
+/**
+ * Main implementation of {@link CommandDispatcher} that extends the
+ * {@link AbstractCommandDispatcher} behavior in order to handle a sort of
+ * {@link DefaultCommandTask} instances as part of a ThreadPoolExecutor.
+ * </br></br>The DefaultCommandDispatcher registers itself as an
+ * {@link Observer} on every {@link Observable} DefaultCommandTask instantiated
+ * in such a way to be notified when each of them had finished processing their
+ * corresponding {@link Command}.
+ * 
+ * @see Command
+ * @see CommandDispatcher
+ * @see AbstractCommandDispatcher
+ * @see DefaultCommandTask
+ * @see Observer
+ * @see Observable
+ * @since 0.0.1
+ * */
 public class DefaultCommandDispatcher extends AbstractCommandDispatcher {
 
 	private ConcurrentMap<String, DefaultCommandTask> taskList;
-	
+
 	private static final Logger LOG = Logger
 			.getLogger(DefaultCommandDispatcher.class);
 
@@ -53,7 +73,7 @@ public class DefaultCommandDispatcher extends AbstractCommandDispatcher {
 			while (!commandQueue.isEmpty()) {
 				LOG.trace("About to dispatch " + commandQueue.size()
 						+ " commands enqueued...");
-				
+
 				final DefaultCommandTask task = new DefaultCommandTask(
 						commandQueue.poll(), delay);
 
@@ -73,7 +93,8 @@ public class DefaultCommandDispatcher extends AbstractCommandDispatcher {
 	@Override
 	public void update(final Observable observableTask, final Object arg) {
 		final DefaultCommandTask task = (DefaultCommandTask) observableTask;
-		final String observableKey = String.valueOf(task.getCommand().hashCode());
+		final String observableKey = String.valueOf(task.getCommand()
+				.hashCode());
 		if (taskList.containsKey(observableKey)) {
 			taskList.remove(observableKey);
 			LOG.debug("Pending tasks: " + taskList.size() + "...");

@@ -18,6 +18,7 @@ import io.github.nixtabyte.telegram.jtelebot.response.json.Update;
 import io.github.nixtabyte.telegram.jtelebot.server.Command;
 import io.github.nixtabyte.telegram.jtelebot.server.CommandDispatcher;
 import io.github.nixtabyte.telegram.jtelebot.server.CommandFactory;
+import io.github.nixtabyte.telegram.jtelebot.server.CommandWatcher;
 
 import java.util.concurrent.ConcurrentMap;
 
@@ -25,6 +26,27 @@ import org.apache.log4j.Logger;
 
 import com.googlecode.concurrentlinkedhashmap.ConcurrentLinkedHashMap;
 
+/**
+ * Main implementation of {@link CommandWatcher} that extends the
+ * {@link AbstractCommandWatcher} behavior in order to implement a polling
+ * component service for the Telegram Bot API service. This is a watcher that is
+ * continuously observing when there are commands available, which are
+ * originated by a Telegram User.</br></br>It has a reference to a
+ * {@link CommandDispatcher} implementation so that it can bypass via its queue,
+ * the group of {@link Command} instances collected on every bunch of polling
+ * updates.</br></br>For the polling purpose, it uses a
+ * {@link DefaultRequestHandler} implementation internally in order to send
+ * requests to the Telegram Bot API service and get {@link Updates} as the
+ * result.
+ * 
+ * @see Command
+ * @see CommandWatcher
+ * @see AbstractCommandWatcher
+ * @see CommandDispatcher
+ * @see DefaultRequestHandler
+ * @see Update
+ * @since 0.0.1
+ * */
 public class DefaultCommandWatcher extends AbstractCommandWatcher {
 
 	private static final Logger LOG = Logger
