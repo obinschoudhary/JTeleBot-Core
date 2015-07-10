@@ -8,11 +8,24 @@
  */
 package io.github.nixtabyte.telegram.jtelebot.server.impl;
 
+import io.github.nixtabyte.telegram.jtelebot.server.Command;
 import io.github.nixtabyte.telegram.jtelebot.server.CommandWatcher;
 import io.github.nixtabyte.telegram.jtelebot.server.Service;
 
 import org.apache.log4j.Logger;
 
+/**
+ * Abstract polling implementation of {@link CommandWatcher}, {@link Service}
+ * and {@link Runnable} which uses a runnable thread with a service pattern
+ * behavior (start|stop) in order to retrieve commands periodically from the
+ * Telegram service (Those commands are supposed to be originated by a User).
+ * 
+ * @see Command
+ * @see CommandWatcher
+ * @see Service
+ * @see Runnable
+ * @since 0.0.1
+ * */
 public abstract class AbstractCommandWatcher implements CommandWatcher,
 		Service, Runnable {
 

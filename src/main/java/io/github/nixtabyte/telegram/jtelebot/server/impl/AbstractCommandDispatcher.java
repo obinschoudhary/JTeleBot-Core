@@ -20,6 +20,24 @@ import java.util.concurrent.Executors;
 
 import org.apache.log4j.Logger;
 
+/**
+ * Abstract implementation of {@link CommandDispatcher}, {@link Observer},
+ * {@link Service} and {@link Runnable} which uses a runnable thread with a
+ * service pattern behavior (start|stop) in order to enqueue {@link Command}
+ * objects and then execute them one by one. </br></br>It also implements an
+ * Observer pattern behavior in order to be able to "observe" or be aware when
+ * an observable object changes its current state. In a common Observer
+ * scenario, the observable object would send a notification to every Observer
+ * class hooked and this way the Observer would be able to perform a particular
+ * action after the signal.
+ * 
+ * @see Command
+ * @see CommandDispatcher
+ * @see Observer
+ * @see Service
+ * @see Runnable
+ * @since 0.0.1
+ * */
 public abstract class AbstractCommandDispatcher implements CommandDispatcher,
 		Observer, Service, Runnable {
 
@@ -93,16 +111,12 @@ public abstract class AbstractCommandDispatcher implements CommandDispatcher,
 		commandQueue.add(command);
 	}
 
-	/**
-	 * This method must to be overridden in order to implement the business
-	 * logic to dispatch every Command from the Queue
-	 * */
 	@Override
 	public abstract void dispatchCommands();
 
 	/**
 	 * Method used by the Observable object in order to notify this Observer
-	 * class about any particular change event in Observable side.
+	 * class about any particular change event on the Observable side.
 	 * */
 	@Override
 	public abstract void update(Observable observableTask, Object arg);
