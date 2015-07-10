@@ -1,0 +1,8 @@
+io.github.nixtabyte.telegram.jtelebot.client
+io.github.nixtabyte.telegram.jtelebot.client.impl
+io.github.nixtabyte.telegram.jtelebot.mapper.json
+io.github.nixtabyte.telegram.jtelebot.request
+io.github.nixtabyte.telegram.jtelebot.request.factory
+io.github.nixtabyte.telegram.jtelebot.response.json
+io.github.nixtabyte.telegram.jtelebot.server
+io.github.nixtabyte.telegram.jtelebot.server.impl
