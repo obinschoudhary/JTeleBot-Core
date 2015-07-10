@@ -15,6 +15,19 @@ import java.util.Observable;
 
 import org.apache.log4j.Logger;
 
+/**
+ * Abstract component that extends {@link Observable} and implements
+ * {@link CommandTask} and {@link Runnable} in order to handle the execution of
+ * every individual {@link Command} into a separated runnable
+ * thread.</br></br>It allows to notify all Observer classes when it has
+ * finished processing the corresponding Command.
+ * 
+ * @see Command
+ * @see CommandTask
+ * @see Observable
+ * @see Runnable
+ * @since 0.0.1
+ * */
 public abstract class AbstractCommandTask extends Observable implements
 		CommandTask, Runnable {
 
@@ -39,13 +52,13 @@ public abstract class AbstractCommandTask extends Observable implements
 		notifyObserver();
 	}
 
-	/**
-	 * This method must be overridden in order to implement the business logic
-	 * while processing the command.
-	 * */
 	@Override
 	public abstract void processCommand();
 
+	/**
+	 * Method used to notify all the hooked {@link Observer} clients when this
+	 * Observable object had finished processing the Command.
+	 * */
 	public abstract void notifyObserver();
 
 	public Command getCommand() {

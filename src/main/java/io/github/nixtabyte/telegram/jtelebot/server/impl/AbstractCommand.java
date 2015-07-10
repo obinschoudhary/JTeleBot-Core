@@ -12,6 +12,16 @@ import io.github.nixtabyte.telegram.jtelebot.client.RequestHandler;
 import io.github.nixtabyte.telegram.jtelebot.response.json.Message;
 import io.github.nixtabyte.telegram.jtelebot.server.Command;
 
+/**
+ * Abstract implementation of {@link Command} in order to contain a
+ * {@link Message} and {@link RequestHandler} for further manipulation of the
+ * Bot.
+ * 
+ * @see Command
+ * @see Message
+ * @see RequestHandler
+ * @since 0.0.1
+ * */
 public abstract class AbstractCommand implements Command {
 
 	protected Message message;
