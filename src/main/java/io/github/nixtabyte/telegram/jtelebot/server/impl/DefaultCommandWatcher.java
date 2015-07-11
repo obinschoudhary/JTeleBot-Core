@@ -8,9 +8,10 @@
  */
 package io.github.nixtabyte.telegram.jtelebot.server.impl;
 
-import io.github.nixtabyte.telegram.jtelebot.client.HttpProxy;
 import io.github.nixtabyte.telegram.jtelebot.client.RequestHandler;
 import io.github.nixtabyte.telegram.jtelebot.client.impl.DefaultRequestHandler;
+import io.github.nixtabyte.telegram.jtelebot.exception.JsonParsingException;
+import io.github.nixtabyte.telegram.jtelebot.exception.TelegramServerException;
 import io.github.nixtabyte.telegram.jtelebot.request.factory.TelegramRequestFactory;
 import io.github.nixtabyte.telegram.jtelebot.response.json.Message;
 import io.github.nixtabyte.telegram.jtelebot.response.json.TelegramResponse;
@@ -59,7 +60,6 @@ public class DefaultCommandWatcher extends AbstractCommandWatcher {
 	private CommandFactory commandFactory;
 	private RequestHandler requestHandler;
 
-	private HttpProxy proxy;
 
 	private long offset;
 	private long limit;
@@ -68,34 +68,26 @@ public class DefaultCommandWatcher extends AbstractCommandWatcher {
 	private ConcurrentMap<String, Message> cache;
 
 	public DefaultCommandWatcher() {
-		this(0, MAX_CACHE_CAPACITY, null, null, null, null);
+		this(0, MAX_CACHE_CAPACITY, null, null, null);
 	}
 
 	public DefaultCommandWatcher(final String telegramToken,
 			CommandDispatcher commandDispatcher,
 			final CommandFactory commandFactory) {
 		this(0, MAX_CACHE_CAPACITY, telegramToken, commandDispatcher,
-				commandFactory, null);
+				commandFactory);
 	}
+
 
 	public DefaultCommandWatcher(final long delayInMillis,
 			final long cacheCapacity, final String telegramToken,
 			final CommandDispatcher commandDispatcher,
 			final CommandFactory commandFactory) {
-		this(delayInMillis, cacheCapacity, telegramToken, commandDispatcher,
-				commandFactory, null);
-	}
-
-	public DefaultCommandWatcher(final long delayInMillis,
-			final long cacheCapacity, final String telegramToken,
-			final CommandDispatcher commandDispatcher,
-			final CommandFactory commandFactory, final HttpProxy proxy) {
 
 		super(delayInMillis);
 		this.commandDispatcher = commandDispatcher;
 		this.commandFactory = commandFactory;
 		this.requestHandler = new DefaultRequestHandler(telegramToken);
-		this.proxy = proxy;
 
 		// TODO These parameters must be persisted (i.e. DB,
 		// configuration file, etc.)
@@ -111,17 +103,28 @@ public class DefaultCommandWatcher extends AbstractCommandWatcher {
 	public void retrieveCommands() {
 		LOG.debug("\tPolling Telegram updates (offset:" + offset + ", limit:"
 				+ limit + ", timeout=" + timeout + ")...");
-		TelegramResponse<?> response = requestHandler.sendRequest(
-				TelegramRequestFactory.createGetUpdatesRequest(offset, limit,
-						timeout), proxy);
-		if (response.isSuccessful()) {
-			handleUpdates(response);
-		} else {
-			// TODO decide what to do in case of unsuccessful response
-			LOG.error("Telegram response was unsuccessful: ["
-					+ response.getErrorCode() + "] "
-					+ response.getDescription());
+		TelegramResponse<?> response;
+		try {
+			response = requestHandler.sendRequest(
+					TelegramRequestFactory.createGetUpdatesRequest(offset, limit,
+							timeout));
+			if (response.isSuccessful()) {
+				handleUpdates(response);
+			} else {
+				// TODO decide what to do in case of unsuccessful response
+				LOG.error("Telegram response was unsuccessful: ["
+						+ response.getErrorCode() + "] "
+						+ response.getDescription());
+			}
+		} catch (JsonParsingException e) {
+			LOG.error("JSON parsing failed");
+			LOG.error(e);
+		} catch (TelegramServerException e) {
+			LOG.error("Fail at retrieving response from telegram");
+			LOG.error(e);
+
 		}
+
 	}
 
 	private void handleUpdates(final TelegramResponse<?> response) {

@@ -68,25 +68,17 @@ public class DefaultCommandDispatcher extends AbstractCommandDispatcher {
 
 	@Override
 	public void dispatchCommands() {
-		try {
-			// LOG.debug("CommandQueue: " + commandQueue.toString());
-			while (!commandQueue.isEmpty()) {
-				LOG.trace("About to dispatch " + commandQueue.size()
-						+ " commands enqueued...");
-
+		// LOG.debug("CommandQueue: " + commandQueue.toString());
+		while (!commandQueue.isEmpty()) {
+			LOG.trace("About to dispatch " + commandQueue.size()
+					+ " commands enqueued...");
 				final DefaultCommandTask task = new DefaultCommandTask(
-						commandQueue.poll(), delay);
+					commandQueue.poll(), delay);
+			task.addObserver(this);
+			taskList.put(String.valueOf(task.getCommand().hashCode()), task);
+			// LOG.debug(taskList.keySet());
 
-				task.addObserver(this);
-				taskList.put(String.valueOf(task.getCommand().hashCode()), task);
-				// LOG.debug(taskList.keySet());
-
-				executor.execute(task);
-			}
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			executor.shutdown();
+			executor.execute(task);
 		}
 	}
 

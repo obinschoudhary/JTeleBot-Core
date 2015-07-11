@@ -49,7 +49,7 @@ public class WatcherIntegrationTest {
 		// Init the Watcher and bypass a reference to Dispatcher
 		commandWatcher = new DefaultCommandWatcher(POLLING_DELAY,
 				CACHE_CAPACITY, TEST_TOKEN, commandDispatcher,
-				new DummyCommandFactoryImpl(), null);
+				new DummyCommandFactoryImpl());
 		commandWatcher.setOffset(DEFAULT_INITIAL_OFFSET);
 		commandWatcher.setLimit(DEFAULT_UPDATES_LIMIT);
 		commandWatcher.setTimeout(DEFAULT_TIMEOUT);

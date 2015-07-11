@@ -12,6 +12,8 @@ package io.github.nixtabyte.telegram.jtelebot.client.impl;
 import io.github.nixtabyte.telegram.jtelebot.client.HttpClientFactory;
 import io.github.nixtabyte.telegram.jtelebot.client.HttpProxy;
 import io.github.nixtabyte.telegram.jtelebot.client.RequestHandler;
+import io.github.nixtabyte.telegram.jtelebot.exception.JsonParsingException;
+import io.github.nixtabyte.telegram.jtelebot.exception.TelegramServerException;
 import io.github.nixtabyte.telegram.jtelebot.mapper.json.MapperHandler;
 import io.github.nixtabyte.telegram.jtelebot.request.TelegramRequest;
 import io.github.nixtabyte.telegram.jtelebot.response.json.TelegramResponse;
@@ -42,6 +44,7 @@ public class DefaultRequestHandler implements RequestHandler {
 	private static final String URL_TEMPLATE = "https://api.telegram.org/bot{0}/{1}";
 
 	private HttpClient httpClient;
+	private HttpProxy httpProxy;
 	private String token;
 
 	/**
@@ -49,6 +52,11 @@ public class DefaultRequestHandler implements RequestHandler {
 	 */
 	public DefaultRequestHandler() {
 		httpClient = HttpClientFactory.createHttpClient();
+	}
+	
+	public DefaultRequestHandler(final String token,final HttpProxy httpProxy) {
+		this(token);
+		this.httpProxy = httpProxy;
 	}
 
 	/**
@@ -61,9 +69,11 @@ public class DefaultRequestHandler implements RequestHandler {
 		this.token = token;
 	}
 
-	/** {@inheritDoc} */
+	/** {@inheritDoc} 
+	 * @throws JsonParsingException 
+	 * @throws TelegramServerException */
 	@Override
-	public TelegramResponse<?> sendRequest(TelegramRequest telegramRequest) {
+	public TelegramResponse<?> sendRequest(TelegramRequest telegramRequest) throws JsonParsingException, TelegramServerException {
 		TelegramResponse<?> telegramResponse = null;
 		final String response = callHttpService(telegramRequest);
 
@@ -73,25 +83,10 @@ public class DefaultRequestHandler implements RequestHandler {
 		return telegramResponse;
 	}
 
-	/** {@inheritDoc} */
-	@Override
-	public TelegramResponse<?> sendRequest(TelegramRequest telegramRequest,
-			HttpProxy proxy) {
-		TelegramResponse<?> telegramResponse = null;
-		final String response = callHttpService(telegramRequest, proxy);
 
-		telegramResponse = parseJsonResponse(response, telegramRequest
-				.getRequestType().getResultClass());
 
-		return telegramResponse;
-	}
 
-	private String callHttpService(TelegramRequest telegramRequest) {
-		return this.callHttpService(telegramRequest, null);
-	}
-
-	private String callHttpService(TelegramRequest telegramRequest,
-			HttpProxy proxy) {
+	private String callHttpService(TelegramRequest telegramRequest) throws TelegramServerException {
 		final String url = MessageFormat.format(URL_TEMPLATE, token,
 				telegramRequest.getRequestType().getMethodName());
 
@@ -111,9 +106,9 @@ public class DefaultRequestHandler implements RequestHandler {
 		}
 		try {
 			// PROXY Usage
-			if (proxy != null) {
-				HttpHost proxyHost = new HttpHost(proxy.getHost(),
-						proxy.getPort(), proxy.getProtocol());
+			if (httpProxy != null) {
+				HttpHost proxyHost = new HttpHost(httpProxy.getHost(),
+						httpProxy.getPort(), httpProxy.getProtocol());
 				RequestConfig config = RequestConfig.custom()
 						.setProxy(proxyHost).build();
 				request.setConfig(config);
@@ -131,25 +126,20 @@ public class DefaultRequestHandler implements RequestHandler {
 			}
 
 			if (response.getStatusLine().getStatusCode() != 200) {
-				System.err.println("Request to Telegram failed!");
-				/**
-				 * TODO: should we throw an exception?
-				 */
+				throw new TelegramServerException(result.toString());
 			}
 
 			return result.toString();
 
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new TelegramServerException(e);
 		}
 
-		return null;
 	}
 
 	// TODO This method should be implemented in a ResponseParser class
 	private TelegramResponse<?> parseJsonResponse(final String jsonResponse,
-			final Class<?> resultTypeClass) {
+			final Class<?> resultTypeClass) throws JsonParsingException {
 		try {
 
 			final TelegramResponse<?> telegramResponse = (TelegramResponse<?>) MapperHandler.INSTANCE
@@ -165,11 +155,9 @@ public class DefaultRequestHandler implements RequestHandler {
 			return telegramResponse;
 
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new JsonParsingException(e);
 		}
 
-		return null;
 	}
 
 	/**

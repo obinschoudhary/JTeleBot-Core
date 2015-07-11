@@ -33,7 +33,7 @@ public class DefaultCommandTask extends AbstractCommandTask {
 			command.execute();
 			LOG.trace("\tEND processing command {" + command + "}");
 		} catch (InterruptedException e) {
-			e.printStackTrace();
+			LOG.error(e);
 		}
 	}
 

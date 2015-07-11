@@ -8,6 +8,9 @@
  */
 package io.github.nixtabyte.telegram.jtelebot.client;
 
+
+import io.github.nixtabyte.telegram.jtelebot.exception.JsonParsingException;
+import io.github.nixtabyte.telegram.jtelebot.exception.TelegramServerException;
 import io.github.nixtabyte.telegram.jtelebot.request.TelegramRequest;
 import io.github.nixtabyte.telegram.jtelebot.response.json.TelegramResponse;
 /**
@@ -24,16 +27,11 @@ public interface RequestHandler {
 	 *
 	 * @param telegramRequest a {@link io.github.nixtabyte.telegram.jtelebot.request.TelegramRequest} object.
 	 * @return a {@link io.github.nixtabyte.telegram.jtelebot.response.json.TelegramResponse} object.
+	 * @throws JsonParsingException 
+	 * @throws TelegramServerException 
 	 */
-	public TelegramResponse<?> sendRequest(final TelegramRequest telegramRequest);
+	public TelegramResponse<?> sendRequest(final TelegramRequest telegramRequest) throws JsonParsingException, TelegramServerException;
 	
-	/**
-	 * <p>sendRequest.</p>
-	 *
-	 * @param telegramRequest a {@link io.github.nixtabyte.telegram.jtelebot.request.TelegramRequest} object.
-	 * @param proxy a {@link io.github.nixtabyte.telegram.jtelebot.client.HttpProxy} object.
-	 * @return a {@link io.github.nixtabyte.telegram.jtelebot.response.json.TelegramResponse} object.
-	 */
-	public TelegramResponse<?> sendRequest(final TelegramRequest telegramRequest, HttpProxy proxy);
+
 
 }

@@ -9,6 +9,8 @@
 package io.github.nixtabyte.telegram.jtelebot.server;
 
 import io.github.nixtabyte.telegram.jtelebot.client.RequestHandler;
+import io.github.nixtabyte.telegram.jtelebot.exception.JsonParsingException;
+import io.github.nixtabyte.telegram.jtelebot.exception.TelegramServerException;
 import io.github.nixtabyte.telegram.jtelebot.request.factory.TelegramRequestFactory;
 import io.github.nixtabyte.telegram.jtelebot.response.json.Message;
 import io.github.nixtabyte.telegram.jtelebot.server.impl.AbstractCommand;
@@ -32,13 +34,10 @@ public class DummyCommandImpl extends AbstractCommand{
 					.createSendMessageRequest(message.getChat().getId(),
 							"Command response: " + message.getText(), false,
 							message.getId(), null));
-		} catch (JsonGenerationException e) {
+		} catch (JsonParsingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (JsonMappingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
+		} catch (TelegramServerException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}		

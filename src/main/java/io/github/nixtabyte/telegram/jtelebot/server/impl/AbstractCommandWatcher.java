@@ -76,7 +76,7 @@ public abstract class AbstractCommandWatcher implements CommandWatcher,
 			try {
 				Thread.sleep(delay);
 			} catch (InterruptedException e) {
-				e.printStackTrace();
+				LOG.error(e);
 			}
 			retrieveCommands();
 		}

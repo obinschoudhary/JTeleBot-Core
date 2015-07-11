@@ -98,9 +98,14 @@ public abstract class AbstractCommandDispatcher implements CommandDispatcher,
 			try {
 				Thread.sleep(delay);
 			} catch (InterruptedException e) {
-				e.printStackTrace();
+				LOG.error(e);
 			}
-			dispatchCommands();
+			try{
+				dispatchCommands();
+			}
+			catch(Exception e){
+				LOG.error(e);
+			}
 		}
 
 		thread = null;

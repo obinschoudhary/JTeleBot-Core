@@ -4,3 +4,6 @@
 **/target
 
 pom.xml.releaseBackup
+
+**/bin
+release.properties
