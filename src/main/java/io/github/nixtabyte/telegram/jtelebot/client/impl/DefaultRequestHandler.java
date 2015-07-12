@@ -32,6 +32,7 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.mime.MultipartEntityBuilder;
 import org.apache.http.message.BasicNameValuePair;
+import org.apache.log4j.Logger;
 /**
 *
 * This is the default request handler
@@ -39,6 +40,9 @@ import org.apache.http.message.BasicNameValuePair;
 * @since 0.0.1
 */
 public class DefaultRequestHandler implements RequestHandler {
+
+	private static final Logger LOG = Logger
+			.getLogger(DefaultRequestHandler.class);
 
 	// TODO This should be in a CommonConstants class
 	private static final String URL_TEMPLATE = "https://api.telegram.org/bot{0}/{1}";
@@ -141,7 +145,7 @@ public class DefaultRequestHandler implements RequestHandler {
 	private TelegramResponse<?> parseJsonResponse(final String jsonResponse,
 			final Class<?> resultTypeClass) throws JsonParsingException {
 		try {
-
+			LOG.trace(jsonResponse);
 			final TelegramResponse<?> telegramResponse = (TelegramResponse<?>) MapperHandler.INSTANCE
 					.getObjectMapper().readValue(
 							jsonResponse,
@@ -151,7 +155,7 @@ public class DefaultRequestHandler implements RequestHandler {
 									.constructParametricType(
 											TelegramResponse.class,
 											resultTypeClass));
-
+			LOG.trace(telegramResponse);
 			return telegramResponse;
 
 		} catch (IOException e) {
