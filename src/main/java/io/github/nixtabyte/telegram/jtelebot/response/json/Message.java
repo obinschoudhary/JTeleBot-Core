@@ -186,7 +186,7 @@ public class Message {
 				this.chat = MapperHandler.INSTANCE.getObjectMapper()
 						.convertValue(chat, GroupChat.class);
 			
-			} else if (chat.toString().contains("username")) {// must be user
+			} else if (chat.toString().contains("first_name")) {// must be user
 				this.chat = MapperHandler.INSTANCE.getObjectMapper()
 						.convertValue(chat, User.class);
 			}
