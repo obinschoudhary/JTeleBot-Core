@@ -67,6 +67,8 @@ public class ConnectionIntegrationTest {
 		StringBuffer result = new StringBuffer();
 		String line = "";
 		while ((line = rd.readLine()) != null) {
+			System.out.println(line);
+
 			result.append(line);
 		}
 		TelegramResponse<Message> telegramResponse = MapperHandler.INSTANCE
@@ -85,7 +87,7 @@ public class ConnectionIntegrationTest {
 	@Test
 	public void testUpdate() throws ClientProtocolException, IOException {
 		String method = "getUpdates";
-		String url = "https://api.telegram.org/" + token + "/" + method;
+		String url = "https://api.telegram.org/bot" + token + "/" + method;
 
 		HttpClient client = HttpClientBuilder.create().build();
 		HttpPost request = new HttpPost(url);
@@ -107,6 +109,8 @@ public class ConnectionIntegrationTest {
 		StringBuffer result = new StringBuffer();
 		String line = "";
 		while ((line = rd.readLine()) != null) {
+			System.out.println(line);
+
 			result.append(line);
 		}
 
@@ -126,7 +130,7 @@ public class ConnectionIntegrationTest {
 	@Test
 	public void test() throws ClientProtocolException, IOException {
 		String method = "getMe";
-		String url = "https://api.telegram.org/" + token + "/" + method;
+		String url = "https://api.telegram.org/bot" + token + "/" + method;
 
 		HttpClient client = HttpClientBuilder.create().build();
 		HttpPost request = new HttpPost(url);
@@ -140,6 +144,8 @@ public class ConnectionIntegrationTest {
 		StringBuffer result = new StringBuffer();
 		String line = "";
 		while ((line = rd.readLine()) != null) {
+			System.out.println(line);
+
 			result.append(line);
 		}
 		TelegramResponse<User> telegramResponse = MapperHandler.INSTANCE

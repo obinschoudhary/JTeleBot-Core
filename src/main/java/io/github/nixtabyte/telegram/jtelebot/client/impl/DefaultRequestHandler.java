@@ -32,7 +32,8 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.mime.MultipartEntityBuilder;
 import org.apache.http.message.BasicNameValuePair;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 /**
 *
 * This is the default request handler
@@ -41,8 +42,7 @@ import org.apache.log4j.Logger;
 */
 public class DefaultRequestHandler implements RequestHandler {
 
-	private static final Logger LOG = Logger
-			.getLogger(DefaultRequestHandler.class);
+	private static final Logger LOG = LoggerFactory.getLogger(DefaultRequestHandler.class);
 
 	// TODO This should be in a CommonConstants class
 	private static final String URL_TEMPLATE = "https://api.telegram.org/bot{0}/{1}";
@@ -155,7 +155,7 @@ public class DefaultRequestHandler implements RequestHandler {
 									.constructParametricType(
 											TelegramResponse.class,
 											resultTypeClass));
-			LOG.trace(telegramResponse);
+			LOG.trace(telegramResponse.toString());
 			return telegramResponse;
 
 		} catch (IOException e) {

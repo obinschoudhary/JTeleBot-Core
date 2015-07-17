@@ -31,7 +31,7 @@ import org.junit.Test;
 public class RequestHandlerIntegrationTest {
 
 	// PUT YOUR TEST TOKEN HERE...
-	private static final String TEST_TOKEN = "put token here";
+	private static final String TEST_TOKEN = "";
 	
 	private RequestHandler handler;
 	
