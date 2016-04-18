@@ -16,6 +16,8 @@ import org.codehaus.jackson.annotate.JsonProperty;
  *
  * @since 0.0.1
  */
+ 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class User extends Chat{
 
 	
